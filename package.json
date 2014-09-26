@@ -6,14 +6,15 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "~4.2.0",
-    "static-favicon": "~1.0.0",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
     "ejs": "*",
-    "mysql" : "*",
-    "socket.io" : "*"
+    "express": "~4.2.0",
+    "log4js": "^0.6.21",
+    "morgan": "~1.0.0",
+    "mysql": "*",
+    "socket.io": "*",
+    "static-favicon": "~1.0.0"
   }
 }

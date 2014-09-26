@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var order = require('../data/order')
+var orderConn = require('../data/order')
 
 router.param(function(name, fn){
   if (fn instanceof RegExp) {
@@ -39,22 +39,8 @@ router.get('/:id', function(req, res, next) {
                 menu : result.menu
             });
         }
-        order.getone(obj, res, next);        
+        orderConn.getone(obj, res, next);        
     }
-});
-
-router.get('/getone', function(req, res) {
-    var order = require('../data/order'),
-        id = req.param('id'),
-        obj = {}
-        ;
-
-    obj.id = +id;
-    obj.callback = function(result){
-        res.json(result);
-    }
-
-    order.getone(obj);
 });
 
 module.exports = router;
