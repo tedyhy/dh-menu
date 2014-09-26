@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>去 <%=mname%> 吃饭的，点菜啦！！</title>
+        <link href="/css/order.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <div class="merchant">
+                <div class="logo">
+                    <img src="/img/merchant/<%=id%>.jpg" alt="<%=mname%>">
+                </div>
+                <div class="info">                    
+                    <h1><%=mname%></h1>
+                    <p>订餐电话：<%=mphone%></p>
+                    <div class="search">
+                        <input type="text" class="j-input-search" placeholder="搜索菜名...">
+                        <ul class="search-list j-search-list"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="order">
+                    <h3>已点菜单，菜个数：<span class="j-order-num">0</span>，预估金额：￥<span class="j-order-price">0.00</span> <button type="button" class="j-order-reset">重置</button></h3>
+                    <ul class="j-order-list">
+                        <%for(var j in order){%>
+                            <li class="j-selected-item" data-id="<%=j%>" data-name="<%=order[j].name%>" data-price="<%=order[j].price%>"><p><%=order[j].name%></p><p><%=order[j].username%> <a href="javascript:;" class="j-selected-remove">删除</a></p></li>
+                        <%}%>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <h3>商家菜单</h3>
+                    <ul class="j-menu-list">
+                        <%for(var i = 0; i < menu.length; i++){%>
+                            <li class="j-menu-item" data-id=<%=menu[i].ID%> data-name="<%=menu[i].name%>" data-price="<%=menu[i].price%>">
+                                <p><%=menu[i].name%></p>
+                                <p>￥ <%=menu[i].price%></p>
+                            </li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script>window['ORDERID'] = <%=id%>;window['IP'] = '<%=ip%>';</script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/sea.js"></script>
+        <script src="/js/class.js"></script>
+        <script src="/js/base.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/order.js"></script>
+    </body>
+</html>

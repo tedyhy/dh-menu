@@ -1,0 +1,267 @@
+/**
+ * YUI 3.5.0 - reset.css (http://developer.yahoo.com/yui/3/cssreset/)
+ * http://cssreset.com
+ * Copyright 2012 Yahoo! Inc. All rights reserved.
+ * http://yuilibrary.com/license/
+ */
+/*
+	TODO will need to remove settings on HTML since we can't namespace it.
+	TODO with the prefix, should I group by selector or property for weight savings?
+*/
+html {
+  font-size: 12;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset,
+img {
+  border: 0;
+}
+/*
+	TODO think about hanlding inheritence differently, maybe letting IE6 fail a bit...
+*/
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+ol,
+ul {
+  list-style: none;
+}
+caption,
+th {
+  text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+q:before,
+q:after {
+  content: '';
+}
+abbr,
+acronym {
+  border: 0;
+  font-variant: normal;
+}
+/* to preserve line-height and selector appearance */
+sup {
+  vertical-align: text-top;
+}
+sub {
+  vertical-align: text-bottom;
+}
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+/*to enable resizing for IE*/
+input,
+textarea,
+select {
+  *font-size: 100%;
+}
+/*because legend doesn't inherit in IE */
+legend {
+  color: #000;
+}
+.container a {
+  color: #666;
+  text-decoration: none;
+}
+.container a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+.container .merchant {
+  border: 2px solid #efefef;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  margin: 20px 40px;
+  padding: 10px;
+  text-align: center;
+}
+.container .merchant h1 {
+  font-weight: bold;
+  font-size: 30px;
+  margin: 10px 0;
+}
+.container .merchant p {
+  font-size: 14px;
+}
+.container .merchant .search {
+  position: relative;
+  margin: 20px auto;
+  width: 300px;
+  border-radius: 5px;
+}
+.container .merchant .search input {
+  width: 280px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #666;
+  border-radius: 5px;
+}
+.container .merchant .search .search-list {
+  display: none;
+  position: absolute;
+  width: 300px;
+  background-color: #fff;
+  top: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 10;
+  height: 200px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.container .merchant .search .search-list li {
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  text-align: left;
+  margin: 5px;
+  padding: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.container .merchant .search .search-list li.hover,
+.container .merchant .search .search-list li:hover {
+  color: #fff;
+  background-color: #999;
+}
+.container .content {
+  margin: 20px;
+}
+.container .content .menu {
+  margin: 10px 20px;
+  padding: 10px;
+  border-top: 2px solid green;
+}
+.container .content .menu h3 {
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+.container .content .menu ul {
+  overflow: hidden;
+  *zoom: 1;
+}
+.container .content .menu ul li {
+  float: left;
+  width: 100px;
+  height: 100px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #ccc;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+  margin: 5px;
+  border: 1px solid #efefef;
+}
+.container .content .menu ul li p {
+  margin: 25px 0 0 0;
+}
+.container .content .menu ul li:hover {
+  background-color: green;
+  color: #fff;
+}
+.container .content .menu ul li.selected {
+  color: #999;
+  cursor: default;
+  background-color: #efefef;
+}
+.container .content .menu ul li.selected:hover {
+  background-color: #efefef;
+}
+.container .content .order {
+  margin: 0 20px;
+  padding: 10px;
+}
+.container .content .order h3 {
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: green;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+.container .content .order h3 span {
+  font-size: 16px;
+  color: yellow;
+}
+.container .content .order ul {
+  overflow: hidden;
+  *zoom: 1;
+}
+.container .content .order ul li {
+  float: left;
+  width: 100px;
+  height: 100px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #ccc;
+  font-size: 12px;
+  margin: 5px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #f1f1f1;
+}
+.container .content .order ul li p {
+  margin: 25px 0 0 0;
+}
+.container .content .order ul li a {
+  font-weight: normal;
+}

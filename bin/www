@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+var debug = require('debug')('menu');
+var app = require('../app');
+
+app.set('port', process.env.PORT || 85);
+
+var server = app.listen(app.get('port'), function() {
+    debug('Express server listening on port ' + server.address().port);
+    console.log('Express server listening on port ' + server.address().port);
+});
+
+var io = require('socket.io').listen(server);
+
+var cache = global.cache = {
+    order : {}
+}
+
+io.sockets.on('connection', function(socket) {
+    //点菜
+    socket.on('server.menu.select', function(result) {
+        cache.order[result.ORDERID] = cache.order[result.ORDERID] || {};
+        !cache.order[result.ORDERID][result.id] && (cache.order[result.ORDERID][result.id] = result);
+        socket.broadcast.emit('menu.select', cache.order[result.ORDERID]);
+    });
+    //撤菜
+    socket.on('server.menu.remove', function(result) {
+        cache.order[result.ORDERID] = cache.order[result.ORDERID] || {};
+        delete cache.order[result.ORDERID][result.id];
+        socket.broadcast.emit('menu.remove', result);
+    });
+    //重置订单
+    socket.on('server.menu.reset', function(result) {
+        cache.order[result.ORDERID] = cache.order[result.ORDERID] || {};
+        delete cache.order[result.ORDERID]
+        socket.broadcast.emit('menu.reset');
+    });
+});
