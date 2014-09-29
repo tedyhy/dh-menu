@@ -16,7 +16,7 @@ var order = {
 
                                 obj.callback(result);
                             }
-                            conn.end();
+                            conn.release();
                         })
                     }
                 }else{

@@ -3,6 +3,7 @@ var router = express.Router();
 
 var orderConn = require('../data/order')
 
+/* 参数过滤 */
 router.param(function(name, fn){
   if (fn instanceof RegExp) {
     return function(req, res, next, val){
