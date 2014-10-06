@@ -17,7 +17,7 @@ var mysql = require("mysql");
 var pool  = mysql.createPool({
     //host     : "192.168.41.16",
     host     : "localhost",
-    database : 'data_menu',
+    database : 'dh_menu',
     user     : "root",
     password : ""
 });

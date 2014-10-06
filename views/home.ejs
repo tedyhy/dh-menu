@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title><%=title%></title>
+	<link rel="icon" href="/static/img/favcoin.ico" size="16x16 32x32">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<link rel="stylesheet" href="/static/css/home.css">
+	<script type="text/javascript" charset="utf-8" src="/static/js/libs/seajs/sea.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/static/js/sea_config.js"></script>
+</head>
+
+<body>
+	<% include rside.ejs %>
+	<div class="wrapper">
+		<div id="top-tips" class="top-tips" style="display: none;">
+			<a class="j-top-tips-close top-tips-close" href="javascript:;"><i class="icon i-top-tips-close"></i></a>
+			<div class="j-top-tips-content top-tips-content" data-id=""></div>
+		</div>
+		<% include header.ejs %>
+		<div class="page-wrap">
+			<div class="inner-wrap">
+				<div class="inner-bg">
+					<div class="rest-banner">
+						<div class="tab clearfix">
+							<a href="/" class="fl rest-tab active">餐厅</a>
+							<a href="/food/topsale/wx4ex92rpq0d" class="fl hot-food">热卖美食<i class="icon i-new"></i></a>
+						</div>
+						<div class="rest-filter clearfix">
+							<div class="rest-filter clearfix">
+								<a title="下单赠饮料" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=fulldonation">
+									<span class="sprite checkbox "></span>
+									<span class="txt">下单赠饮料
+
+									</span>
+								</a>
+								<a title="赠250ml统一饮料" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_88">
+									<span class="sprite checkbox "></span>
+									<span class="txt">赠250ml统一饮料
+
+									</span>
+								</a>
+								<a title="赠600ml百事可乐" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_101">
+									<span class="sprite checkbox "></span>
+									<span class="txt">赠600ml百事可乐
+
+									</span>
+								</a>
+								<a title="赠450ml果粒橙" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_86">
+									<span class="sprite checkbox "></span>
+									<span class="txt">赠450ml果粒橙
+
+									</span>
+								</a>
+								<a title="赠450ml果粒橙" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_25">
+									<span class="sprite checkbox "></span>
+									<span class="txt">赠450ml果粒橙
+
+									</span>
+								</a>
+								<a title="赠600ml可口可乐" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_10">
+									<span class="sprite checkbox "></span>
+									<span class="txt">赠600ml可口可乐
+
+									</span>
+								</a>
+								<a title="赠600ml雪碧" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_35">
+									<span class="sprite checkbox "></span>
+									<span class="txt">赠600ml雪碧
+
+									</span>
+								</a>
+								<a title="下单立减" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=fulldiscount">
+									<span class="sprite checkbox "></span>
+									<span class="txt">下单立减
+
+									</span>
+								</a>
+								<a title="新用户优惠" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=firstdiscount">
+									<span class="sprite checkbox "></span>
+									<span class="txt">新用户优惠
+
+									</span>
+								</a>
+
+								<a title="超时赔付" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&sort_type=0&support_online_pay=0&support_invoice=0&pay_type=1">
+									<span class="sprite checkbox "></span>
+									<span class="txt">超时赔付</span>
+								</a>
+
+								<a title="在线支付" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&sort_type=0&pay_type=0&support_invoice=0&support_online_pay=1">
+									<span class="sprite checkbox "></span>
+									<span class="txt">在线支付</span>
+								</a>
+
+								<a title="支持发票" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&sort_type=0&pay_type=0&support_online_pay=0&support_invoice=1">
+									<span class="sprite checkbox "></span>
+									<span class="txt">支持发票</span>
+								</a>
+							</div>
+						</div>
+						<div class="sort-filter" id="sortFilter">
+							<a class="sort default-sort active" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=0">默认排序</a>
+							<a class="sort sa-sort " href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=1">销量<i class="icon i-orderdown"></i></a>
+							<a class="sort ct-sort " href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=2">评价<i class="icon i-orderdown"></i></a>
+						</div>
+					</div>
+					<div class="store-status clearfix">
+						<i class="icon i-more-poi fl"></i>
+						<span>营业中</span>
+					</div>
+					<div class="rest-list online-rests">
+						<div class="list clearfix">
+							<textarea class="j-restlistdata" style="display: none;"><%=data%></textarea>
+							<ul class="j-restlist">
+								<% for (var i=0; i<restaurants.length; i++) { 
+									var r = restaurants[i];	%>
+									<li class="fl j-restaurant" data-index="<%=i%>">
+										<div class="restaurant">
+											<a class="rest-atag" href="/restaurant/<%=r.id%>" target="_blank">
+												<div class="top-content">
+													<div class="preview fl">
+														<img class="scroll-loading" src="<%=r.img_url%>">
+													</div>
+													<div class="content">
+														<div class="name">
+															<span title="<%=r.name%>"><%=r.name%></span>
+														</div>
+														<div class="tags">
+															<span title="快餐小吃">快餐小吃</span>
+														</div>
+														<div class="price">
+															<span class="start-price">20元起送</span>
+															<span class="send-price">
+																免配送费
+															</span>
+														</div>
+														<div class="rank clearfix">
+															<i class="icon i-star"></i>
+															<i class="icon i-star"></i>
+															<i class="icon i-star"></i>
+															<i class="icon i-star"></i>
+															<i class="icon i-star-empty"></i>
+															<span class="total cc-syellow fl">
+																月售43单
+															</span>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="others">
+													<div class="discount fr">
+														<i class="icon i-free-gift fl"></i>
+														<script type="text/template" data-icon="i-free-gift">
+															下单即赠500ml冰红茶
+														</script>
+
+														<i class="icon i-first fl"></i>
+														<script type="text/template" data-icon="i-first">
+															美团外卖新用户下首单， 立减 5元
+														</script>
+
+														<i class="icon i-minus fl"></i>
+														<script type="text/template" data-icon="i-minus">
+															满15元减5元；
+														</script>
+
+														<i class="icon i-reimbursement fl"></i>
+														<script type="text/template" data-icon="i-reimbursement">
+															该餐厅支持超时赔付活动， 超40分钟8折。。 预订订单不参与超时赔付。
+														</script>
+													</div>
+													<span class="send-time ct-middlegrey">平均送餐时间：36分钟</span>
+												</div>
+											</a>
+										</div>
+									</li>
+								<% } %>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% include footer.ejs %>
+	</div>
+
+	<div class="dialog dialog-discount" style="display: none;">
+		<div class="tips-dialog" style="left: 439px; top: 376px;">
+			<div class="header header-rev"></div>
+			<div class="body body-rev">
+				<div class="content">
+					<div class="title">【立减5元+赠饮】香香小屋【西式营养快餐】</div>
+					<ul>
+						<li class="clearfix"><i class="fl discount-icon icon i-pay"></i>
+							<span class="discount-content">该餐厅支持在线支付</span>
+						</li>
+						<li class="clearfix"><i class="fl discount-icon icon i-cheque"></i>
+							<span class="discount-content">支持开发票，开票金额50元起。请在下单时填好发票抬头。</span>
+						</li>
+						<li class="clearfix"><i class="fl discount-icon icon i-free-gift"></i>
+							<span class="discount-content">
+								下单即赠500ML冰红茶
+							</span>
+						</li>
+						<li class="clearfix"><i class="fl discount-icon icon i-first"></i>
+							<span class="discount-content">美团外卖新用户下首单，立减 5元</span>
+						</li>
+						<li class="clearfix"><i class="fl discount-icon icon i-minus"></i>
+							<span class="discount-content">满5元减5元；</span>
+						</li>
+					</ul>
+					<div class="broadcaster">
+						<div class="sub-title">餐厅公告</div>
+						<div class="broadcontent">1、为了不耽误您的用餐时间，请提前30分钟订餐，谢谢理解
+							<br>2、该餐厅支持开发票，请在下单时填写好发票抬头
+							<br>
+							<br>~~本店优先配送美团外卖订单~~</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer footer-rev"></div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		seajs.use('apps/home/home');
+	</script>
+</body>
+</html>

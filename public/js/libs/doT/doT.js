@@ -40,11 +40,9 @@
 		global.doT = doT;
 	}
 
-	// camel || seaJs
-	if (typeof define === 'function') {
-		define('core/lang/doT', function() {
-			return doT;
-		});
+	// seajs
+	if ( typeof define === "function" && define.cmd ) {
+		define( "libs/doT/doT", [], function () { return doT; } );
 	}
 
 	function encodeHTMLSource() {
