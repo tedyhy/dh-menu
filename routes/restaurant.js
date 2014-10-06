@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var orderConn = require('../data/order')
+var restaurantConn = require('../data/order')
 
 /* 参数过滤 */
 router.param(function(name, fn){
@@ -27,9 +27,9 @@ router.get('/:id', function(req, res, next) {
         ;
 
     if(id){
-        obj.id = +id;
+        obj.id = id;
         obj.callback = function(result){
-            res.render('order', {
+            res.render('restaurant', {
                 id : id,
                 ip : ip,
                 mname : result.mname,
@@ -40,7 +40,7 @@ router.get('/:id', function(req, res, next) {
                 menu : result.menu
             });
         }
-        orderConn.getone(obj, res, next);        
+        restaurantConn.getone(obj, res, next);        
     }
 });
 

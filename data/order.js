@@ -1,6 +1,6 @@
 var conn = require('../data/conn');
 
-var order = {
+var restaurant = {
     getone : function(obj, ires, next){
 
         conn.getConnection(function(err, conn){
@@ -30,4 +30,4 @@ var order = {
     }
 }
 
-module.exports = order;
+module.exports = restaurant;

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title><%=title%></title>
+	<link rel="icon" href="/static/img/favcoin.ico" size="16x16 32x32">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<link rel="stylesheet" href="/static/css/help/feedback.css">
+</head>
+
+<body>
+	<% include rside.ejs %>
+	<div class="wrapper">
+		<div id="top-tips" class="top-tips" style="display: none;">
+			<a class="j-top-tips-close top-tips-close" href="javascript:;"><i class="icon i-top-tips-close"></i></a>
+			<div class="j-top-tips-content top-tips-content" data-id=""></div>
+		</div>
+		<% include header.ejs %>
+		<div class="page-wrap">
+			<div class="inner-wrap">
+				<div class="help-cont clearfix">
+					<div class="fl tabs">
+						<ul>
+							<li><a href="/help/feedback" class="feedback active ca-deepgrey">找客服</a>
+							</li>
+							<li><a href="/help/faq" class="faq ca-deepgrey">常见问题</a>
+							</li>
+							<li><a href="/help/job" class="attend ca-deepgrey">人才招聘</a>
+							</li>
+							<li><a href="/help/cooperate" class="cooperate ca-deepgrey">商务合作</a>
+							</li>
+						</ul>
+					</div>
+					<div class="content">
+						<div class="feedback-bar">反馈通道</div>
+						<div class="feedback-channel clearfix">
+							<div class="channel fl">
+								<div class="phone">
+									<span>客服电话：</span>4008507777</div>
+								<div class="qq clearfix">
+									<span class="fl">客服QQ：</span>
+									<span class="fl normal">2984604463</span>
+									<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2984604463&amp;site=qq&amp;menu=yes" class="sprite qq-chat fl"></a>
+								</div>
+							</div>
+							<div class="channel fl">
+								<div class="weixin">
+									<span>客服微信：</span>美团外卖</div>
+							</div>
+						</div>
+						<div id="loginbar" class="loginbar">
+							<div class="loginbar-word">为了您能更好的接收到我们对您反馈的回复，我们建议您</div>
+							<a class="j-loginbar-login loginbar-login borderradius-5">登录</a>
+							<a class="j-loginbar-reg loginbar-reg borderradius-5">注册美团外卖</a>
+						</div>
+						<br>
+						<form id="feedback-box" class="feedback-box">
+							<div class="feedback-bar">反馈留言</div>
+							<div class="message-box">
+								<textarea name="feedback" placeholder="我们非常珍视您的反馈，请留下您的宝贵意见。"></textarea>
+							</div>
+							<div class="phone">
+								<label for="phone">手机号：</label>
+								<input name="phone" class="phone-input">
+							</div>
+							<input type="hidden" name="view_id" value="">
+							<a id="send" href="javascript:;" class="send-btn s-btn" title="发送">
+								<span class="s-btn">发送</span>
+							</a>
+							<span class="error-info"></span>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<% include footer.ejs %>
+	</div>
+
+	<script type="text/javascript">
+
+	</script>
+</body>
+</html>
