@@ -4,7 +4,7 @@ define('apps/home/home', function(require, exports) {
 		data = eval("(" + $('.j-restlistdata').val() + ")"),
 		dialog_left_tpl = '<div class="dialog dialog-discount j-dialog" style="display: none;"><div class="tips-dialog"><div class="header"></div><div class="body"><div class="content"><div class="title">{{=it.name}}</div><div class="broadcaster"><div class="sub-title">餐厅公告</div><div class="broadcontent">{{=it.broad_content}}</div></div></div></div><div class="footer"></div></div></div>',
 		dialog_left = doT.compile(dialog_left_tpl),
-		dialog_right_tpl = '<div class="dialog dialog-discount j-dialog" style="display: none;"><div class="tips-dialog"><div class="header header-rev"></div><div class="body body-rev"><div class="content"><div class="title">{{=it.name}}</div><div class="broadcaster"><div class="sub-title">餐厅公告</div><div class="broad_content">{{=it.broadcontent}}</div></div></div></div><div class="footer footer-rev"></div></div></div>',
+		dialog_right_tpl = '<div class="dialog dialog-discount j-dialog" style="display: none;"><div class="tips-dialog"><div class="header header-rev"></div><div class="body body-rev"><div class="content"><div class="title">{{=it.name}}</div><div class="broadcaster"><div class="sub-title">餐厅公告</div><div class="broadcontent">{{=it.broad_content}}</div></div></div></div><div class="footer footer-rev"></div></div></div>',
 		dialog_right = doT.compile(dialog_right_tpl);
 
 	$('ul.j-restlist li.j-restaurant').hover(function() {

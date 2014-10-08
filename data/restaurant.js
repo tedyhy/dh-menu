@@ -4,11 +4,11 @@
 var conn = require('./conn');
 
 var restaurant = {
-	getone: function(obj, ires, next) {
+	gethome: function(obj, ires, next) {
 
 		conn.getConnection(function(err, conn) {
 
-			conn.query('SELECT * FROM restaurant WHERE home_id = ' + obj.id, [], function(err, res) {
+			conn.query('SELECT * FROM home WHERE home_id = ' + obj.id, [], function(err, res) {
 
 				if (!err) {
 					res = res && res.length && res || [];
@@ -32,7 +32,24 @@ var restaurant = {
 			});
 
 		});
+	},
+	getrest: function(obj, ires, next) {
 
+		conn.getConnection(function(err, conn) {
+
+			conn.query('SELECT * FROM home WHERE home_id = ' + obj.id, [], function(err, res) {
+
+				if (!err) {
+					res = res && res.length && res || [];
+					obj.callback(res);
+				} else {
+					ires.status(404);
+					next();
+				}
+				conn.release();
+			});
+
+		});
 	}
 }
 

@@ -1,46 +1,338 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title><%=mname%></title>
-        <link href="/static/css/order.css" rel="stylesheet"/>
-    </head>
-    <body>
-        <div class="container">
-            <div class="merchant">
-                <div class="logo">
-                    <img src="/static/img/merchant/<%=id%>.jpg" alt="<%=mname%>">
-                </div>
-                <div class="info">                    
-                    <h1><%=mname%></h1>
-                    <p>订餐电话：<%=mphone%></p>
-                    <div class="search">
-                        <input type="text" class="j-input-search" placeholder="搜索菜名...">
-                        <ul class="search-list j-search-list"></ul>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <div class="order">
-                    <h3>已点菜单，菜个数：<span class="j-order-num">0</span>，预估金额：￥<span class="j-order-price">0.00</span> <button type="button" class="j-order-reset">重置</button></h3>
-                    <ul class="j-order-list">
-                        <%for(var j in order){%>
-                            <li class="j-selected-item" data-id="<%=j%>" data-name="<%=order[j].name%>" data-price="<%=order[j].price%>"><p><%=order[j].name%></p><p><%=order[j].username%> <a href="javascript:;" class="j-selected-remove">删除</a></p></li>
-                        <%}%>
-                    </ul>
-                </div>
-                <div class="menu">
-                    <h3>商家菜单</h3>
-                    <ul class="j-menu-list">
-                        <%for(var i = 0; i < menu.length; i++){%>
-                            <li class="j-menu-item" data-id=<%=menu[i].ID%> data-name="<%=menu[i].name%>" data-price="<%=menu[i].price%>">
-                                <p><%=menu[i].name%></p>
-                                <p>￥ <%=menu[i].price%></p>
-                            </li>
-                        <%}%>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </body>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title><%=title%></title>
+	<link rel="icon" href="/static/img/favcoin.ico" size="16x16 32x32">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<link rel="stylesheet" href="/static/css/restaurant.css">
+	<script type="text/javascript" charset="utf-8" src="/static/js/libs/seajs/sea.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/static/js/sea_config.js"></script>
+</head>
+
+<body>
+	<% include rside.ejs %>
+	<div class="wrapper">
+		<div id="top-tips" class="top-tips" style="display: none;">
+			<a class="j-top-tips-close top-tips-close" href="javascript:;"><i class="icon i-top-tips-close"></i></a>
+			<div class="j-top-tips-content top-tips-content" data-id=""></div>
+		</div>
+		<!-- page-header -->
+		<% include header.ejs %>
+		<!-- shopping-cart -->
+		<div class="shopping-cart clearfix j-shopping-cart">
+			<form method="post" action="/order/preview" id="shoppingCartForm">
+				<div class="order-list j-order-list" style="top: -275px;">
+					<div class="title">
+						<span class="fl dishes">菜品<a href="javascript:;" class="clear-cart j-clearcart">[清空]</a>
+						</span>
+						<span class="fl">份数</span>
+						<span class="fl ti-price">价格</span>
+					</div>
+					<ul style="height: auto; overflow: visible;">
+						<li class="clearfix  food-3032099" data-fid="3032099">
+							<div class="fl na " title="花生米/袋">花生米/袋</div>
+							<div class="fl modify clearfix"> <a href="javascript:;" class="fl minus">-</a> 
+								<input type="text" class="fl txt-count" value="1"> <a href="javascript:;" class="fl plus">+</a> 
+							</div>
+							<div class="fl pri ">
+								<span>¥15</span>
+							</div>
+						</li>
+						<li class="clearfix discount-food food-0" data-fid="0">
+							<div class="fl na cc-oriange" title="500ml饮料">500ml饮料</div>
+							<div class="fl modify clearfix"> <a href="javascript:;" class="fl minus">-</a> 
+								<input type="text" class="fl txt-count" disabled="disabled" value="1"> <a href="javascript:;" class="fl plus">+</a> 
+							</div>
+							<div class="fl pri cc-oriange">
+								<span>¥0</span>
+							</div>
+						</li>
+					</ul>
+					<div class="other-charge">
+						<div class="clearfix packing-cost hidden">
+							<span class="fl">包装盒</span>
+							<span class="fr boxtotalprice">¥0</span>
+						</div>
+						<div class="clearfix delivery-cost">
+							<span class="fl">配送费</span>
+							<span class="fr shippingfee">¥0</span>
+						</div>
+					</div>
+					<div class="privilege">
+						<div class="clearfix">
+							<span class="fl">满减优惠</span>
+							<span class="fr">-5</span>
+						</div>
+					</div>
+					<div class="total">共
+						<span class="totalnumber">1</span>份，总计
+						<span class="bill">¥10</span>
+					</div>
+				</div>
+
+				<div class="footer clearfix j-shopping-cart-footer" onselectstart="return false;">
+					<div class="logo fl"><i class="icon i-shopping-cart"></i>
+					</div>
+					<div class="brief-order fl">
+						<span class="count">1份</span>
+						<span class="price">¥10</span>
+					</div>
+					<div class="fr">
+						<a class="ready-pay borderradius-2" href="javascript:;" style="display: none;">还差<span data-left="0" class="margintominprice">0</span>元起送</a>
+						<input class="go-pay borderradius-2" type="submit" value="去下单" style="display: inline-block;">
+						<input type="hidden" value="<%=id%>:3032099,1" class="order-data" name="shop_cart">
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- page-wrap -->
+		<div class="page-wrap">
+			<div class="inner-wrap j-inner-wrap">
+				<div class="rest-info">
+					<div class="right-bar fr clearfix">
+						<div class="fl average-speed">
+							<div class="nu">
+								<strong>46</strong>分钟
+							</div>
+							<div class="desc">送餐速度</div>
+						</div>
+						<div class="fl ack-ti">
+							<div class="nu">
+								<strong>29</strong>秒
+								<i class="icon i-triangle-dn up10px"></i>
+							</div>
+							<div class="desc">接单时长</div>
+							<div class="tipbox">
+								<i class="icon i-tagtop"></i>
+								<p>餐厅大约会在1分钟处理您的订单</p>
+								<p class="ct-red red-text"><i class="icon i-arrsmallup"></i>快于周边93%的餐厅</p>
+							</div>
+						</div>
+
+						<div class="fl in-ti">
+							<div class="nu">
+								<strong>61</strong>%
+								<i class="icon i-triangle-dn up10px"></i>
+							</div>
+							<div class="desc">及时送餐率</div>
+							<div class="tipbox">
+								<i class="icon i-tagtop"></i>
+								<p>61%的订单会在45分钟内送达</p>
+								<p class="ct-red red-text"><i class="icon i-arrsmallup"></i>高于周边27%的餐厅</p>
+							</div>
+						</div>
+					</div>
+					<div class="details j-details">
+						<div class="up-wrap">
+							<div class="avatar fl">
+								<img src="<%=restinfo.img_url%>" width="75" height="75">
+							</div>
+							<div class="list">
+								<div class="na">
+									<a href="/restaurant/<%=restinfo.id%>">
+										<span><%=restinfo.name%></span><i class="icon i-triangle-dn"></i>
+									</a>
+								</div>
+								<div class="clearfix">
+									<div class="stars clearfix">
+										<i class="icon i-star"></i>
+										<i class="icon i-star"></i>
+										<i class="icon i-star"></i>
+										<i class="icon i-star-empty"></i>
+										<i class="icon i-star-empty"></i>
+										<span class="fl mark ct-middlegrey">3.9</span>
+										<br>
+									</div>
+									<div class="rest-info-thirdpart">
+										<span>0元起送&nbsp;免费配送&nbsp;由餐厅配送</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="rest-info-down-wrap">
+							<div class="location">
+								<span>餐厅地址：</span><%=restinfo.address%>
+							</div>
+							<div class="delivery-time">
+								<span>营业时间：</span><%=restinfo.time%>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-link clearfix">
+					<a href="/restaurant/<%=id%>" class="tab-item active">菜单</a>
+					<a href="/comment/<%=id%>" class="tab-item no-border-left">评价</a>
+				</div>
+
+				<textarea class="j-food-data" style="display: none;"><%=data%></textarea>
+				<script type="text/template" id="foodcontext-template">
+					<div class="text-food clearfix">
+						<div class="fl description">
+							<div class="na nodesc" title="巴西咖喱牛肉饭">
+								{{name}}
+							</div>
+						</div>
+						<div class="fr fleft nofleft"></div>
+						<div class="fr sold">
+							<div class="zan-rank">
+								<i class="icon i-zan"></i>
+								<span class="cc-oriange">(1)</span>
+							</div>
+							<div class="count ct-middlegrey">
+								<span>月售42份</span>
+							</div>
+						</div>
+						<div class="fr add">
+							<a href="javascript:;" class="add-cart"><i class="icon i-addcart"></i></a>
+						</div>
+						<div class="fr unit-price">
+							<div class="only">¥
+								{{price}}/份</div>
+						</div>
+						<span class="j-food-cart-num text-food-cart-num fr" style="display:none;">0</span>
+					</div>
+				</script>
+				<!-- food-list -->
+				<div class="food-list fl j-food-list">
+					<!-- ori-foodtype-nav -->
+					<div class="ori-foodtype-nav clearfix">
+						<span class="fl title ct-middlegrey">菜品分类：</span>
+						<ul>
+						<%for (var i=0; i<food.length; i++) {
+							var r = food[i];
+						%>
+							<li class="j-food-cate <%=(i===0?'active':'')%>">
+								<a href="javascript:;" class="type" data-anchor="<%=i%>" title="<%=r.name%>(<%=r.num%>)">
+									<span class="name"><%=r.name%>(<%=r.num%>)</span>
+								</a>
+							</li>
+						<%}%>
+						</ul>
+					</div>
+					<!-- foodtype-nav -->
+					<div class="foodtype-nav clearfix j-foodtype-nav hidden">
+						<i class="icon i-tagtop"></i>
+						<ul>
+						<%for (var i=0; i<food.length; i++) {
+							var r = food[i];
+						%>
+							<li class="j-food-cate <%=(i===0?'active':'')%>">
+								<a href="javascript:;" class="type" data-anchor="<%=i%>" title="<%=r.name%>(<%=r.num%>)">
+									<span class="name"><%=r.name%>(<%=r.num%>)</span>
+								</a>
+							</li>
+						<%}%>
+						</ul>
+					</div>
+					<!-- food-nav -->
+					<div class="food-nav j-food-nav">
+						<!-- title-blank -->
+					    <div class="title-blank ct-deepgrey j-title-blank hidden">
+					        <div class="actions clearfix fr">
+					            <a href="javascript:;" class="classic">美食分类<i class="icon i-triangle-dn"></i></a>
+					            <a href="javascript:;" data-href="/restaurant/<%=id%>" class="active default borderradius-2">默认排序</a>
+					            <a href="javascript:;" data-href="/restaurant/<%=id%>?sort_type=1" class=" sales borderradius-2">销量<i class="icon i-orderdown"></i></a>
+					            <a href="javascript:;" data-href="/restaurant/<%=id%>?sort_type=2" class=" price borderradius-2">价格<i class="icon i-orderup"></i></a>
+					        </div>
+					        <span class="tag-na"></span>
+					    </div>
+					    <!-- catgory -->
+					    <%for (var i = 0; i < food.length; i++) { var r = food[i];%>
+					    <div class="category">
+					    	<%if (i === 0) {%>
+					        <h3 class="title title-0 ct-deepgrey" title="<%=r.name%>">
+					            <div class="actions clearfix fr">
+					                <a href="javascript:;" data-href="javascript:;" class="classic hidden">美食分类<i class="icon i-triangle-dn"></i></a>
+					                <a href="javascript:;" data-href="/restaurant/<%=id%>" class="active default borderradius-2">默认排序</a>
+					                <a href="javascript:;" data-href="/restaurant/<%=id%>?sort_type=1" class=" sales borderradius-2">销量<i class="icon i-orderdown"></i></a>
+					                <a href="javascript:;" data-href="/restaurant/<%=id%>?sort_type=2" class=" price borderradius-2">价格<i class="icon i-orderup"></i></a>
+					            </div>
+					            <span class="tag-na"><%=r.name%></span>
+					        </h3>
+					        <%} else {%>
+					        <h3 class="title title-1 ct-deepgrey" title="<%=r.name%>">
+					            <span class="tag-na"><%=r.name%></span>
+					        </h3>
+					        <%}%>
+					        <div class="text-food-cont">
+					        <%for (var j = 0; j < r.food.length; j++) { var rr = r.food[j];%>
+					            <div class="text-food clearfix j-text-food">
+					                <div class="fl description">
+					                    <div class="na nodesc" title="<%=rr.name%>"><%=rr.name%></div>
+					                </div>
+					                <div class="fr fleft nofleft"></div>
+					                <div class="fr sold">
+					                    <div class="zan-rank">
+					                        <i class="icon i-zan"></i>
+					                        <span class="cc-oriange">(1)</span>
+					                    </div>
+					                    <div class="count ct-middlegrey">
+					                        <span>月售14份</span>
+					                    </div>
+					                </div>
+					                <div class="fr add">
+					                    <a href="javascript:;" class="add-cart" ><i class="icon i-addcart"></i></a>
+					                </div>
+					                <div class="fr unit-price">
+					                    <div class="only">¥<%=rr.price%>/份</div>
+					                </div>
+					                <span id="food2325071-cart-num" class="text-food-cart-num fr" style="display:none;">0</span>
+					            </div>
+					        <%}%>
+					        </div>
+					    </div>
+					    <%}%>
+					</div>
+				</div>
+
+				<div class="widgets fr j-widgets">
+					<div class="widget broadcaster j-broadcaster">
+						<div class="title">
+							<h3>订餐必读&amp;商家公告</h3>
+						</div>
+						<div class="content ct-deepgrey">
+							1、为了不耽误您的用餐时间，请提前30分钟订餐，谢谢理解
+							<br>
+							<br>~~本店优先配送美团外卖订单~~
+						</div>
+					</div>
+					<div class="widget discount"> 
+    <p class="delivery-min-fee">
+      <i class="icon i-zero"></i><span class="discount-desc">起送价</span>
+    </p>
+    <p class="delivery-fee">
+      <i class="icon i-free"></i><span class="discount-desc">配送费</span>
+    </p>
+      <p><i class="icon i-pay"></i><span class="discount-desc">该餐厅支持在线支付</span></p>
+      <p><i class="icon i-first"></i><span class="discount-desc">美团外卖新用户下首单，立减 5元</span></p>
+        <p><i class="icon i-minus"></i><span class="discount-desc">满5元减5元；</span></p>
+    
+    <p>
+  		<i class="icon i-free-gift"></i>
+  		<span class="discount-desc">
+  				下单即赠500ml饮料
+  		</span>
+	  </p><p>
+	  
+      </p><p><i class="icon i-reimbursement"></i><span class="discount-desc">该餐厅支持超时赔付活动，超60分钟9折。如果遇到雨雪天气，不进行超时赔付。。预订订单不参与超时赔付。</span></p>
+    
+    
+      			
+  </div>
+				</div>
+
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!-- page-footer -->
+		<% include footer.ejs %>
+	</div>
+
+	<script type="text/javascript">
+		seajs.use('apps/restaurant/restaurant');
+	</script>
+</body>
 </html>

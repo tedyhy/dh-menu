@@ -1,7 +1,10 @@
 seajs.config({
     base: '/static/js/',
     alias: {
-        'jquery': 'libs/jquery/jquery'
+        'jquery': 'libs/jquery/jquery',
+        'doT': 'libs/doT/doT',
+        'underscore': 'libs/underscore/underscore',
+        'backbone': 'libs/backbone/backbone'
     },
     preload: [],
     map: [
