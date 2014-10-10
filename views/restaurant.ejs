@@ -35,7 +35,7 @@
 						<div class="fl na" title="{{name}}">{{name}}</div>
 						<div class="fl modify clearfix">
 							<a href="javascript:;" class="fl minus j-minus">-</a> 
-							<input type="text" class="fl txt-count j-txt-count" value="{{cart}}" />
+							<input type="text" class="fl txt-count j-txt-count" value="{{cart}}" readonly />
 							<a href="javascript:;" class="fl plus j-plus">+</a> 
 						</div>
 						<div class="fl pri">
@@ -45,38 +45,21 @@
 					<ul class="j-cartul" style="height: auto; overflow: visible;">
 						<!-- li from cookies -->
 					</ul>
-					<div class="other-charge hidden">
-						<div class="clearfix packing-cost">
-							<span class="fl">包装盒</span>
-							<span class="fr boxtotalprice">¥0</span>
-						</div>
-						<div class="clearfix delivery-cost">
-							<span class="fl">配送费</span>
-							<span class="fr shippingfee">¥0</span>
-						</div>
-					</div>
-					<div class="privilege hidden">
-						<div class="clearfix">
-							<span class="fl">满减优惠</span>
-							<span class="fr">-5</span>
-						</div>
-					</div>
 					<div class="total">共
-						<span class="totalnumber">1</span>份，总计
-						<span class="bill">¥10</span>
+						<span class="totalnumber j-totalnumber">0</span>份，总计
+						<span class="bill j-bill">¥0</span>
 					</div>
 				</div>
 
 				<div class="footer clearfix j-shopping-cart-footer" onselectstart="return false;">
-					<div class="logo fl"><i class="icon i-shopping-cart"></i>
-					</div>
+					<div class="logo fl"><i class="icon i-shopping-cart"></i></div>
 					<div class="brief-order fl">
 						<span class="count">1份</span>
 						<span class="price">¥10</span>
 					</div>
 					<div class="fr">
 						<a class="ready-pay borderradius-2 j-readypay" href="javascript:;">去下单</a>
-						<input class="go-pay borderradius-2 j-gopay" type="submit" style="display: none;" value="去下单">
+						<input class="go-pay borderradius-2 j-gopay" type="submit" style="display: none;" value="去下单" />
 						<input type="hidden" value="<%=id%>:3032099,1" class="order-data" name="shop_cart">
 					</div>
 				</div>

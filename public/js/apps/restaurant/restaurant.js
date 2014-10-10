@@ -23,14 +23,15 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 	// 订餐必读&商家公告
 	var foodListOffset = $('.j-food-list').offset(),
+		ori_foodtype_nav_h = $('.ori-foodtype-nav').outerHeight(true),
 		$broadcaster = $('.j-broadcaster'),
 		$widgets = $('.j-widgets');
 	$(window).scroll(function() {
 		var top = $(window).scrollTop();
-		if (top < foodListOffset.top && $broadcaster.hasClass('broadcaster-fixed')) {
+		if (top < (foodListOffset.top - ori_foodtype_nav_h) && $broadcaster.hasClass('broadcaster-fixed')) {
 			$broadcaster.removeClass('broadcaster-fixed');
 			$widgets.css('padding-top', 0);
-		} else if (top >= foodListOffset.top && !$broadcaster.hasClass('broadcaster-fixed')) {
+		} else if (top >= (foodListOffset.top - ori_foodtype_nav_h) && !$broadcaster.hasClass('broadcaster-fixed')) {
 			$broadcaster.addClass('broadcaster-fixed');
 			$widgets.css('padding-top', '161px');
 		}
@@ -115,12 +116,12 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.listenTo(allfoods, 'change', this.render);
 		},
 
-		render: function(d){
+		render: function(d) {
 			var id = d.get('id'),
 				$cartnum = this.$('#' + id + '-cart-num'),
 				cart = d.get('cart');
 
-			if (cart <=0 ) {
+			if (cart <= 0) {
 				$cartnum.hide();
 				return;
 			};
@@ -172,11 +173,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			var cart = d.get('cart');
 			d.set('cart', cart + 1);
 
-			if (carts.get(fid)) {
-				carts.set(d);
-			} else {
-				carts.add(d);
-			}
+			carts.add(d);
 		}
 
 	});
@@ -201,20 +198,32 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));
+
+			// 总计
+			cartviews.render();
+
 			return this;
 		},
 
 		minusOne: function() {
-			var v = +this.$txtcount.val();
-			console.log(v)
-			v = !isNaN(v) ? v : 0;
-			v -= 1;
+			var cart = +this.model.get('cart') - 1;
 
-			this.$txtcount.val(v);
+			if (cart === 0) {
+				this.clear();
+				return;
+			}
+			this.model.set('cart', cart);
+		},
+
+		plusOne: function(){
+			var cart = +this.model.get('cart') + 1;
+
+			this.model.set('cart', cart);
 		},
 
 		clear: function() {
-			this.model.destroy();
+			carts.remove(this.model);
+			allfoods.get(this.model.get('id')).set('cart', 0);
 		}
 
 	});
@@ -232,6 +241,10 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		initialize: function() {
 			this.$cartul = this.$('.j-cartul');
 			this.$orderlist = this.$('.j-order-list');
+			this.$bill = this.$('.j-bill');
+			this.$totalnumber = this.$('.j-totalnumber');
+			this.$readypay = this.$('.j-readypay');
+			this.$gopay = this.$('.j-gopay');
 
 			if (carts.models.length) {
 				this.fnShoppingCart();
@@ -240,15 +253,6 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.listenTo(carts, 'add', this.addOne);
 			this.listenTo(carts, 'remove', this.removeOne);
 			this.listenTo(carts, 'all', this.render);
-			this.listenTo(carts, 'change', this.addAll);
-			
-		},
-
-		addAll: function(d) {
-			console.log(d.models)
-			carts.remove(d.models);
-			carts.add(d)
-			// d.each(this.addOne, this);
 		},
 
 		addOne: function(f) {
@@ -270,22 +274,33 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			var orderh = this.$orderlist.outerHeight(true);
 
 			this.$orderlist.stop().animate({
-				'top': -(orderh - 50)
+				'top': -orderh
 			});
 		},
 
 		render: function() {
+			var t = 0,
+				n = 0;
+
+			carts.each(function(p, i) {
+				t += (+p.get('price') * +p.get('cart')); // 总计
+				n += +p.get('cart'); // 份
+			})
+
+			this.$totalnumber.text(n);
+			this.$bill.text('¥' + t);
+
 			this.renderPay(carts.models.length);
 		},
 
 		renderPay: function(l) {
 			if (l) {
-				this.$('.j-readypay').hide();
-				this.$('.j-gopay').show();
+				this.$readypay.hide();
+				this.$gopay.show();
 				return;
 			};
-			this.$('.j-readypay').show();
-			this.$('.j-gopay').hide();
+			this.$readypay.show();
+			this.$gopay.hide();
 		},
 
 		fnShoppingCart: function() {
@@ -306,7 +321,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 		fnClearCart: function() {
 			this.$orderlist.css('top', 0);
+
+			carts.each(function(d, i){
+				allfoods.get(d.get('id')).set('cart', 0);
+			});
+
 			carts.remove(carts.models);
+
 			return false;
 		}
 	});
