@@ -78,13 +78,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		defaults: {}
 	});
 
-	var Cart = Backbone.Model.extend({  
-	    defaults : {
-	    	id: 0,
-	        name : '',
-	        price : 0,
-	        num: 1
-	    }
+	var Cart = Backbone.Model.extend({
+		defaults: {
+			id: 0,
+			name: '',
+			price: 0,
+			num: 1
+		}
 	});
 	var CartColl = Backbone.Collection.extend({
 		model: Cart
@@ -110,24 +110,21 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		initialize: function() {
+			this.$foodtypenav = this.$('.j-foodtype-nav');
 
+			this.listenTo(allfoods, 'change', this.render);
 		},
 
-		render: function(id, todo) {
-			if (!id && !todo) return;
-		
-			var $cartnum = this.$('#' + id + '-cart-num'),
-				num = +$cartnum.text();
+		render: function(d){
+			var id = d.get('id'),
+				$cartnum = this.$('#' + id + '-cart-num'),
+				cart = d.get('cart');
 
-			num = !isNaN(num) && num || 0;
-
-			num = todo === '+' ? ++num : --num ;
-
-			if (num > 0) {
-				$cartnum.text(num).show();
-			} else {
+			if (cart <=0 ) {
 				$cartnum.hide();
-			}
+				return;
+			};
+			$cartnum.text(cart).show();
 		},
 
 		fnScrollToCate: function(e) {
@@ -145,16 +142,16 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		fnShowClassic: function(e) {
 			var offset = $(e.target).offset(),
 				top = 50,
-				left = offset.left - this.$('.j-foodtype-nav').outerWidth(true) / 2 - 32;
+				left = offset.left - this.$foodtypenav.outerWidth(true) / 2 - 32;
 
-			this.$('.j-foodtype-nav').removeClass('hidden').css({
+			this.$foodtypenav.removeClass('hidden').css({
 				top: top,
 				left: left
 			});
 		},
 
 		fnHideClassic: function() {
-			this.$('.j-foodtype-nav').addClass('hidden');
+			this.$foodtypenav.addClass('hidden');
 		},
 
 		fnAAddOver: function(e) {
@@ -169,13 +166,17 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			var $self = $(e.currentTarget),
 				fid = $self.attr('id');
 
-			this.render(fid, '+');
-			// cartviews.render(fid, '+');
-
 			var d = allfoods.get(fid);
 			if (!d) return;
-			
-			carts.add(d.attributes);
+
+			var cart = d.get('cart');
+			d.set('cart', cart + 1);
+
+			if (carts.get(fid)) {
+				carts.set(d);
+			} else {
+				carts.add(d);
+			}
 		}
 
 	});
@@ -189,11 +190,8 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		template: _.template($('#cartfood-template').html()),
 
 		events: {
-			"click .toggle": "toggleDone",
-			"dblclick .view": "edit",
-			"click a.destroy": "clear",
-			"keypress .edit": "updateOnEnter",
-			"blur .edit": "close"
+			"click .j-minus": "minusOne",
+			"click .j-plus": "plusOne"
 		},
 
 		initialize: function() {
@@ -204,6 +202,15 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
+		},
+
+		minusOne: function() {
+			var v = +this.$txtcount.val();
+			console.log(v)
+			v = !isNaN(v) ? v : 0;
+			v -= 1;
+
+			this.$txtcount.val(v);
 		},
 
 		clear: function() {
@@ -223,65 +230,83 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		initialize: function() {
-			if (this.$('.j-cartul').children().length) {
+			this.$cartul = this.$('.j-cartul');
+			this.$orderlist = this.$('.j-order-list');
+
+			if (carts.models.length) {
 				this.fnShoppingCart();
 			};
 
 			this.listenTo(carts, 'add', this.addOne);
-			// this.listenTo(carts, 'reset', this.addAll);
-			// this.listenTo(carts, 'all', this.render);
+			this.listenTo(carts, 'remove', this.removeOne);
+			this.listenTo(carts, 'all', this.render);
+			this.listenTo(carts, 'change', this.addAll);
+			
 		},
 
-		addOne: function(f){
+		addAll: function(d) {
+			console.log(d.models)
+			carts.remove(d.models);
+			carts.add(d)
+			// d.each(this.addOne, this);
+		},
+
+		addOne: function(f) {
 			var view = new ItemView({
 				model: f
 			});
 
 			// 调整高度
-			var $orderlist = this.$('.j-order-list'),
-				orderh = $orderlist.outerHeight(true);
+			var orderh = this.$orderlist.outerHeight(true);
 
-			this.$(".j-cartul").append(view.render().el);
-			$orderlist.stop().animate({'top': -(50 + orderh)});
+			this.$cartul.append(view.render().el);
+			this.$orderlist.stop().animate({
+				'top': -(50 + orderh)
+			});
 		},
 
-		render: function(id, todo) {
-			// var d = allfoods.get(id);
-			// if (!d) return;
-			
-			// carttpl = this.carttpl(d.attributes);
+		removeOne: function() {
+			// 调整高度
+			var orderh = this.$orderlist.outerHeight(true);
 
-			// if (carttpl) {
-			// 	var $orderlist = this.$('.j-order-list'),
-			// 		orderh = $orderlist.outerHeight(true);
+			this.$orderlist.stop().animate({
+				'top': -(orderh - 50)
+			});
+		},
 
-			// 	this.$('.j-cartul').append($(carttpl));
-			// 	$orderlist.stop().animate({'top': -(50 + orderh)});
-			// };
+		render: function() {
+			this.renderPay(carts.models.length);
+		},
+
+		renderPay: function(l) {
+			if (l) {
+				this.$('.j-readypay').hide();
+				this.$('.j-gopay').show();
+				return;
+			};
+			this.$('.j-readypay').show();
+			this.$('.j-gopay').hide();
 		},
 
 		fnShoppingCart: function() {
-			if (!this.$('.j-cartul').children().length) return;
+			if (!carts.models.length) return;
 
-			var $orderlist = this.$('.j-order-list'),
-				h = 0 - $orderlist.outerHeight(true);
+			var h = 0 - this.$orderlist.outerHeight(true);
 
-			if (+$orderlist.css('top').replace('px', '') === 0) {
-				$orderlist.stop().animate({
+			if (+this.$orderlist.css('top').replace('px', '') === 0) {
+				this.$orderlist.stop().animate({
 					'top': h + 'px'
 				});
 			} else {
-				$orderlist.stop().animate({
+				this.$orderlist.stop().animate({
 					'top': 0
 				});
 			}
 		},
 
 		fnClearCart: function() {
-			// this.$('.j-cartul').children().remove();
-			// this.$('.j-order-list').css('top', 0);
+			this.$orderlist.css('top', 0);
 			carts.remove(carts.models);
-			this.$('.j-order-list').css('top', 0);
 			return false;
 		}
 	});

@@ -34,9 +34,9 @@
 					<script type="text/template" id="cartfood-template">
 						<div class="fl na" title="{{name}}">{{name}}</div>
 						<div class="fl modify clearfix">
-							<a href="javascript:;" class="fl minus">-</a> 
-							<input type="text" class="fl txt-count j-txt-count" value="1" />
-							<a href="javascript:;" class="fl plus">+</a> 
+							<a href="javascript:;" class="fl minus j-minus">-</a> 
+							<input type="text" class="fl txt-count j-txt-count" value="{{cart}}" />
+							<a href="javascript:;" class="fl plus j-plus">+</a> 
 						</div>
 						<div class="fl pri">
 							<span>¥{{price}}</span>
@@ -75,8 +75,8 @@
 						<span class="price">¥10</span>
 					</div>
 					<div class="fr">
-						<a class="ready-pay borderradius-2" href="javascript:;">去下单</a>
-						<input class="go-pay borderradius-2 hidden" type="submit" value="去下单">
+						<a class="ready-pay borderradius-2 j-readypay" href="javascript:;">去下单</a>
+						<input class="go-pay borderradius-2 j-gopay" type="submit" style="display: none;" value="去下单">
 						<input type="hidden" value="<%=id%>:3032099,1" class="order-data" name="shop_cart">
 					</div>
 				</div>
