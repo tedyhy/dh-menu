@@ -4,26 +4,29 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+// route
 var index = require('./routes/index');
 var restaurant = require('./routes/restaurant');
-
+// app
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 // app.engine('.html', require('ejs').__express);
 // app.set('view engine', 'html');
 
+// middleware
 app.use(favicon());
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+if (app.get('env') === 'development') {
+    app.use(logger('dev'));
+}
+// static resource
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
+// route
 app.use('/', index);
 app.use('/restaurant', restaurant);
 
@@ -34,18 +37,12 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-/// error handlers
+// app.set('env', 'production');
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
+    // app.use(logger('dev'));
 }
 
 // production error handler
@@ -54,9 +51,8 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: {}
+        error: err
     });
 });
-
 
 module.exports = app;

@@ -5,32 +5,45 @@ var app = require('../app');
 app.set('port', process.env.PORT || 85);
 
 var server = app.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + server.address().port);
+	console.log('Express server listening on port ' + server.address().port);
 });
 
 var io = require('socket.io').listen(server);
 
+// 根据不同用户缓存订餐数据
 var cache = global.cache = {
-    order : {}
+	order: {}
 }
 
 io.sockets.on('connection', function(socket) {
-    //点菜
-    socket.on('server.menu.select', function(result) {
-        cache.order[result.ORDERID] = cache.order[result.ORDERID] || {};
-        !cache.order[result.ORDERID][result.id] && (cache.order[result.ORDERID][result.id] = result);
-        socket.broadcast.emit('menu.select', cache.order[result.ORDERID]);
-    });
-    //撤菜
-    socket.on('server.menu.remove', function(result) {
-        cache.order[result.ORDERID] = cache.order[result.ORDERID] || {};
-        delete cache.order[result.ORDERID][result.id];
-        socket.broadcast.emit('menu.remove', result);
-    });
-    //重置订单
-    socket.on('server.menu.reset', function(result) {
-        cache.order[result.ORDERID] = cache.order[result.ORDERID] || {};
-        delete cache.order[result.ORDERID]
-        socket.broadcast.emit('menu.reset');
-    });
+	//点菜
+	socket.on('server.menu.add', function(d) {
+		if (!d || !d.uid) return;
+
+		var uid = d.uid,
+			data = d.data,
+			cart = cache.order[uid] || {}, // 用户购物车
+			fid = data.id || 0, // food id
+			food = (cart[fid] = data); // food
+
+		socket.broadcast.emit('client.menu.add', data);
+	});
+	//撤菜
+	socket.on('server.menu.remove', function(uid, result) {
+		if (!result) return;
+
+		var cart = cache.order[uid] || {}, // 用户购物车
+			fid = result.id || 0; // food id
+			
+		delete cart[fid]; // food
+		socket.broadcast.emit('client.menu.remove', result);
+	});
+	//重置订单
+	socket.on('server.menu.reset', function(uid, result) {
+		if (!result) return;
+
+		var cart = (cache.order[uid] = {}); // 用户购物车
+
+		socket.broadcast.emit('client.menu.reset');
+	});
 });

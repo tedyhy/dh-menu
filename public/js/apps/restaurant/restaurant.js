@@ -2,7 +2,10 @@ define('apps/restaurant/restaurant', function(require, exports) {
 	var $ = require('jquery'),
 		_ = require('underscore'),
 		Backbone = require('backbone'),
+		TWEEN = require('libs/tween/Tween'),
 		foodData = eval("(" + $('.j-food-data').val() + ")");
+
+	require("libs/tween/requestAnimationFrame");
 
 	// 设置underscore模板边界符号
 	_.templateSettings = {
@@ -65,6 +68,10 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		}
 	});
 
+	// trigger scroll events
+	window.onload = function() {
+		$(window).trigger('scroll');
+	}
 
 	// mvc
 	var foods = [];
@@ -114,6 +121,19 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.$foodtypenav = this.$('.j-foodtype-nav');
 
 			this.listenTo(allfoods, 'change', this.render);
+
+			var socket = this.socket = io.connect();
+			// 广播内容
+            socket.on('client.menu.add', $.proxy(this.ioAdd, this));
+            socket.on('client.menu.remove', $.proxy(this.removeMenu, this));
+            socket.on('client.menu.reset', $.proxy(this.resetMenu, this));
+		},
+		ioAdd: function(d) {
+			// carts.set(d);
+			// console.log(carts.get(d.id))
+			// this.render(carts.get(d.id));
+			console.log(d)
+			carts.set(d);
 		},
 
 		render: function(d) {
@@ -164,16 +184,91 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		fnAddFoodToCart: function(e) {
-			var $self = $(e.currentTarget),
+			var self = this,
+				$self = $(e.currentTarget),
 				fid = $self.attr('id');
 
 			var d = allfoods.get(fid);
 			if (!d) return;
 
-			var cart = d.get('cart');
-			d.set('cart', cart + 1);
+			var cart = d.get('cart'),
+				price = d.get('price');
+			
+			// 添加购物车动画
+			self.addFoodAnim($self, price, function() {
+				d.set('cart', cart + 1);
+				carts.add(d);
+				// 缓存到服务器
+				self.socket.emit('server.menu.add', {uid: 111, data: carts});
+			});
 
-			carts.add(d);
+			function animate(time){
+				window.requestAnimationFrame(animate);
+				TWEEN.update(time);
+			}
+
+			animate();
+		},
+
+		addFoodAnim: function($btn, price, fn) {
+			var self = this,
+				c, d, e, f = $(window).scrollTop(),
+				$shoppingcart = cartviews.$(".i-shopping-cart"),
+				cart_offset = $shoppingcart.offset(),
+				$tip = $('<span class="rst-animate-tip">' + price + "</span>").appendTo('body'),
+				btn_offset = $btn.offset(),
+				m = $btn.width(),
+				n = $btn.height();
+
+			d = {
+				left: btn_offset.left + m / 2 - $tip.outerWidth(!0) / 2,
+				top: btn_offset.top - f + n / 2 - $tip.outerHeight(!0) / 2
+			};
+			e = {
+				left: cart_offset.left + $shoppingcart.width() / 2 - $tip.outerWidth(!0) / 2,
+				top: cart_offset.top - f
+			};
+			c = {
+				x: e.left - d.left,
+				y: e.top - d.top
+			};
+
+			new TWEEN.Tween({
+				x: 0,
+				y: 0,
+				old: {
+					x: 0,
+					y: 0
+				}
+			}).to({
+				x: [.6 * c.x, c.x],
+				y: [Math.min(-150, c.y - 100), c.y]
+			}, 700).interpolation(TWEEN.Interpolation.Bezier).easing(TWEEN.Easing.Quadratic.Out).onUpdate(function() {
+				$tip.css({
+					left: this.x + d.left + "px",
+					top: this.y + d.top + "px"
+				});
+				this.old.x = this.x;
+				this.old.y = this.y;
+
+			}).onComplete(function() {
+				$tip.remove();
+				typeof fn === 'function' && fn.call(self);
+			}).start();
+		},
+
+		animationFrame: function(){
+			var a = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(a) {
+				window.setTimeout(a, 16)
+			};
+			var b = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.msCancelAnimationFrame || function(a) {
+				window.clearTimeout(a)
+			};
+
+			return {
+				requestAnimationFrame: a,
+				cancelAnimationFrame: b
+			}
 		}
 
 	});
@@ -215,7 +310,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.model.set('cart', cart);
 		},
 
-		plusOne: function(){
+		plusOne: function() {
 			var cart = +this.model.get('cart') + 1;
 
 			this.model.set('cart', cart);
@@ -263,7 +358,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			// 调整高度
 			var orderh = this.$orderlist.outerHeight(true);
 
-			this.$cartul.append(view.render().el);
+			this.$cartul.prepend(view.render().el);
+
+			if (orderh >= 400) {
+				this.$cartul.scrollTop(0);
+				return;
+			}
+
 			this.$orderlist.stop().animate({
 				'top': -(50 + orderh)
 			});
@@ -322,7 +423,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		fnClearCart: function() {
 			this.$orderlist.css('top', 0);
 
-			carts.each(function(d, i){
+			carts.each(function(d, i) {
 				allfoods.get(d.get('id')).set('cart', 0);
 			});
 

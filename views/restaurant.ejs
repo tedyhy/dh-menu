@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="/static/css/restaurant.css">
 	<script type="text/javascript" charset="utf-8" src="/static/js/libs/seajs/sea.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/static/js/sea_config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/socket.io/socket.io.js"></script>
 </head>
 
 <body>
@@ -42,7 +43,7 @@
 							<span>¥{{price}}</span>
 						</div>
 					</script>
-					<ul class="j-cartul" style="height: auto; overflow: visible;">
+					<ul class="j-cartul" style="height: auto; overflow: visible; max-height: 400px; overflow-y: auto;">
 						<!-- li from cookies -->
 					</ul>
 					<div class="total">共

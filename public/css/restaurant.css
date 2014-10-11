@@ -1,1 +1,743 @@
-.rest-info{height:121px;border:1px solid #DCDCDC;background-color:#fff;position:relative;border-top:0;zoom:1;}.rest-info .over .i-triangle-dn,.rest-info .tip-box-over .i-triangle-dn{background-position:-370px -69px;}.rest-info .details{min-width:330px;position:absolute;top:0;left:0;padding-right:20px;z-index:3;overflow:hidden;_width:350px;_padding-right:0px;_display:inline;}.rest-info .red-text{position:relative;padding-left:12px;color:#ff6900;}.rest-info .red-text .i-arrsmallup{position:absolute;top:5px;left:0px;}.rest-info .over{left:-1px;background-color:#fff;border:1px solid #DCDCDC;border-top:0;overflow:visible;box-shadow:1px 1px 5px #ccc;-moz-box-shadow:1px 1px 5px #ccc;-webkit-box-shadow:1px 1px 5px #ccc;-ms-box-shadow:1px 1px 5px #ccc;-o-box-shadow:1px 1px 5px #ccc;}.rest-info .details .list{height:100px;float:left;}.rest-info .over .list{height:195px;}.rest-info .rest-info-down-wrap{position:absolute;top:121px;left:0;width:100%;border-top:1px solid #DCDCDC;-webkit-opacity:0;-moz-opacity:0;-ms-opacity:0;-o-opacity:0;filter:alpha(opacity=0);}.rest-info .over .rest-info-down-wrap{opacity:1;-webkit-opacity:1;-moz-opacity:1;-ms-opacity:1;-o-opacity:1;filter:alpha(opacity=100);-webkit-transition:opacity .6s ease;-moz-transition:opacity .6s ease;-ms-transition:opacity .6s ease;-0-transition:opacity .6s ease;transition:opacity .6s ease;}.rest-info .avatar{margin-left:21px;margin-top:21px;_display:inline;}.rest-info .na{margin-left:15px;padding-top:20px;}.rest-info .na span{font-size:18px;font-family:\5FAE\8F6F\96C5\9ED1;color:#444;}.rest-info .stars{margin-left:15px;margin-top:10px;}.rest-info .stars .icon{float:left;margin-right:3px;}.rest-info .stars .mark{margin-left:9px;}.rest-info-thirdpart{margin-left:15px;margin-top:8px;color:#898989;}.rest-info-thirdpart-pic{height:12px;vertical-align:text-top;}.rest-info .na .i-triangle-dn{margin-left:5px;vertical-align:3px;}.rest-info .location,.rest-info .delivery-time,.rest-info .telephone{margin-top:10px;width:320px;margin-left:20px;}.rest-info .delivery-time span,.rest-info .location span,.rest-info .telephone span{font-weight:bold;color:#434343;}.rest-info .right-bar{padding-top:16px;color:#434343;}.rest-info .tipbox{line-height:22px;position:absolute;background-color:#FFFFFF;border:1px solid #DCDCDC;width:180px;text-align:left;padding:12px 17px;top:5px;left:-54px;overflow:hidden;zoom:1;opacity:0;-webkit-opacity:0;-moz-opacity:0;-ms-opacity:0;-o-opacity:0;filter:alpha(opacity=0);box-shadow:0px 1px 9px #ccc;-moz-box-shadow:0px 1px 9px #ccc;-webkit-box-shadow:0px 1px 9px #ccc;-ms-box-shadow:0px 1px 9px #ccc;-o-box-shadow:0px 1px 9px #ccc;-webkit-transition:all .6s ease-in-out;-moz-transition:all .6s ease-in-out;-ms-transition:all .6s ease-in-out;-0-transition:all .6s ease-in-out;transition:all .6s ease-in-out;}.tipbox p{display:none;}.rest-info .tip-box-over .tipbox{top:86px;opacity:1;overflow:visible;opacity:1;-webkit-opacity:1;-moz-opacity:1;-ms-opacity:1;-o-opacity:1;filter:alpha(opacity=100);}.tip-box-over .tipbox p{display:block;}.rest-info .tipbox .i-tagtop{position:absolute;top:-9px;left:101px;}.rest-info .average-speed,.rest-info .ack-ti,.rest-info .in-ti{text-align:center;position:relative;padding-left:6px;padding-right:16px;min-width:100px;_width:100px;}.rest-info .average-speed,.rest-info .ack-ti{background:url(http://xs01.meituan.net/waimai_web/img/spliter.png) no-repeat 100% 19px;}.rest-info .right-bar .nu{color:#FF6900;font-size:14px;margin-top:10px;cursor:pointer;position:relative;z-index:2;}.rest-info .right-bar strong{font-weight:normal;font-family:\5FAE\8F6F\96C5\9ED1;font-size:34px;}.rest-info .right-bar .desc{color:#434343;position:relative;z-index:2;}.rest-info .up10px{position:relative;top:-4px;left:5px;}.rest-info .no-at-time{padding-bottom:8px;display:block;padding-top:19px;color:#333;}.page-wrap .inner-wrap{padding-top:0;}.tab-link{margin-top:15px;position:relative;top:1px;}.tab-link .tab-item{height:38px;line-height:38px;text-align:center;border:1px solid #DCDCDC;border-bottom:0;text-decoration:none;color:#686868;font-size:14px;display:block;float:left;padding:0 30px;}.tab-link .tab-item:hover{text-decoration:none;color:#333;}.tab-link .no-border-left{border-left:0;}.tab-link .active{color:#333;background-color:#fff;border-top:2px solid #ff6900;line-height:37px;}.widgets .widget{width:250px;margin-bottom:10px;background-color:#FFFFFF;}.broadcaster-fixed{position:fixed;top:0;z-index:1;_position:absolute;_top:expression(eval(document.documentElement.scrollTop));}.broadcaster .title{border:1px solid #ED9400;height:40px;background-color:#FF6900;color:#FFFFFF;line-height:40px;padding-left:12px;}.broadcaster .content{border:1px solid #DCDCDC;border-top:0;padding:12px;line-height:21px;word-wrap:break-word;font-size:14px;color:#FF6900;}.broadcaster .content .loading{width:16px;height:16px;margin:0 auto;background:url(http://xs01.meituan.net/waimai_web/img/icon-loading16x16.gif);}.food-list{width:718px;border:1px solid #DCDCDC;background-color:#FFFFFF;}.food-list .informer{background-color:#FFFBCC;border-bottom:1px solid #DCDCDC;color:#EB6100;padding:9px 13px;}.foodtype-nav{background-color:#FFFFFF;padding:15px;border:1px solid #DCDCDC;width:616px;position:fixed;z-index:10;box-shadow:0 -1px 9px #CCC;-moz-box-shadow:0 -1px 9px #CCC;-webkit-box-shadow:0 -1px 9px #CCC;-ms-box-shadow:0 -1px 9px #CCC;-o-box-shadow:0 -1px 9px #CCC;}.foodtype-nav .i-tagtop{position:absolute;top:-9px;left:375px;}.foodtype-nav .name .i-ph15x15{margin-right:3px;}.nav-fixed{width:718px;position:fixed;top:0;z-index:1;_position:static;box-shadow:0 1px 5px #ccc;-moz-box-shadow:0 1px 5px #ccc;-webkit-box-shadow:0 1px 5px #ccc;-ms-box-shadow:0 1px 5px #ccc;-o-box-shadow:0 1px 5px #ccc;}.foodtype-nav .title{font-size:14px;font-weight:bold;margin-left:18px;margin-top:4px;}.foodtype-nav ul li{float:left;margin-right:12px;margin-bottom:3px;}.foodtype-nav .type{display:block;padding:5px 7px;width:120px;color:#434343;}.foodtype-nav .active .type{background-color:#FF7900;color:#FFFFFF;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;-ms-boder-radius:3px;-o-boder-radius:3px;}.food-nav .actions{font-size:12px;font-weight:normal;margin-top:-4px;}.food-nav .actions .icon{vertical-align:-1px;margin-left:5px;*vertical-align:2px;_vertical-align:-2px;}.food-nav .actions a{width:65px;height:25px;margin-right:8px;float:left;color:#434343;text-align:center;line-height:25px;border-width:1px;_padding-top:6px;_height:19px;_line-height:19px;}.food-nav .actions a.classic{margin-right:20px;}.food-nav a.active ,.food-nav a.over{color:#FF6900;}.food-nav a.active .i-orderdown ,.food-nav a.over .i-orderdown{background-position:-410px -47px;}.food-nav a.active .i-orderup ,.food-nav a.over .i-orderup{background-position:-384px -47px;}.food-nav .actions a.active{border:1px solid #DDDDDD;background-color:#EEEEEE;}.food-nav .actions .sales{border-left:1px solid #EEEEEE;}.food-nav .actions .price{border-left:1px solid #EEEEEE;}.food-nav .title,.food-nav .title-blank{height:35px;font-size:14px;padding-left:19px;padding-top:15px;background-color:#F5F5F5;}.food-nav .title{border-bottom:1px solid #DCDCDC;}.title-blank{top:0;z-index:1;width:699px;position:fixed;border-bottom:1px solid #DCDCDC;_position:absolute;_top:expression(eval(document.documentElement.scrollTop));}.title .tag-na,.title-blank .tag-na{font-weight:bold;}.food-nav .title .i-ph17x17,.food-nav .title-blank .i-ph17x17{margin-right:5px;}.food-cate-desc{background-color:#FFF8ED;color:#686868;font-size:12px;padding:13px 22px;border-top:1px solid #EEEEEE;border-bottom:1px solid #EEEEEE;}.text-food-cont .over{background-color:#fff6e0;}.text-food-cont .over .i-addcart,.pic-food-cont .over .i-addcart{background-position-y:-28px;}.text-food{height:69px;border-bottom:1px solid #EEE;cursor:pointer}.text-food .description{overflow:hidden;padding-left:30px}.text-food .description .na{font-size:14px;margin-top:15px}.text-food .description .na img{vertical-align:text-bottom;}.text-food .description .nodesc{margin-top:25px}.text-food .description .desc{margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.text-food .unit-price{font-size:14px;margin-right:15px;}.text-food .unit-price .only{line-height:70px;}.text-food .unit-price .origin{font-size:10px;color:#A0A0A0;text-decoration:line-through;-webkit-transform:scale(0.9);text-line-through-color:#FF6900;margin-top:16px;}.text-food .unit-price .latest{margin-top:1px;}.text-food .add{margin-right:25px;padding-top:22px;}.text-food .add .tips{display:inline-block;line-height:25px;width:60px;height:25px;text-align:center;background-color:#b5b5b5;color:#fff;}.text-food .sold{width:70px;height:100%}.text-food .fleft{width:38px;height:69px;background:url(http://xs01.meituan.net/waimai_web/img/foodleft.png) no-repeat;}.text-food .fleft .txt{color:#434343;padding-left:9px;margin-top:18px;}.text-food .fleft .count{color:#E15F00;font-weight:bold;padding-left:5px;text-align:center;margin-top:5px;}.text-food .nofleft{background:none;}.text-food .zan-rank{margin-top:16px}.text-food .zan-rank .i-zan{vertical-align:text-bottom;}.text-food .sold .count{margin-top:3px}.pic-food-cont{border-bottom:1px solid #EEE;overflow:hidden;}.pic-food-cont .over{background-color:#fff6e0;}.pic-food{float:left;width:238px;height:270px;border-right:1px dashed #DDDDDD;border-bottom:1px dashed #DDDDDD;padding-right:1px;overflow:hidden;}.pic-food .price .only{font-size:14px;}.pic-food .price .origin{font-size:10px;color:#A0A0A0;text-decoration:line-through;-webkit-transform:scale(0.9);text-line-through-color:#FF6900;}.pic-food .price .latest{margin-top:1px;font-size:14px;}.pic-food-col2{border-right:0;padding-right:0;}.pic-food-rowlast{border-bottom:0;}.pic-food .avatar,.pic-food .op,.pic-food .sale-info,.pic-food .np,.pic-food .labels{width:195px;}.pic-food .avatar{position:relative;height:146px;margin:20px auto 0;}.pic-food .avatar .description{width:175px;bottom:0;padding:10px;background-color:#333;position:absolute;color:#fff;font-size:12px;line-height:16px;left:0;display:none;-ms-filter:"alpha(Opacity=80)";filter:alpha(opacity=80);-moz-opacity:.8;-khtml-opacity:.8;opacity:.8;}.pic-food .avatar .food-tag{position:absolute;height:17px;top:5px;left:5px;}.pic-food-cont .over .description{display:block;}.pic-food .avatar img.food-shape{display:block;width:100%;height:100%;background-repeat:no-repeat;background-position:center;}.pic-food .np{margin:14px auto 0;font-size:14px;}.pic-food .sale-info{margin:14px auto 0;margin-top:5px;}.pic-food .sale-info .counter{color:#FF6900;font-weight:bold;}.pic-food .sale-info .i-zan{vertical-align:text-bottom;}.pic-food .op{margin:5px auto 0;}.pic-food .labels{margin:8px auto 0;}.pic-food .labels img{float:left;margin-right:5px;}.pic-food .labels .tip{display:block;width:60px;height:25px;line-height:25px;text-align:center;background-color:#b5b5b5;color:#fff;}.pic-food .op .add{height:26px;margin-top:5px;}.pic-food .op .sold-count{margin-top:3px;}.pic-food-cart-num,.text-food-cart-num{width:20px;height:20px;line-height:20px;background:url(http://xs01.meituan.net/waimai_web/img/icon-blockff6900.png);color:#fff;text-align:center;}.pic-food-cart-num{margin:2px 8px 0 0;}.text-food-cart-num{margin:24px 12px 0 0;}.triffle{margin-left:530px;}.widgets .discount{border:1px solid #DCDCDC;padding:10px;width:228px;font-size:14px;}.widgets .discount .icon{vertical-align:text-bottom;float:left;}.widgets .discount .i-ph17x17{float:left;}.widgets .discount p{margin-bottom:10px;}.widgets .discount .i-pay{margin-right:6px;}.widgets .discount .discount-desc{margin-left:24px;display:block;}.discount .i-ph17x17{vertical-align:text-bottom;display:inline-block;}.ori-foodtype-nav{background-color:#FFFFFF;padding:15px 0;border-bottom:1px solid #DCDCDC;}.ori-foodtype-nav .title{font-size:14px;font-weight:bold;margin-left:18px;margin-top:4px;}.ori-foodtype-nav ul{margin-left:100px;}.ori-foodtype-nav ul li{float:left;margin-right:12px;margin-bottom:3px;}.ori-foodtype-nav .active .type{background-color:#FF6900;color:#FFFFFF;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;-ms-boder-radius:3px;-o-boder-radius:3px;}.ori-foodtype-nav .type{display:block;padding:5px 7px;width:120px;color:#434343;}.ori-foodtype-nav .name .i-ph15x15{margin-right:3px;}
+.rest-info {
+    height: 121px;
+    border: 1px solid #DCDCDC;
+    background-color: #fff;
+    position: relative;
+    border-top: 0;
+    zoom: 1;
+}
+.rest-info .over .i-triangle-dn, .rest-info .tip-box-over .i-triangle-dn {
+    background-position: -370px -69px;
+}
+.rest-info .details {
+    min-width: 330px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-right: 20px;
+    z-index: 3;
+    overflow: hidden;
+    _width: 350px;
+    _padding-right: 0px;
+    _display: inline;
+}
+.rest-info .red-text {
+    position: relative;
+    padding-left: 12px;
+    color: #ff6900;
+}
+.rest-info .red-text .i-arrsmallup {
+    position: absolute;
+    top: 5px;
+    left: 0px;
+}
+.rest-info .over {
+    left: -1px;
+    background-color: #fff;
+    border: 1px solid #DCDCDC;
+    border-top: 0;
+    overflow: visible;
+    box-shadow: 1px 1px 5px #ccc;
+    -moz-box-shadow: 1px 1px 5px #ccc;
+    -webkit-box-shadow: 1px 1px 5px #ccc;
+    -ms-box-shadow: 1px 1px 5px #ccc;
+    -o-box-shadow: 1px 1px 5px #ccc;
+}
+.rest-info .details .list {
+    height: 100px;
+    float: left;
+}
+.rest-info .over .list {
+    height: 195px;
+}
+.rest-info .rest-info-down-wrap {
+    position: absolute;
+    top: 121px;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #DCDCDC;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    -ms-opacity: 0;
+    -o-opacity: 0;
+    filter: alpha(opacity=0);
+}
+.rest-info .over .rest-info-down-wrap {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+    -ms-opacity: 1;
+    -o-opacity: 1;
+    filter: alpha(opacity=100);
+    -webkit-transition: opacity .6s ease;
+    -moz-transition: opacity .6s ease;
+    -ms-transition: opacity .6s ease;
+    -0-transition: opacity .6s ease;
+    transition: opacity .6s ease;
+}
+.rest-info .avatar {
+    margin-left: 21px;
+    margin-top: 21px;
+    _display: inline;
+}
+.rest-info .na {
+    margin-left: 15px;
+    padding-top: 20px;
+}
+.rest-info .na span {
+    font-size: 18px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    color: #444;
+}
+.rest-info .stars {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.rest-info .stars .icon {
+    float: left;
+    margin-right: 3px;
+}
+.rest-info .stars .mark {
+    margin-left: 9px;
+}
+.rest-info-thirdpart {
+    margin-left: 15px;
+    margin-top: 8px;
+    color: #898989;
+}
+.rest-info-thirdpart-pic {
+    height: 12px;
+    vertical-align: text-top;
+}
+.rest-info .na .i-triangle-dn {
+    margin-left: 5px;
+    vertical-align: 3px;
+}
+.rest-info .location, .rest-info .delivery-time, .rest-info .telephone {
+    margin-top: 10px;
+    width: 320px;
+    margin-left: 20px;
+}
+.rest-info .delivery-time span, .rest-info .location span, .rest-info .telephone span {
+    font-weight: bold;
+    color: #434343;
+}
+.rest-info .right-bar {
+    padding-top: 16px;
+    color: #434343;
+}
+.rest-info .tipbox {
+    line-height: 22px;
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 1px solid #DCDCDC;
+    width: 180px;
+    text-align: left;
+    padding: 12px 17px;
+    top: 5px;
+    left: -54px;
+    overflow: hidden;
+    zoom: 1;
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    -ms-opacity: 0;
+    -o-opacity: 0;
+    filter: alpha(opacity=0);
+    box-shadow: 0px 1px 9px #ccc;
+    -moz-box-shadow: 0px 1px 9px #ccc;
+    -webkit-box-shadow: 0px 1px 9px #ccc;
+    -ms-box-shadow: 0px 1px 9px #ccc;
+    -o-box-shadow: 0px 1px 9px #ccc;
+    -webkit-transition: all .6s ease-in-out;
+    -moz-transition: all .6s ease-in-out;
+    -ms-transition: all .6s ease-in-out;
+    -0-transition: all .6s ease-in-out;
+    transition: all .6s ease-in-out;
+}
+.tipbox p {
+    display: none;
+}
+.rest-info .tip-box-over .tipbox {
+    top: 86px;
+    opacity: 1;
+    overflow: visible;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+    -ms-opacity: 1;
+    -o-opacity: 1;
+    filter: alpha(opacity=100);
+}
+.tip-box-over .tipbox p {
+    display: block;
+}
+.rest-info .tipbox .i-tagtop {
+    position: absolute;
+    top: -9px;
+    left: 101px;
+}
+.rest-info .average-speed, .rest-info .ack-ti, .rest-info .in-ti {
+    text-align: center;
+    position: relative;
+    padding-left: 6px;
+    padding-right: 16px;
+    min-width: 100px;
+    _width: 100px;
+}
+.rest-info .average-speed, .rest-info .ack-ti {
+    background: url(http://xs01.meituan.net/waimai_web/img/spliter.png) no-repeat 100% 19px;
+}
+.rest-info .right-bar .nu {
+    color: #FF6900;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+.rest-info .right-bar strong {
+    font-weight: normal;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-size: 34px;
+}
+.rest-info .right-bar .desc {
+    color: #434343;
+    position: relative;
+    z-index: 2;
+}
+.rest-info .up10px {
+    position: relative;
+    top: -4px;
+    left: 5px;
+}
+.rest-info .no-at-time {
+    padding-bottom: 8px;
+    display: block;
+    padding-top: 19px;
+    color: #333;
+}
+.page-wrap .inner-wrap {
+    padding-top: 0;
+}
+.tab-link {
+    margin-top: 15px;
+    position: relative;
+    top: 1px;
+}
+.tab-link .tab-item {
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    border: 1px solid #DCDCDC;
+    border-bottom: 0;
+    text-decoration: none;
+    color: #686868;
+    font-size: 14px;
+    display: block;
+    float: left;
+    padding: 0 30px;
+}
+.tab-link .tab-item:hover {
+    text-decoration: none;
+    color: #333;
+}
+.tab-link .no-border-left {
+    border-left: 0;
+}
+.tab-link .active {
+    color: #333;
+    background-color: #fff;
+    border-top: 2px solid #ff6900;
+    line-height: 37px;
+}
+.widgets .widget {
+    width: 250px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+}
+.broadcaster-fixed {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    _position: absolute;
+    _top: expression(eval(document.documentElement.scrollTop));
+}
+.broadcaster .title {
+    border: 1px solid #ED9400;
+    height: 40px;
+    background-color: #FF6900;
+    color: #FFFFFF;
+    line-height: 40px;
+    padding-left: 12px;
+}
+.broadcaster .content {
+    border: 1px solid #DCDCDC;
+    border-top: 0;
+    padding: 12px;
+    line-height: 21px;
+    word-wrap: break-word;
+    font-size: 14px;
+    color: #FF6900;
+}
+.broadcaster .content .loading {
+    width: 16px;
+    height: 16px;
+    margin: 0 auto;
+    background: url(http://xs01.meituan.net/waimai_web/img/icon-loading16x16.gif);
+}
+.food-list {
+    width: 718px;
+    border: 1px solid #DCDCDC;
+    background-color: #FFFFFF;
+}
+.food-list .informer {
+    background-color: #FFFBCC;
+    border-bottom: 1px solid #DCDCDC;
+    color: #EB6100;
+    padding: 9px 13px;
+}
+.foodtype-nav {
+    background-color: #FFFFFF;
+    padding: 15px;
+    border: 1px solid #DCDCDC;
+    width: 616px;
+    position: fixed;
+    z-index: 10;
+    box-shadow: 0 -1px 9px #CCC;
+    -moz-box-shadow: 0 -1px 9px #CCC;
+    -webkit-box-shadow: 0 -1px 9px #CCC;
+    -ms-box-shadow: 0 -1px 9px #CCC;
+    -o-box-shadow: 0 -1px 9px #CCC;
+}
+.foodtype-nav .i-tagtop {
+    position: absolute;
+    top: -9px;
+    left: 375px;
+}
+.foodtype-nav .name .i-ph15x15 {
+    margin-right: 3px;
+}
+.nav-fixed {
+    width: 718px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    _position: static;
+    box-shadow: 0 1px 5px #ccc;
+    -moz-box-shadow: 0 1px 5px #ccc;
+    -webkit-box-shadow: 0 1px 5px #ccc;
+    -ms-box-shadow: 0 1px 5px #ccc;
+    -o-box-shadow: 0 1px 5px #ccc;
+}
+.foodtype-nav .title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 18px;
+    margin-top: 4px;
+}
+.foodtype-nav ul li {
+    float: left;
+    margin-right: 12px;
+    margin-bottom: 3px;
+}
+.foodtype-nav .type {
+    display: block;
+    padding: 5px 7px;
+    width: 120px;
+    color: #434343;
+}
+.foodtype-nav .active .type {
+    background-color: #FF7900;
+    color: #FFFFFF;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -ms-boder-radius: 3px;
+    -o-boder-radius: 3px;
+}
+.food-nav .actions {
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: -4px;
+}
+.food-nav .actions .icon {
+    vertical-align: -1px;
+    margin-left: 5px;
+    *vertical-align: 2px;
+    _vertical-align: -2px;
+}
+.food-nav .actions a {
+    width: 65px;
+    height: 25px;
+    margin-right: 8px;
+    float: left;
+    color: #434343;
+    text-align: center;
+    line-height: 25px;
+    border-width: 1px;
+    _padding-top: 6px;
+    _height: 19px;
+    _line-height: 19px;
+}
+.food-nav .actions a.classic {
+    margin-right: 20px;
+}
+.food-nav a.active, .food-nav a.over {
+    color: #FF6900;
+}
+.food-nav a.active .i-orderdown, .food-nav a.over .i-orderdown {
+    background-position: -410px -47px;
+}
+.food-nav a.active .i-orderup, .food-nav a.over .i-orderup {
+    background-position: -384px -47px;
+}
+.food-nav .actions a.active {
+    border: 1px solid #DDDDDD;
+    background-color: #EEEEEE;
+}
+.food-nav .actions .sales {
+    border-left: 1px solid #EEEEEE;
+}
+.food-nav .actions .price {
+    border-left: 1px solid #EEEEEE;
+}
+.food-nav .title, .food-nav .title-blank {
+    height: 35px;
+    font-size: 14px;
+    padding-left: 19px;
+    padding-top: 15px;
+    background-color: #F5F5F5;
+}
+.food-nav .title {
+    border-bottom: 1px solid #DCDCDC;
+}
+.title-blank {
+    top: 0;
+    z-index: 1;
+    width: 699px;
+    position: fixed;
+    border-bottom: 1px solid #DCDCDC;
+    _position: absolute;
+    _top: expression(eval(document.documentElement.scrollTop));
+}
+.title .tag-na, .title-blank .tag-na {
+    font-weight: bold;
+}
+.food-nav .title .i-ph17x17, .food-nav .title-blank .i-ph17x17 {
+    margin-right: 5px;
+}
+.food-cate-desc {
+    background-color: #FFF8ED;
+    color: #686868;
+    font-size: 12px;
+    padding: 13px 22px;
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+}
+.text-food-cont .over {
+    background-color: #fff6e0;
+}
+.text-food-cont .over .i-addcart, .pic-food-cont .over .i-addcart {
+    background-position-y: -28px;
+}
+.text-food {
+    height: 69px;
+    border-bottom: 1px solid #EEE;
+    cursor: pointer
+}
+.text-food .description {
+    overflow: hidden;
+    padding-left: 30px
+}
+.text-food .description .na {
+    font-size: 14px;
+    margin-top: 15px
+}
+.text-food .description .na img {
+    vertical-align: text-bottom;
+}
+.text-food .description .nodesc {
+    margin-top: 25px
+}
+.text-food .description .desc {
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.text-food .unit-price {
+    font-size: 14px;
+    margin-right: 15px;
+}
+.text-food .unit-price .only {
+    line-height: 70px;
+}
+.text-food .unit-price .origin {
+    font-size: 10px;
+    color: #A0A0A0;
+    text-decoration: line-through;
+    -webkit-transform: scale(0.9);
+    text-line-through-color: #FF6900;
+    margin-top: 16px;
+}
+.text-food .unit-price .latest {
+    margin-top: 1px;
+}
+.text-food .add {
+    margin-right: 25px;
+    padding-top: 22px;
+}
+.text-food .add .tips {
+    display: inline-block;
+    line-height: 25px;
+    width: 60px;
+    height: 25px;
+    text-align: center;
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.text-food .sold {
+    width: 70px;
+    height: 100%
+}
+.text-food .fleft {
+    width: 38px;
+    height: 69px;
+    background: url(http://xs01.meituan.net/waimai_web/img/foodleft.png) no-repeat;
+}
+.text-food .fleft .txt {
+    color: #434343;
+    padding-left: 9px;
+    margin-top: 18px;
+}
+.text-food .fleft .count {
+    color: #E15F00;
+    font-weight: bold;
+    padding-left: 5px;
+    text-align: center;
+    margin-top: 5px;
+}
+.text-food .nofleft {
+    background: none;
+}
+.text-food .zan-rank {
+    margin-top: 16px
+}
+.text-food .zan-rank .i-zan {
+    vertical-align: text-bottom;
+}
+.text-food .sold .count {
+    margin-top: 3px
+}
+.pic-food-cont {
+    border-bottom: 1px solid #EEE;
+    overflow: hidden;
+}
+.pic-food-cont .over {
+    background-color: #fff6e0;
+}
+.pic-food {
+    float: left;
+    width: 238px;
+    height: 270px;
+    border-right: 1px dashed #DDDDDD;
+    border-bottom: 1px dashed #DDDDDD;
+    padding-right: 1px;
+    overflow: hidden;
+}
+.pic-food .price .only {
+    font-size: 14px;
+}
+.pic-food .price .origin {
+    font-size: 10px;
+    color: #A0A0A0;
+    text-decoration: line-through;
+    -webkit-transform: scale(0.9);
+    text-line-through-color: #FF6900;
+}
+.pic-food .price .latest {
+    margin-top: 1px;
+    font-size: 14px;
+}
+.pic-food-col2 {
+    border-right: 0;
+    padding-right: 0;
+}
+.pic-food-rowlast {
+    border-bottom: 0;
+}
+.pic-food .avatar, .pic-food .op, .pic-food .sale-info, .pic-food .np, .pic-food .labels {
+    width: 195px;
+}
+.pic-food .avatar {
+    position: relative;
+    height: 146px;
+    margin: 20px auto 0;
+}
+.pic-food .avatar .description {
+    width: 175px;
+    bottom: 0;
+    padding: 10px;
+    background-color: #333;
+    position: absolute;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    left: 0;
+    display: none;
+    -ms-filter: "alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity: .8;
+    -khtml-opacity: .8;
+    opacity: .8;
+}
+.pic-food .avatar .food-tag {
+    position: absolute;
+    height: 17px;
+    top: 5px;
+    left: 5px;
+}
+.pic-food-cont .over .description {
+    display: block;
+}
+.pic-food .avatar img.food-shape {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.pic-food .np {
+    margin: 14px auto 0;
+    font-size: 14px;
+}
+.pic-food .sale-info {
+    margin: 14px auto 0;
+    margin-top: 5px;
+}
+.pic-food .sale-info .counter {
+    color: #FF6900;
+    font-weight: bold;
+}
+.pic-food .sale-info .i-zan {
+    vertical-align: text-bottom;
+}
+.pic-food .op {
+    margin: 5px auto 0;
+}
+.pic-food .labels {
+    margin: 8px auto 0;
+}
+.pic-food .labels img {
+    float: left;
+    margin-right: 5px;
+}
+.pic-food .labels .tip {
+    display: block;
+    width: 60px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    background-color: #b5b5b5;
+    color: #fff;
+}
+.pic-food .op .add {
+    height: 26px;
+    margin-top: 5px;
+}
+.pic-food .op .sold-count {
+    margin-top: 3px;
+}
+.pic-food-cart-num, .text-food-cart-num {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background: url(http://xs01.meituan.net/waimai_web/img/icon-blockff6900.png);
+    color: #fff;
+    text-align: center;
+}
+.pic-food-cart-num {
+    margin: 2px 8px 0 0;
+}
+.text-food-cart-num {
+    margin: 24px 12px 0 0;
+}
+.triffle {
+    margin-left: 530px;
+}
+.widgets .discount {
+    border: 1px solid #DCDCDC;
+    padding: 10px;
+    width: 228px;
+    font-size: 14px;
+}
+.widgets .discount .icon {
+    vertical-align: text-bottom;
+    float: left;
+}
+.widgets .discount .i-ph17x17 {
+    float: left;
+}
+.widgets .discount p {
+    margin-bottom: 10px;
+}
+.widgets .discount .i-pay {
+    margin-right: 6px;
+}
+.widgets .discount .discount-desc {
+    margin-left: 24px;
+    display: block;
+}
+.discount .i-ph17x17 {
+    vertical-align: text-bottom;
+    display: inline-block;
+}
+.ori-foodtype-nav {
+    background-color: #FFFFFF;
+    padding: 15px 0;
+    border-bottom: 1px solid #DCDCDC;
+}
+.ori-foodtype-nav .title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 18px;
+    margin-top: 4px;
+}
+.ori-foodtype-nav ul {
+    margin-left: 100px;
+}
+.ori-foodtype-nav ul li {
+    float: left;
+    margin-right: 12px;
+    margin-bottom: 3px;
+}
+.ori-foodtype-nav .active .type {
+    background-color: #FF6900;
+    color: #FFFFFF;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -ms-boder-radius: 3px;
+    -o-boder-radius: 3px;
+}
+.ori-foodtype-nav .type {
+    display: block;
+    padding: 5px 7px;
+    width: 120px;
+    color: #434343;
+}
+.ori-foodtype-nav .name .i-ph15x15 {
+    margin-right: 3px;
+}
+.rst-animate-tip {
+    position: fixed;
+    z-index: 100000;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background-color: #FF6900;
+    color: #fff;
+    line-height: 20px;
+    font-size: 12px;
+}
