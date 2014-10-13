@@ -34,7 +34,7 @@ define('order', function(require, exports){
 
             this.menuList = [];
 
-            this.chkUserName();
+            //this.chkUserName();
 
             this.initOrder();
 
@@ -49,7 +49,8 @@ define('order', function(require, exports){
             })
         },
         chkUserName : function(){
-            this.username = window.prompt('我知道你的ip是：'+ window.IP +'，所以请输入你的真实名字再点菜。');
+            var name = window.prompt('我知道你的ip是：'+ window.IP +'，所以请输入你的真实名字再点菜。', '');
+			this.username = name && typeof name === 'string' && name || null;
         },
         initOrder : function(){
             var self = this,
@@ -94,7 +95,7 @@ define('order', function(require, exports){
                 item = obj[i];
 
                 if(!this.el.find('.j-selected-item[data-id="'+ item.id +'"]').length){
-                    this.addOrderItem(item);
+                    this.addOrderItem(item, true);
                 }
             }
         },
@@ -125,7 +126,7 @@ define('order', function(require, exports){
                 return;
             }
 
-            this.addOrderItem(obj);
+            if (!this.addOrderItem(obj)) return;
             this.socket.emit('server.menu.select', obj);
         },
         clickOrderReset : function(){
@@ -153,10 +154,10 @@ define('order', function(require, exports){
                 this.socket.emit('server.menu.remove', obj);
             }
         },
-        addOrderItem : function(obj){
-            if(!this.username){
+        addOrderItem : function(obj, bool){
+            if(!this.username && !bool){
                 this.chkUserName();
-                return;
+                return false;
             }
             if(obj){
                 this.el.find('.j-menu-item[data-id="'+ obj.id +'"]').addClass('selected');
@@ -169,6 +170,7 @@ define('order', function(require, exports){
 
                 this.resetPrice(1, obj.price);
             }
+			return true;
         },
         removeOrderItem : function(obj){
             if(obj){
@@ -274,7 +276,7 @@ define('order', function(require, exports){
                 return;
             }
 
-            this.addOrderItem(obj);
+            if (!this.addOrderItem(obj)) return;
             this.socket.emit('server.menu.select', obj);
 
             this.elInputSearch.val('');
