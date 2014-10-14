@@ -75,6 +75,45 @@ router.get('/:id', function(req, res, next) {
 				{"id": "23250603", "name": "巴西咖喱牛肉饭6", "price": "13", "minCount": "1" ,"onSale": "1", "cart": 0 },
 				{"id": "23250613", "name": "巴西咖喱牛肉饭7", "price": "19", "minCount": "1" ,"onSale": "1", "cart": 0 }
 			]
+		},
+		{
+			name: "水果1",
+			num: 40,
+			food: [
+				{"id": "232505531", "name": "巴西咖喱牛肉饭1", "price": "25", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232505632", "name": "巴西咖喱牛肉饭2", "price": "26", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232505733", "name": "巴西咖喱牛肉饭3", "price": "11", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232505834", "name": "巴西咖喱牛肉饭4", "price": "19", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232505935", "name": "巴西咖喱牛肉饭5", "price": "12", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232506036", "name": "巴西咖喱牛肉饭6", "price": "13", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232506137", "name": "巴西咖喱牛肉饭7", "price": "19", "minCount": "1" ,"onSale": "1", "cart": 0 }
+			]
+		},
+		{
+			name: "水果2",
+			num: 40,
+			food: [
+				{"id": "2325051", "name": "巴西咖喱牛肉饭1", "price": "25", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "2325052", "name": "巴西咖喱牛肉饭2", "price": "26", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "2325053", "name": "巴西咖喱牛肉饭3", "price": "11", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "2325054", "name": "巴西咖喱牛肉饭4", "price": "19", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "2325055", "name": "巴西咖喱牛肉饭5", "price": "12", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "2325066", "name": "巴西咖喱牛肉饭6", "price": "13", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "2325067", "name": "巴西咖喱牛肉饭7", "price": "19", "minCount": "1" ,"onSale": "1", "cart": 0 }
+			]
+		},
+		{
+			name: "水果3",
+			num: 40,
+			food: [
+				{"id": "232501", "name": "巴西咖喱牛肉饭1", "price": "25", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232502", "name": "巴西咖喱牛肉饭2", "price": "26", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232503", "name": "巴西咖喱牛肉饭3", "price": "11", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232504", "name": "巴西咖喱牛肉饭4", "price": "19", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232505", "name": "巴西咖喱牛肉饭5", "price": "12", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232506", "name": "巴西咖喱牛肉饭6", "price": "13", "minCount": "1" ,"onSale": "1", "cart": 0 },
+				{"id": "232507", "name": "巴西咖喱牛肉饭7", "price": "19", "minCount": "1" ,"onSale": "1", "cart": 0 }
+			]
 		}
 	];
 

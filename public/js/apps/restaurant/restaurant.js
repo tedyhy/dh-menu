@@ -59,7 +59,6 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		var top = $(window).scrollTop();
 
 		if (top < foodListOffset.top) {
-
 			$titleblank.addClass('hidden');
 			$foodtypenav.addClass('hidden');
 
@@ -69,12 +68,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			$categorys.each(function(i, cate) {
 				var t = $(cate).offset().top;
 				if (top >= t) {
+					if ($('html, body').is(':animated')) return;
+
 					var title = $(cate).find('.tag-na').text(),
 						$curcate = $foodtypenav.find('li.j-food-cate').eq(i);
 
 					$titleblank.find('.tag-na').text(title);
 
-					if ($('html, body').is(':animated')) return;
 					$foodtypenav.find('li.j-food-cate').eq(i).addClass('active')
 						.siblings().removeClass('active');
 					$orifoodtypenav.find('li.j-food-cate').eq(i).addClass('active')
