@@ -3,7 +3,9 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		_ = require('underscore'),
 		Backbone = require('backbone'),
 		TWEEN = require('libs/tween/Tween'),
-		foodData = eval("(" + $('.j-food-data').val() + ")");
+		foodData = eval("(" + $('.j-food-data').val() + ")"),
+		cartData = eval("(" + $('.j-cart-data').val() + ")")
+		socket = io.connect();
 
 	require("libs/tween/requestAnimationFrame");
 
@@ -122,18 +124,12 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 			this.listenTo(allfoods, 'change', this.render);
 
-			var socket = this.socket = io.connect();
 			// 广播内容
-            socket.on('client.menu.add', $.proxy(this.ioAdd, this));
-            socket.on('client.menu.remove', $.proxy(this.removeMenu, this));
-            socket.on('client.menu.reset', $.proxy(this.resetMenu, this));
+            // socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
 		},
-		ioAdd: function(d) {
-			// carts.set(d);
-			// console.log(carts.get(d.id))
-			// this.render(carts.get(d.id));
-			console.log(d)
-			carts.set(d);
+
+		ioAddOne: function(f){
+			allfoods.set(f);
 		},
 
 		render: function(d) {
@@ -198,8 +194,9 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			self.addFoodAnim($self, price, function() {
 				d.set('cart', cart + 1);
 				carts.add(d);
+				console.log(carts.models)
 				// 缓存到服务器
-				self.socket.emit('server.menu.add', {uid: 111, data: carts});
+				socket.emit('server.menu.add', {uid: 111, data: d});
 			});
 
 			function animate(time){
@@ -289,6 +286,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		initialize: function() {
 			this.listenTo(this.model, 'change', this.render);
 			this.listenTo(this.model, 'remove', this.remove);
+
+			// 广播内容
+            socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
+		},
+
+		ioAddOne: function(f){
+			this.model.set(f);
 		},
 
 		render: function() {
@@ -348,6 +352,17 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.listenTo(carts, 'add', this.addOne);
 			this.listenTo(carts, 'remove', this.removeOne);
 			this.listenTo(carts, 'all', this.render);
+
+			cartData && carts.set(cartData);
+
+			// 广播内容
+            // socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
+            // socket.on('client.menu.remove', $.proxy(this.removeMenu, this));
+            // socket.on('client.menu.reset', $.proxy(this.resetMenu, this));
+		},
+
+		ioAddOne: function(f){
+			carts.set(f);
 		},
 
 		addOne: function(f) {

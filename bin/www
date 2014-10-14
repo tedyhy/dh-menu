@@ -25,8 +25,8 @@ io.sockets.on('connection', function(socket) {
 			cart = cache.order[uid] || {}, // 用户购物车
 			fid = data.id || 0, // food id
 			food = (cart[fid] = data); // food
-
-		socket.broadcast.emit('client.menu.add', data);
+console.log(d, uid, cache)
+		// socket.broadcast.emit('client.menu.add', data);
 	});
 	//撤菜
 	socket.on('server.menu.remove', function(uid, result) {

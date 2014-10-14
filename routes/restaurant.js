@@ -24,7 +24,7 @@ router.get('/:id', function(req, res, next) {
 	var id = req.params.id,
 		ip = req.ip,
 		obj = {};
-
+console.log(cache.order)
 	var restinfo = {
 		id: id,
 		img_url: 'http://p1.meituan.net/xianfu/1e91ff9ebb8ec442d8b0ba70409dd17216271.jpg',
@@ -34,6 +34,8 @@ router.get('/:id', function(req, res, next) {
 		broad_content: "提示：<br>1、节假日不供应<br>2、请用餐之前出示员工证件或胸卡，方可用餐。<br>3、每点炒菜一道，送米饭一碗。（打包外卖除外）。<br>地址：<br>海淀区成府路28号五道口购物中心五层513号<br>"
 	}
 
+	var cart = cache.order[111] || [];
+	
 	var data = [
 		{
 			name: "家常饭",
@@ -81,7 +83,8 @@ router.get('/:id', function(req, res, next) {
 		title: 'DH FWD MENU',
 		restinfo: restinfo,
 		food: data,
-		data: JSON.stringify(data)
+		data: JSON.stringify(data),
+		cart: JSON.stringify(cart)
 	});
 
 
