@@ -7,6 +7,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		cartData = eval("(" + $('.j-cart-data').val() + ")")
 		socket = io.connect();
 
+	// animate
 	require("libs/tween/requestAnimationFrame");
 
 	// 设置underscore模板边界符号
@@ -194,9 +195,8 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			self.addFoodAnim($self, price, function() {
 				d.set('cart', cart + 1);
 				carts.add(d);
-				console.log(carts.models)
 				// 缓存到服务器
-				socket.emit('server.menu.add', {uid: 111, data: d});
+				// socket.emit('server.menu.add', {uid: 111, data: d});
 			});
 
 			function animate(time){
@@ -252,20 +252,6 @@ define('apps/restaurant/restaurant', function(require, exports) {
 				$tip.remove();
 				typeof fn === 'function' && fn.call(self);
 			}).start();
-		},
-
-		animationFrame: function(){
-			var a = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(a) {
-				window.setTimeout(a, 16)
-			};
-			var b = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.msCancelAnimationFrame || function(a) {
-				window.clearTimeout(a)
-			};
-
-			return {
-				requestAnimationFrame: a,
-				cancelAnimationFrame: b
-			}
 		}
 
 	});
@@ -288,7 +274,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.listenTo(this.model, 'remove', this.remove);
 
 			// 广播内容
-            socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
+            // socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
 		},
 
 		ioAddOne: function(f){
@@ -353,7 +339,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.listenTo(carts, 'remove', this.removeOne);
 			this.listenTo(carts, 'all', this.render);
 
-			cartData && carts.set(cartData);
+			// cartData && carts.set(cartData);
 
 			// 广播内容
             // socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
