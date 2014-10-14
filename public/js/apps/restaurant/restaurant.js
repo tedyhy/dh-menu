@@ -4,8 +4,8 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		Backbone = require('backbone'),
 		TWEEN = require('libs/tween/Tween'),
 		foodData = eval("(" + $('.j-food-data').val() + ")"),
-		cartData = eval("(" + $('.j-cart-data').val() + ")")
-	socket = io.connect();
+		cartData = eval("(" + $('.j-cart-data').val() + ")"),
+		socket = io.connect();
 
 	// animate
 	require("libs/tween/requestAnimationFrame");
@@ -46,7 +46,9 @@ define('apps/restaurant/restaurant', function(require, exports) {
 	// foods滚动title
 	var $categorys = $('.j-food-nav .category'),
 		foodListOffset = $categorys.eq(0).offset(),
-		$titleblank = $('.j-title-blank');
+		$titleblank = $('.j-title-blank'),
+		$foodtypenav = $('.j-foodtype-nav'),
+		$orifoodtypenav = $('.ori-foodtype-nav');
 
 	$categorys.eq(0).find('.actions a').hover(function() {
 		$(this).addClass('over');
@@ -55,17 +57,28 @@ define('apps/restaurant/restaurant', function(require, exports) {
 	});
 	$(window).scroll(function() {
 		var top = $(window).scrollTop();
+
 		if (top < foodListOffset.top) {
+
 			$titleblank.addClass('hidden');
-			$('.j-foodtype-nav').addClass('hidden');
+			$foodtypenav.addClass('hidden');
+
 		} else if (top >= foodListOffset.top) {
 			$titleblank.removeClass('hidden');
 
 			$categorys.each(function(i, cate) {
 				var t = $(cate).offset().top;
 				if (top >= t) {
-					var title = $(cate).find('.tag-na').text();
+					var title = $(cate).find('.tag-na').text(),
+						$curcate = $foodtypenav.find('li.j-food-cate').eq(i);
+
 					$titleblank.find('.tag-na').text(title);
+
+					if ($('html, body').is(':animated')) return;
+					$foodtypenav.find('li.j-food-cate').eq(i).addClass('active')
+						.siblings().removeClass('active');
+					$orifoodtypenav.find('li.j-food-cate').eq(i).addClass('active')
+						.siblings().removeClass('active');
 				};
 			});
 		}
