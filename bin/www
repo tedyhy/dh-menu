@@ -15,34 +15,44 @@ var cache = global.cache = {
 	order: {}
 }
 
+// socket
 io.sockets.on('connection', function(socket) {
-	//点菜
+	//点菜 d = {uid: 111, data: d}
 	socket.on('server.menu.add', function(d) {
 		if (!d || !d.uid) return;
 
 		var uid = d.uid,
 			data = d.data,
-			cart = cache.order[uid] || {}, // 用户购物车
+			cart = cache.order[uid] || (cache.order[uid] = []), // 用户购物车
 			fid = data.id || 0, // food id
-			food = (cart[fid] = data); // food
-console.log(d, uid, cache)
-		// socket.broadcast.emit('client.menu.add', data);
+			food = (cart.push(data)); // food
+
+		socket.broadcast.emit('client.menu.add', data);
 	});
 	//撤菜
-	socket.on('server.menu.remove', function(uid, result) {
-		if (!result) return;
+	socket.on('server.menu.remove', function(d) {
+		if (!d || !d.uid) return;
 
-		var cart = cache.order[uid] || {}, // 用户购物车
-			fid = result.id || 0; // food id
-			
-		delete cart[fid]; // food
-		socket.broadcast.emit('client.menu.remove', result);
+		var uid = d.uid,
+			data = d.data,
+			cart = cache.order[uid] || (cache.order[uid] = []), // 用户购物车
+			fid = data.id || 0; // food id
+
+		for (var i = 0; i < cart.length; i++) {
+			if (cart[i].id == fid) {
+				cart.splice(i, 1);
+				break;
+			}
+		};
+
+		socket.broadcast.emit('client.menu.remove', fid);
 	});
 	//重置订单
-	socket.on('server.menu.reset', function(uid, result) {
-		if (!result) return;
+	socket.on('server.menu.reset', function(d) {
+		if (!d || !d.uid) return;
 
-		var cart = (cache.order[uid] = {}); // 用户购物车
+		var uid = d.uid;
+		cache.order[uid] = []; // 清空用户购物车
 
 		socket.broadcast.emit('client.menu.reset');
 	});

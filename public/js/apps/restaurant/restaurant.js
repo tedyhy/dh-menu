@@ -5,7 +5,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		TWEEN = require('libs/tween/Tween'),
 		foodData = eval("(" + $('.j-food-data').val() + ")"),
 		cartData = eval("(" + $('.j-cart-data').val() + ")")
-		socket = io.connect();
+	socket = io.connect();
 
 	// animate
 	require("libs/tween/requestAnimationFrame");
@@ -126,11 +126,16 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.listenTo(allfoods, 'change', this.render);
 
 			// 广播内容
-            // socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
+			socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
 		},
 
-		ioAddOne: function(f){
-			allfoods.set(f);
+		ioAddOne: function(f) {
+			allfoods.add(f, {
+				merge: true
+			});
+			carts.add(f, {
+				merge: true
+			});
 		},
 
 		render: function(d) {
@@ -188,18 +193,24 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			var d = allfoods.get(fid);
 			if (!d) return;
 
-			var cart = d.get('cart'),
-				price = d.get('price');
-			
+			var price = d.get('price');
+
 			// 添加购物车动画
 			self.addFoodAnim($self, price, function() {
-				d.set('cart', cart + 1);
-				carts.add(d);
+				var cart = +d.get('cart') + 1;
+				d.set('cart', cart);
+				carts.add(d, {
+					merge: true
+				});
+
 				// 缓存到服务器
-				// socket.emit('server.menu.add', {uid: 111, data: d});
+				socket.emit('server.menu.add', {
+					uid: 111,
+					data: d
+				});
 			});
 
-			function animate(time){
+			function animate(time) {
 				window.requestAnimationFrame(animate);
 				TWEEN.update(time);
 			}
@@ -272,20 +283,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		initialize: function() {
 			this.listenTo(this.model, 'change', this.render);
 			this.listenTo(this.model, 'remove', this.remove);
-
-			// 广播内容
-            // socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
-		},
-
-		ioAddOne: function(f){
-			this.model.set(f);
 		},
 
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));
 
 			// 总计
-			cartviews.render();
+			cartviews && cartviews.render();
 
 			return this;
 		},
@@ -295,15 +299,31 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 			if (cart === 0) {
 				this.clear();
+				socket.emit('server.menu.remove', {
+					uid: 111,
+					data: this.model
+				});
 				return;
 			}
 			this.model.set('cart', cart);
+			allfoods.get(this.model).set('cart', cart);
+
+			socket.emit('server.menu.remove', {
+				uid: 111,
+				data: this.model
+			});
 		},
 
 		plusOne: function() {
 			var cart = +this.model.get('cart') + 1;
 
 			this.model.set('cart', cart);
+			allfoods.get(this.model).set('cart', cart);
+
+			socket.emit('server.menu.add', {
+				uid: 111,
+				data: this.model
+			});
 		},
 
 		clear: function() {
@@ -339,16 +359,45 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.listenTo(carts, 'remove', this.removeOne);
 			this.listenTo(carts, 'all', this.render);
 
-			// cartData && carts.set(cartData);
+			cartData.length && carts.add(cartData);
+			allfoods.length && allfoods.add(cartData, {
+				merge: true
+			});
 
 			// 广播内容
-            // socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
-            // socket.on('client.menu.remove', $.proxy(this.removeMenu, this));
-            // socket.on('client.menu.reset', $.proxy(this.resetMenu, this));
+			socket.on('client.menu.add', $.proxy(this.ioAddOne, this));
+			socket.on('client.menu.remove', $.proxy(this.ioRemoveOne, this));
+			socket.on('client.menu.reset', $.proxy(this.ioClearCart, this));
 		},
 
-		ioAddOne: function(f){
-			carts.set(f);
+		ioAddOne: function(f) {
+			carts.add(f, {
+				merge: true
+			});
+		},
+
+		ioRemoveOne: function(fid) {
+			var model = carts.get(fid),
+				cart = +model.get('cart') - 1;
+
+			if (cart === 0) {
+				carts.remove(model);
+				allfoods.get(fid).set('cart', cart);
+				return;
+			}
+
+			model.set('cart', cart);
+			allfoods.get(fid).set('cart', cart);
+		},
+
+		ioClearCart: function() {
+			this.$orderlist.css('top', 0);
+
+			carts.each(function(d, i) {
+				allfoods.get(d.get('id')).set('cart', 0);
+			});
+
+			carts.remove(carts.models);
 		},
 
 		addOne: function(f) {
@@ -429,6 +478,10 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			});
 
 			carts.remove(carts.models);
+
+			socket.emit('server.menu.reset', {
+				uid: 111
+			});
 
 			return false;
 		}

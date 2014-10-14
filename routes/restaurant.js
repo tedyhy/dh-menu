@@ -24,7 +24,7 @@ router.get('/:id', function(req, res, next) {
 	var id = req.params.id,
 		ip = req.ip,
 		obj = {};
-console.log(cache.order)
+
 	var restinfo = {
 		id: id,
 		img_url: 'http://p1.meituan.net/xianfu/1e91ff9ebb8ec442d8b0ba70409dd17216271.jpg',
@@ -35,7 +35,7 @@ console.log(cache.order)
 	}
 
 	var cart = cache.order[111] || [];
-	
+
 	var data = [
 		{
 			name: "家常饭",
