@@ -15,6 +15,7 @@
     "morgan": "~1.0.0",
     "mysql": "*",
     "socket.io": "*",
-    "static-favicon": "~1.0.0"
+    "static-favicon": "~1.0.0",
+    "thenjs": "^1.4.4"
   }
 }

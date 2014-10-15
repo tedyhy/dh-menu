@@ -1,9 +1,9 @@
 /*
- * 餐馆相关信息
+ * home相关信息
  */
 var conn = require('./conn');
 
-var restaurant = {
+var home = {
 	gethome: function(obj, ires, next) {
 
 		conn.getConnection(function(err, conn) {
@@ -32,25 +32,7 @@ var restaurant = {
 			});
 
 		});
-	},
-	getrest: function(obj, ires, next) {
-
-		conn.getConnection(function(err, conn) {
-
-			conn.query('SELECT * FROM home WHERE home_id = ' + obj.id, [], function(err, res) {
-
-				if (!err) {
-					res = res && res.length && res || [];
-					obj.callback(res);
-				} else {
-					ires.status(404);
-					next();
-				}
-				conn.release();
-			});
-
-		});
 	}
 }
 
-module.exports = restaurant;
+module.exports = home;
