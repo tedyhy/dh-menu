@@ -354,6 +354,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		events: {
 			'click .j-shopping-cart-footer': 'fnShoppingCart',
 			'click .j-clearcart': 'fnClearCart'
+			// 'click .j-gopay': 'fnGoPay'
 		},
 
 		initialize: function() {
@@ -363,6 +364,8 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.$totalnumber = this.$('.j-totalnumber');
 			this.$readypay = this.$('.j-readypay');
 			this.$gopay = this.$('.j-gopay');
+			this.$orderdata = this.$('.j-order-data');
+			this.$form = this.$('#shoppingCartForm');
 
 			if (carts.models.length) {
 				this.fnShoppingCart();
@@ -372,7 +375,9 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.listenTo(carts, 'remove', this.removeOne);
 			this.listenTo(carts, 'all', this.render);
 
-			cartData.length && carts.add(cartData);
+			cartData.length && carts.add(cartData, {
+				merge: true
+			});
 			allfoods.length && allfoods.add(cartData, {
 				merge: true
 			});
@@ -495,6 +500,24 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			socket.emit('server.menu.reset', {
 				uid: 111
 			});
+
+			return false;
+		},
+
+		fnGoPay: function(){
+			var d = carts.models,
+				data = [],
+				dd = '';
+
+			for (var i = 0; i < d.length; i++) {
+				data.push(d[i].get("id")+','+d[i].get("cart"));
+			};
+
+			dd = data.length && data.join('|');
+
+			this.$orderdata.val(dd);
+
+			this.$form.submit();
 
 			return false;
 		}

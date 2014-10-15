@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title><%=title%></title>
+	<link rel="icon" href="/static/img/favcoin.ico" size="16x16 32x32">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<link rel="stylesheet" href="/static/css/preview.css">
+	<script type="text/javascript" charset="utf-8" src="/static/js/libs/seajs/sea.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/static/js/sea_config.js"></script>
+</head>
+
+<body>
+	<% include ../rside.ejs %>
+	<div class="wrapper">
+		<div id="top-tips" class="top-tips" style="display: none;">
+			<a class="j-top-tips-close top-tips-close" href="javascript:;"><i class="icon i-top-tips-close"></i></a>
+			<div class="j-top-tips-content top-tips-content" data-id=""></div>
+		</div>
+		<% include ../header.ejs %>
+		<div class="page-wrap">
+			<div class="inner-wrap">
+				<div class="breadcrumb">
+					<a class="ca-brown" href="/restaurant/32991">【首减5+立减5】人民公社</a><i>&gt;</i>
+					<span>确认购买</span>
+				</div>
+				<div class="order-confirm clearfix">
+					<div class="fl address">
+						<table class="standard-table dishes-table">
+							<thead>
+								<tr class="bot-border">
+									<th width="240">
+										<div class="th-inner align-left">菜品</div>
+									</th>
+									<th width="100">
+										<div class="th-inner">份数</div>
+									</th>
+									<th>
+										<div class="th-inner align-right">金额</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div class="td-inner align-left" title="巴西咖喱牛肉饭">巴西咖喱牛肉饭
+
+										</div>
+									</td>
+									<td>
+										<div class="td-inner align-center">1</div>
+									</td>
+									<td>
+										<div class="td-inner align-right">¥19</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="td-inner align-left" title="红烧排骨饭">红烧排骨饭
+
+										</div>
+									</td>
+									<td>
+										<div class="td-inner align-center">1</div>
+									</td>
+									<td>
+										<div class="td-inner align-right">¥18</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="td-inner align-left" title="红烧鸡腿饭">红烧鸡腿饭
+
+										</div>
+									</td>
+									<td>
+										<div class="td-inner align-center">5</div>
+									</td>
+									<td>
+										<div class="td-inner align-right">¥17*5</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="td-inner align-left" title="湘味剁椒牛肉饭">湘味剁椒牛肉饭
+
+										</div>
+									</td>
+									<td>
+										<div class="td-inner align-center">1</div>
+									</td>
+									<td>
+										<div class="td-inner align-right">¥19</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="td-inner align-left" title="鱼香茄子饭">鱼香茄子饭
+
+										</div>
+									</td>
+									<td>
+										<div class="td-inner align-center">1</div>
+									</td>
+									<td>
+										<div class="td-inner align-right">¥14</div>
+									</td>
+								</tr>
+								<tr class="cc-oriange">
+									<td>
+										<div class="td-inner align-left" title="500ml饮料">500ml饮料
+
+										</div>
+									</td>
+									<td>
+										<div class="td-inner align-center">1</div>
+									</td>
+									<td>
+										<div class="td-inner align-right">¥0</div>
+									</td>
+								</tr>
+								<tr class="top-border packing-cost">
+									<td colspan="3">
+										<div class="td-inner align-right">餐盒费&nbsp;¥0</div>
+									</td>
+								</tr>
+								<tr class="delivery-cost">
+									<td colspan="3">
+										<div class="td-inner align-right">配送费&nbsp;¥0</div>
+									</td>
+								</tr>
+								<tr class="top-border">
+									<td colspan="3">
+										<div class="td-inner cc-oriange align-right">满减优惠&nbsp;-¥5</div>
+									</td>
+								</tr>
+								<tr class="total top-border" data-total="150">
+									<td colspan="3" class="clearfix">
+										<div class="td-inner">
+											<span class="t-number fr">150 元</span>
+											<span class="t-total fr">合计</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="dishes">
+						<div class="dishes-rap">
+							<h3>送餐详情</h3>
+							<form id="addressForm" class="address-form">
+								<div class="field clearfix">
+									<label for="address">送餐地址：</label>
+									<input class="sprite" type="text" name="address">
+									<span class="error-flag">*</span>
+									<span class="error-tips"></span>
+								</div>
+								<div class="field clearfix mobile-field">
+									<label for="mobile">手机号：</label>
+									<input class="sprite" type="text" name="mobile" autocomplete="off" disableautocomplete="" data-pid="32991">
+									<span class="error-flag">*</span>
+									<span class="error-tips"></span>
+								</div>
+								<div class="field clearfix">
+									<label for="customer">客户姓名：</label>
+									<input class="sprite" type="text" name="customer">
+								</div>
+								<div class="field clearfix">
+									<label for="message">给餐厅留言：</label>
+									<input class="show-tags sprite" type="text" name="message">
+								</div>
+								<div class="field clearfix">
+									<label for="pay-method">付款方式：</label>
+									<div class="fl pay-option clearfix">
+										<a href="javascript:;" data-method="1" class="fl sprite option simple-pay selected">餐到付款</a>
+										<a href="javascript:;" data-method="2" class="fl sprite option online-pay">在线支付</a>
+										<i class="fl icon i-pay-tip"></i>
+										<span class="fl tip hidden">在线支付需要您登录并绑定手机号</span>
+									</div>
+								</div>
+								<div class="field hidden">
+									<input type="hidden" name="poiid" value="32991">
+									<input type="hidden" name="uuid" value="00278868E31E4D048090DA2DFC1D9FF3">
+									<input type="hidden" name="buildingid" value="">
+									<input type="hidden" name="shop_cart" value="32991:2325055,1|2325057,1|2325058,5|2325062,1|2325065,1">
+								</div>
+							</form>
+						</div>
+						<div class="pay-area">
+							<a class="s-btn fr" id="confirmOrder">
+								<span class="s-btn">确认订单</span>
+							</a>
+							<div class="tips">您需支付&nbsp;
+								<span class="price cc-oriange">¥
+									<span id="totalPrice">150</span>
+
+									<span style="display: none;" id="float-tip" class="float-tip borderradius-2">新用户立减¥
+										<span class="pri"></span><i class="icon i-discountip"></i>
+									</span>
+									<span id="nodiscount-tip" class="nodiscount-tip borderradius-2" style="display: none;"><i class="icon i-discountip"></i>
+									</span>
+								</span>
+								<span id="endfix">，饭到当面付款</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% include ../footer.ejs %>
+	</div>
+
+	<script type="text/javascript">
+		// seajs.use('apps/home/home');
+	</script>
+</body>
+</html>

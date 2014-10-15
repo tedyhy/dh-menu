@@ -38,13 +38,23 @@ router.get('/home/:id', function(req, res, next) {
     }
 });
 
-router.get('/stay/:id', function(req, res) {
+// order preview router
+router.all('/order/preview', function(req, res, next) {
+	var uid = req.param('shop_cart');
+	res.render('order/preview', {
+		title: 'DH FWD MENU'
+	});
+});
+
+// stay router
+router.get('/stay/:id', function(req, res, next) {
 	console.log(req.params.id);
 	res.render('index', {
 		title: 'DH FWD MENU'
 	});
 });
 
+// help router
 router.get('/help/:help', function(req, res) {
 	var help = 'help/' + req.params.help;
 	console.log(help)
