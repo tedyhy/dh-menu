@@ -23,10 +23,11 @@
 		<div class="page-wrap">
 			<div class="inner-wrap">
 				<div class="breadcrumb">
-					<a class="ca-brown" href="/restaurant/32991">【首减5+立减5】人民公社</a><i>&gt;</i>
-					<span>确认购买</span>
+					<a class="ca-brown" href="/restaurant/<%=restinfo.id%>"><%=restinfo.name%></a><i>&gt;</i>
+					<span>确认订单</span>
 				</div>
-				<div class="order-confirm clearfix">
+				<textarea class="j-cart-data" style="display: none;"><%=cart%></textarea>
+				<div class="order-confirm clearfix j-order-confirm">
 					<div class="fl address">
 						<table class="standard-table dishes-table">
 							<thead>
@@ -43,103 +44,25 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										<div class="td-inner align-left" title="巴西咖喱牛肉饭">巴西咖喱牛肉饭
-
-										</div>
-									</td>
-									<td>
-										<div class="td-inner align-center">1</div>
-									</td>
-									<td>
-										<div class="td-inner align-right">¥19</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="td-inner align-left" title="红烧排骨饭">红烧排骨饭
-
-										</div>
-									</td>
-									<td>
-										<div class="td-inner align-center">1</div>
-									</td>
-									<td>
-										<div class="td-inner align-right">¥18</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="td-inner align-left" title="红烧鸡腿饭">红烧鸡腿饭
-
-										</div>
-									</td>
-									<td>
-										<div class="td-inner align-center">5</div>
-									</td>
-									<td>
-										<div class="td-inner align-right">¥17*5</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="td-inner align-left" title="湘味剁椒牛肉饭">湘味剁椒牛肉饭
-
-										</div>
-									</td>
-									<td>
-										<div class="td-inner align-center">1</div>
-									</td>
-									<td>
-										<div class="td-inner align-right">¥19</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="td-inner align-left" title="鱼香茄子饭">鱼香茄子饭
-
-										</div>
-									</td>
-									<td>
-										<div class="td-inner align-center">1</div>
-									</td>
-									<td>
-										<div class="td-inner align-right">¥14</div>
-									</td>
-								</tr>
-								<tr class="cc-oriange">
-									<td>
-										<div class="td-inner align-left" title="500ml饮料">500ml饮料
-
-										</div>
-									</td>
-									<td>
-										<div class="td-inner align-center">1</div>
-									</td>
-									<td>
-										<div class="td-inner align-right">¥0</div>
-									</td>
-								</tr>
-								<tr class="top-border packing-cost">
-									<td colspan="3">
-										<div class="td-inner align-right">餐盒费&nbsp;¥0</div>
-									</td>
-								</tr>
-								<tr class="delivery-cost">
-									<td colspan="3">
-										<div class="td-inner align-right">配送费&nbsp;¥0</div>
-									</td>
-								</tr>
-								<tr class="top-border">
-									<td colspan="3">
-										<div class="td-inner cc-oriange align-right">满减优惠&nbsp;-¥5</div>
-									</td>
-								</tr>
-								<tr class="total top-border" data-total="150">
+								<%for (var i=0; i<data.length; i++) {
+									var r = data[i];
+								%>
+									<tr>
+										<td>
+											<div class="td-inner align-left" title="<%=r.name%>"><%=r.name%></div>
+										</td>
+										<td>
+											<div class="td-inner align-center"><%=r.cart%></div>
+										</td>
+										<td>
+											<div class="td-inner align-right">¥<%=r.price%><%=(r.cart>1?'*'+r.cart:'')%></div>
+										</td>
+									</tr>
+								<%}%>
+								<tr class="total top-border">
 									<td colspan="3" class="clearfix">
 										<div class="td-inner">
-											<span class="t-number fr">150 元</span>
+											<span class="t-number fr j-t-number">0 元</span>
 											<span class="t-total fr">合计</span>
 										</div>
 									</td>
@@ -149,7 +72,7 @@
 					</div>
 					<div class="dishes">
 						<div class="dishes-rap">
-							<h3>送餐详情</h3>
+							<h3>订餐详情</h3>
 							<form id="addressForm" class="address-form">
 								<div class="field clearfix">
 									<label for="address">送餐地址：</label>
@@ -189,12 +112,12 @@
 							</form>
 						</div>
 						<div class="pay-area">
-							<a class="s-btn fr" id="confirmOrder">
+							<a class="s-btn fr" id="confirmOrder" style="display: none;">
 								<span class="s-btn">确认订单</span>
 							</a>
 							<div class="tips">您需支付&nbsp;
 								<span class="price cc-oriange">¥
-									<span id="totalPrice">150</span>
+									<span id="totalPrice">0</span>
 
 									<span style="display: none;" id="float-tip" class="float-tip borderradius-2">新用户立减¥
 										<span class="pri"></span><i class="icon i-discountip"></i>
@@ -213,7 +136,7 @@
 	</div>
 
 	<script type="text/javascript">
-		// seajs.use('apps/home/home');
+		seajs.use('apps/order/preview');
 	</script>
 </body>
 </html>

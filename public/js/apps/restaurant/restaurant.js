@@ -353,8 +353,8 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 		events: {
 			'click .j-shopping-cart-footer': 'fnShoppingCart',
-			'click .j-clearcart': 'fnClearCart'
-			// 'click .j-gopay': 'fnGoPay'
+			'click .j-clearcart': 'fnClearCart',
+			'click .j-gopay': 'fnGoPay'
 		},
 
 		initialize: function() {
@@ -364,8 +364,11 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.$totalnumber = this.$('.j-totalnumber');
 			this.$readypay = this.$('.j-readypay');
 			this.$gopay = this.$('.j-gopay');
-			this.$orderdata = this.$('.j-order-data');
 			this.$form = this.$('#shoppingCartForm');
+			this.$brieforder = this.$('.j-brief-order');
+			this.$restid = this.$('.j-restid-data');
+			this.$uid = this.$('.j-uid-data');
+			this.restid = this.$restid.val();
 
 			if (carts.models.length) {
 				this.fnShoppingCart();
@@ -433,9 +436,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 				return;
 			}
 
-			this.$orderlist.stop().animate({
-				'top': -(50 + orderh)
-			});
+			if (+this.$orderlist.css('top').replace('px', '') !== 0) {
+				this.$orderlist.stop().animate({
+					'top': -(50 + orderh)
+				});
+			} else {
+				this.$brieforder.show();
+			}
 		},
 
 		removeOne: function() {
@@ -459,6 +466,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.$totalnumber.text(n);
 			this.$bill.text('¥' + t);
 
+			this.$brieforder.find('.count').text(n + '份').end().find('.price').text('¥' + t);
 			this.renderPay(carts.models.length);
 		},
 
@@ -475,15 +483,20 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		fnShoppingCart: function() {
 			if (!carts.models.length) return;
 
-			var h = 0 - this.$orderlist.outerHeight(true);
+			var self = this,
+				h = 0 - this.$orderlist.outerHeight(true);
 
 			if (+this.$orderlist.css('top').replace('px', '') === 0) {
 				this.$orderlist.stop().animate({
 					'top': h + 'px'
+				}, function() {
+					self.$brieforder.hide();
 				});
 			} else {
 				this.$orderlist.stop().animate({
 					'top': 0
+				}, function() {
+					self.$brieforder.show();
 				});
 			}
 		},
@@ -504,18 +517,9 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			return false;
 		},
 
-		fnGoPay: function(){
-			var d = carts.models,
-				data = [],
-				dd = '';
-
-			for (var i = 0; i < d.length; i++) {
-				data.push(d[i].get("id")+','+d[i].get("cart"));
-			};
-
-			dd = data.length && data.join('|');
-
-			this.$orderdata.val(dd);
+		fnGoPay: function() {
+			this.$uid.val(111);
+			this.$restid.val(this.restid);
 
 			this.$form.submit();
 

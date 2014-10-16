@@ -25,7 +25,15 @@ io.sockets.on('connection', function(socket) {
 			data = d.data,
 			cart = cache.order[uid] || (cache.order[uid] = []), // 用户购物车
 			fid = data.id || 0, // food id
-			food = (cart.push(data)); // food
+			merge = false;
+
+		cart.forEach(function(c, i){
+			if(!merge && c.id == fid) {
+				cart[i] = data;
+				merge = true;
+			}
+		});
+		if (!merge) cart.push(data); // food
 
 		socket.broadcast.emit('client.menu.add', data);
 	});

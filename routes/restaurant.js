@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Thenjs = require('thenjs');
-var restaurantConn = require('../data/restaurant')
+var restaurantConn = require('../data/restaurant');
+var gtitle = 'DH FWD MENU';
 
 /* 参数过滤 */
 router.param(function(name, fn) {
@@ -26,67 +27,19 @@ router.get('/:id', function(req, res, next) {
 		_obj = {},
 		_restinfo = {},
 		_data = [],
-		_cart = cache.order[111] || [];
-	/*
+		_cart = cache.order[111] || [],
+		_cates = [],
+		_foods = [];
 
-function task(arg, callback) { // 模拟异步任务
-  Thenjs.nextTick(function () {
-    callback(null, arg);
-  });
-}
-
-Thenjs(function (cont) {
-  task(10, cont);
-}).
-then(function (cont, arg) {
-  console.log(arg);
-  cont(new Error('error!'), 123);
-}).
-fin(function (cont, error, result) {
-  console.log(error, result);
-  cont();
-}).
-each([0, 1, 2], function (cont, value) {
-  task(value * 2, cont); // 并行执行队列任务，把队列 list 中的每一个值输入到 task 中运行
-}).
-then(function (cont, result) {
-  console.log(result);
-  cont();
-}).
-parallel([ // 串行执行队列任务
-  function (cont) { task(8448, cont); }, // 队列第一个是异步任务
-  function (cont) { cont(null, 94339); } // 第二个是同步任务
-]).
-then(function (cont, result) {
-  console.log(result, 333333333);
-  cont(new Error('error!!'));
-}).
-fail(function (cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常
-  console.log(error);
-  console.log('DEMO END!');
-});
-return;*/
-
-	Thenjs.parallel([
-		function(cont) {
-			var obj = {
-				id: _id,
-				callback: cont
-			};
-			restaurantConn.getrest(obj);
-		},
-		function(cont) {
-			var obj = {
-				id: _id,
-				callback: cont
-			};
-			restaurantConn.getcate(obj);
-		}
-	]).
-	then(function(cont, result) {
-		var r = result[0],
-			rr = result[1];
-
+	Thenjs(function(cont) {
+		// 获取餐馆详细信息
+		var obj = {
+			id: _id,
+			callback: cont
+		};
+		restaurantConn.getrest(obj);
+	}).
+	then(function(cont, r) {
 		// 餐馆信息
 		if (!r || !'id' in r) {
 			cont(new Error('the id is not exist!!!'));
@@ -98,351 +51,103 @@ return;*/
 			_restinfo.time = r.time;
 			_restinfo.broad_content = r.broad_content;
 			_restinfo.cate = r.cate;
-
 		};
 
-		// 餐馆菜品分类
+		cont();
+	}).
+	parallel([
+		// 获取餐馆类目信息
+		function(cont) {
+			var obj = {
+				id: _id,
+				cate: _restinfo.cate,
+				callback: cont
+			};
+			restaurantConn.getcate(obj);
+		},
+		// 获取餐馆food信息
+		function(cont) {
+			var obj = {
+				id: _id,
+				cate: _restinfo.cate,
+				callback: cont
+			};
+			restaurantConn.getfood(obj);
+		}
+	]).
+	then(function(cont, result) {
+		if (result && result.length) {
+			// 餐馆菜品分类信息
+			_cates = result[0];
+			// 获取餐馆food详细信息
+			_foods = result[1];
+			if (!_cates || !_foods) {
+				cont(new Error('the cate && food is not exist!!!'));
+			};
+
+		} else {
+			cont(new Error('the cates && foods is not exist!!!'));
+		};
+
+		cont(null, _cates, _foods);
+	}).
+	then(function(cont, cates, foods) {
+		// 拼接餐馆菜品和food信息成最终信息
+		if (cates.length && foods.length) {
+			var data = {},
+				fs = [];
+
+			cates.forEach(function(c, i) {
+				var cs = {};
+				cs.id = c.id;
+				cs.name = c.name;
+				cs.num = 0;
+				cs.food = [];
+				data[c.id] = cs;
+			});
+			foods.forEach(function(f, i) {
+				var tmp = {},
+					cateid, num;
+				tmp.id = f.id;
+				tmp.name = f.name;
+				tmp.price = f.price;
+				tmp.like = f.like;
+				tmp.cart = 0;
+				cateid = f.cate_id;
+				num = +data[cateid].num;
+				data[cateid].food.push(tmp);
+				data[cateid].num = ++num;
+			});
+
+			for (var i in data) {
+				_data.push(data[i]);
+			};
+
+		} else {
+			cont(new Error('the food is not exist!!!'));
+		};
 
 		cont();
 	}).
 	then(function(cont) {
-
-
-		_data = [{
-			name: "家常饭",
-			num: 12,
-			food: [{
-				"id": "23250551",
-				"name": "巴西咖喱牛肉饭1",
-				"price": "11",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250561",
-				"name": "巴西咖喱牛肉饭2",
-				"price": "12",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250571",
-				"name": "巴西咖喱牛肉饭3",
-				"price": "13",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250581",
-				"name": "巴西咖喱牛肉饭4",
-				"price": "14",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250591",
-				"name": "巴西咖喱牛肉饭5",
-				"price": "15",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250601",
-				"name": "巴西咖喱牛肉饭6",
-				"price": "16",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250611",
-				"name": "巴西咖喱牛肉饭7",
-				"price": "17",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}]
-		}, {
-			name: "经典小吃",
-			num: 30,
-			food: [{
-				"id": "23250552",
-				"name": "巴西咖喱牛肉饭1",
-				"price": "18",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250562",
-				"name": "巴西咖喱牛肉饭2",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250572",
-				"name": "巴西咖喱牛肉饭3",
-				"price": "20",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250582",
-				"name": "巴西咖喱牛肉饭4",
-				"price": "21",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250592",
-				"name": "巴西咖喱牛肉饭5",
-				"price": "22",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250602",
-				"name": "巴西咖喱牛肉饭6",
-				"price": "23",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250612",
-				"name": "巴西咖喱牛肉饭7",
-				"price": "24",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}]
-		}, {
-			name: "水果",
-			num: 40,
-			food: [{
-				"id": "23250553",
-				"name": "巴西咖喱牛肉饭1",
-				"price": "25",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250563",
-				"name": "巴西咖喱牛肉饭2",
-				"price": "26",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250573",
-				"name": "巴西咖喱牛肉饭3",
-				"price": "11",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250583",
-				"name": "巴西咖喱牛肉饭4",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250593",
-				"name": "巴西咖喱牛肉饭5",
-				"price": "12",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250603",
-				"name": "巴西咖喱牛肉饭6",
-				"price": "13",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "23250613",
-				"name": "巴西咖喱牛肉饭7",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}]
-		}, {
-			name: "水果1",
-			num: 40,
-			food: [{
-				"id": "232505531",
-				"name": "巴西咖喱牛肉饭1",
-				"price": "25",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232505632",
-				"name": "巴西咖喱牛肉饭2",
-				"price": "26",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232505733",
-				"name": "巴西咖喱牛肉饭3",
-				"price": "11",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232505834",
-				"name": "巴西咖喱牛肉饭4",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232505935",
-				"name": "巴西咖喱牛肉饭5",
-				"price": "12",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232506036",
-				"name": "巴西咖喱牛肉饭6",
-				"price": "13",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232506137",
-				"name": "巴西咖喱牛肉饭7",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}]
-		}, {
-			name: "水果2",
-			num: 40,
-			food: [{
-				"id": "2325051",
-				"name": "巴西咖喱牛肉饭1",
-				"price": "25",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "2325052",
-				"name": "巴西咖喱牛肉饭2",
-				"price": "26",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "2325053",
-				"name": "巴西咖喱牛肉饭3",
-				"price": "11",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "2325054",
-				"name": "巴西咖喱牛肉饭4",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "2325055",
-				"name": "巴西咖喱牛肉饭5",
-				"price": "12",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "2325066",
-				"name": "巴西咖喱牛肉饭6",
-				"price": "13",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "2325067",
-				"name": "巴西咖喱牛肉饭7",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}]
-		}, {
-			name: "水果3",
-			num: 40,
-			food: [{
-				"id": "232501",
-				"name": "巴西咖喱牛肉饭1",
-				"price": "25",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232502",
-				"name": "巴西咖喱牛肉饭2",
-				"price": "26",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232503",
-				"name": "巴西咖喱牛肉饭3",
-				"price": "11",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232504",
-				"name": "巴西咖喱牛肉饭4",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232505",
-				"name": "巴西咖喱牛肉饭5",
-				"price": "12",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232506",
-				"name": "巴西咖喱牛肉饭6",
-				"price": "13",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}, {
-				"id": "232507",
-				"name": "巴西咖喱牛肉饭7",
-				"price": "19",
-				"minCount": "1",
-				"onSale": "1",
-				"cart": 0
-			}]
-		}];
-
+		// 渲染页面
 		res.render('restaurant', {
 			id: _id,
-			title: 'DH FWD MENU',
+			title: gtitle,
 			restinfo: _restinfo,
 			food: _data,
 			data: JSON.stringify(_data),
 			cart: JSON.stringify(_cart)
 		});
+
+		cont();
 	}).
 	fin(function(cont, error) {
-		console.log(error)
+		// console.log(error, 111)
 		cont();
 	}).
 	fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常
-		console.log(error)
+		console.log(error);
 		res.status(404);
 		next();
 	});
