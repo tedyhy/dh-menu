@@ -123,7 +123,8 @@
     color: #434343;
 }
 .rest-info .right-bar {
-    padding-top: 16px;
+    width: 400px;
+    padding-top: 40px;
     color: #434343;
 }
 .rest-info .tipbox {
@@ -740,4 +741,61 @@
     color: #fff;
     line-height: 20px;
     font-size: 12px;
+}
+.rest-info .search-label {
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+.rest-info .search-input {
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+    width: 290px;
+    border: 0;
+    font-size: 13px;
+    background-position: -424px -63px;
+    padding-left: 6px;
+}
+.title-blank .search-label {
+    height: 25px;
+    line-height: 25px;
+}
+.title-blank .search-food {
+    margin-right: 20px;
+}
+.title-blank .search-input {
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+    width: 200px;
+    border: 0;
+    background-position: -424px -63px;
+    padding-left: 6px;
+}
+.search-list {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+    border: 1px solid #ccc;
+    z-index: 10;
+    height: 200px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.search-list li {
+    text-align: left;
+    padding: 10px 15px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.search-list li:hover {
+    color: #434343;
+    background-color: #fff6e0;
+}
+.search-list .over {
+    color: #434343;
+    background-color: #fff6e0;
 }

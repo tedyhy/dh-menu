@@ -25,10 +25,10 @@
 				<div class="inner-bg">
 					<div class="rest-banner">
 						<div class="tab clearfix">
-							<a href="/" class="fl rest-tab active">餐厅</a>
-							<a href="/food/topsale/wx4ex92rpq0d" class="fl hot-food">热卖美食<i class="icon i-new"></i></a>
+							<a href="/home/<%=id%>" class="fl rest-tab active">餐厅</a>
+							<!--<a href="/food/topsale/wx4ex92rpq0d" class="fl hot-food">热卖美食<i class="icon i-new"></i></a>-->
 						</div>
-						<div class="rest-filter clearfix">
+						<!--<div class="rest-filter clearfix">
 							<div class="rest-filter clearfix">
 								<a title="下单赠饮料" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=fulldonation">
 									<span class="sprite checkbox "></span>
@@ -105,7 +105,7 @@
 							<a class="sort default-sort active" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=0">默认排序</a>
 							<a class="sort sa-sort " href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=1">销量<i class="icon i-orderdown"></i></a>
 							<a class="sort ct-sort " href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=2">评价<i class="icon i-orderdown"></i></a>
-						</div>
+						</div>-->
 					</div>
 					<div class="store-status clearfix">
 						<i class="icon i-more-poi fl"></i>
@@ -227,6 +227,7 @@
 
 
 	<script type="text/javascript">
+		seajs.use('main');
 		seajs.use('apps/home/home');
 	</script>
 </body>

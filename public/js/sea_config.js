@@ -4,7 +4,8 @@ seajs.config({
         'jquery': 'libs/jquery/jquery',
         'doT': 'libs/doT/doT',
         'underscore': 'libs/underscore/underscore',
-        'backbone': 'libs/backbone/backbone'
+        'backbone': 'libs/backbone/backbone',
+        'main': 'modules/main/main'
     },
     preload: [],
     map: [

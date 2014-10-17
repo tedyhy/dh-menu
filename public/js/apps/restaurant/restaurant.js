@@ -3,6 +3,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		_ = require('underscore'),
 		Backbone = require('backbone'),
 		TWEEN = require('libs/tween/Tween'),
+		// Pinyin = require('modules/pinyin/pinyin'),
 		foodData = eval("(" + $('.j-food-data').val() + ")"),
 		cartData = eval("(" + $('.j-cart-data').val() + ")"),
 		socket = io.connect();
@@ -14,18 +15,6 @@ define('apps/restaurant/restaurant', function(require, exports) {
 	_.templateSettings = {
 		interpolate: /\{\{(.+?)\}\}/g
 	};
-
-	// details
-	$('.j-details').hover(function() {
-		$(this).addClass('over');
-	}, function() {
-		$(this).removeClass('over');
-	});
-	$('.text-food').hover(function() {
-		$(this).addClass('over');
-	}, function() {
-		$(this).removeClass('over');
-	});
 
 	// 订餐必读&商家公告
 	var foodListOffset = $('.j-food-list').offset(),
@@ -121,6 +110,99 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		model: Food
 	});
 
+	var InfoView = Backbone.View.extend({
+		el: $(".j-inner-wrap"),
+
+		template: _.template($('#search-item-template').html()),
+
+		events: {
+			'mouseenter .j-details': 'fnShowDetails',
+			'mouseleave .j-details': 'fnHideDetails'
+		},
+
+		initialize: function() {
+			$('body').on('keyup propertychange input paste filter', '.j-search-input', $.proxy(this.search, this));
+			$('body').on('click', '.j-search-item', function(){
+				return false;
+			});
+			$('body').on('click', function() {
+				$('.j-search-list').hide();
+				return false;
+			});
+		},
+
+		fnShowDetails: function(e) {
+			$(e.currentTarget).addClass('over');
+		},
+
+		fnHideDetails: function(e) {
+			$(e.currentTarget).removeClass('over');
+		},
+
+		search: function(e) {
+			var $list, $prev, $next,
+				self = this,
+				input = e.target,
+				$searchinput = $(input),
+				value = input.value,
+				code = e.keyCode,
+				tpl = this.template,
+				re = new RegExp(value.replace(/\s/g, '')),
+				count = 0,
+				$list = ($list = $('.j-search-list'))[0] && $list || $('<ul class="search-list j-search-list" style="display: none;"></ul>').appendTo('body'),
+				sioffset = $searchinput.offset(),
+				siwidth = $searchinput.outerWidth(true),
+				offset = {
+					top: 0,
+					left: 0
+				};
+
+			if ($.trim(value) === '') {
+				$list.hide();
+				return;
+			}
+
+			if (code === 38) { // 上箭头
+				if ($list.is(':visible') && ($prev = this.$currentItem.prev('.j-search-item')).length) {
+					$prev.addClass('over');
+					this.$currentItem.removeClass('over');
+					this.$currentItem = $prev;
+				}
+			} else if (code === 40) { // 下箭头
+				if ($list.is(':visible') && ($next = this.$currentItem.next('.j-search-item')).length) {
+					$next.addClass('over');
+					this.$currentItem.removeClass('over');
+					this.$currentItem = $next;
+				}
+			} else if ($list.is(':visible') && code === 13) { // 回车
+				// this.selectSearchItem(this.$currentItem);
+				console.log(13);
+			} else {
+				$list.hide().empty();
+
+				$.each(foods, function(m, n) {
+					if (re.test(n.name.replace(/\s/g, ''))) {
+						$list.append(tpl({
+							id: n.id,
+							name: n.name,
+							price: n.price
+						}));
+						count++;
+					}
+				});
+
+				if (count > 0) {
+					offset.top = sioffset.top + $searchinput.outerHeight(true) + 2;
+					offset.left = sioffset.left;
+					this.$currentItem = $list.children().eq(0);
+					this.$currentItem.addClass('over');
+					$list.css(offset).width(siwidth).show();
+				}
+			}
+
+		}
+	});
+
 	var FoodView = Backbone.View.extend({
 		el: $(".j-food-list"),
 
@@ -130,7 +212,9 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			'mouseleave .j-foodtype-nav': 'fnHideClassic',
 			'mouseenter .j-title-blank a': 'fnAAddOver',
 			'mouseleave .j-title-blank a': 'fnARemoveOver',
-			'click .j-add-cart': 'fnAddFoodToCart'
+			'click .j-add-cart': 'fnAddFoodToCart',
+			'mouseenter .text-food': 'fnShowTextFood',
+			'mouseleave .text-food': 'fnHideTextFood'
 		},
 
 		initialize: function() {
@@ -161,6 +245,14 @@ define('apps/restaurant/restaurant', function(require, exports) {
 				return;
 			};
 			$cartnum.text(cart).show();
+		},
+
+		fnShowTextFood: function(e) {
+			$(e.currentTarget).addClass('over');
+		},
+
+		fnHideTextFood: function(e) {
+			$(e.currentTarget).removeClass('over');
 		},
 
 		fnScrollToCate: function(e) {
@@ -527,6 +619,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		}
 	});
 
+	var infoViews = new InfoView;
 	var foodviews = new FoodView;
 	var cartviews = new CartView;
 });
