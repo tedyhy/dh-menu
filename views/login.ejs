@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title><%=title%></title>
+	<link rel="icon" href="/static/img/favcoin.ico" size="16x16 32x32">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<link rel="stylesheet" href="/static/css/register.css">
+	<script type="text/javascript" charset="utf-8" src="/static/js/libs/seajs/sea.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/static/js/sea_config.js"></script>
+</head>
+
+<body>
+	<% include rside.ejs %>
+	<div class="wrapper">
+		<div id="top-tips" class="top-tips hidden">
+			<a class="j-top-tips-close top-tips-close" href="javascript:;"><i class="icon i-top-tips-close"></i></a>
+			<div class="j-top-tips-content top-tips-content"></div>
+		</div>
+		<% include header.ejs %>
+		<div class="page-wrap">
+			<div class="inner-wrap">
+				<div id="body-wrap">
+					<div class="page-body">
+						<h2 class="page-title">登录账号</h2>
+						<div id="login-panal">
+							<div id="login-panal-left">
+								<form action="/login" method="post" id="login-form">
+									<table class="form-table">
+										<tbody>
+											<tr><td colspan="2" class="fred"><%=error%></td></tr>
+											<tr>
+												<td class="text-column">
+													<label for="username">账号</label>
+												</td>
+												<td class="input-column">
+													<input type="text" class="input-text" name="name" id="username" autocomplete="off" placeholder="用户名" value="<%=name%>">
+												</td>
+											</tr>
+											<tr>
+												<td class="text-column">
+													<label for="password">密码</label>
+												</td>
+												<td class="input-column">
+													<input type="password" class="input-text" name="pass" id="password" autocomplete="off">
+												</td>
+											</tr>
+											<tr>
+												<td class="text-column"></td>
+												<td class="input-column" style="display:block;">
+													<label for="remember_username">
+														<input type="checkbox" name="remember_username" id="remember_username" checked="checked">记住账号
+													</label>
+													<label for="auto_login">
+														<input type="checkbox" name="auto_login" id="auto_login" checked="checked">下次自动登录
+													</label>
+												</td>
+											</tr>
+											<tr>
+												<td class="text-column"></td>
+												<td class="input-column">
+													<input type="submit" id="btn_submit" class="btn large" value="登录">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+							<div id="login-panal-right">
+								<p>还没有账号？</p>
+								<p class="actions"><a href="/register" class="btn large minor" id="a_register">免费注册</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% include footer.ejs %>
+	</div>
+
+	<script type="text/javascript">
+		// seajs.use('main');
+		// seajs.use('apps/home/home');
+	</script>
+</body>
+</html>

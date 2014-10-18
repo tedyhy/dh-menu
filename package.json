@@ -8,6 +8,7 @@
   "dependencies": {
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.1",
+    "crypto": "0.0.3",
     "debug": "~0.7.4",
     "ejs": "*",
     "express": "~4.2.0",
@@ -16,6 +17,7 @@
     "mysql": "*",
     "socket.io": "*",
     "static-favicon": "~1.0.0",
-    "thenjs": "^1.4.4"
+    "thenjs": "^1.4.4",
+    "validator": "0.3.7"
   }
 }

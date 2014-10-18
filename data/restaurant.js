@@ -12,7 +12,12 @@ var restaurant = {
 
 				if (!err) {
 					res = res && res.length && res || [];
-					obj.callback(res);
+					if (res.length) {
+						obj.callback(res);
+					} else {
+						ires.status(404);
+						next();
+					}
 				} else {
 					ires.status(404);
 					next();

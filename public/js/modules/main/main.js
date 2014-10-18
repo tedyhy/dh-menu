@@ -16,4 +16,7 @@ define('modules/main/main', function(require, exports) {
 		$('html, body').animate({scrollTop: 0});
 	});
 
+	$('body').on('click', '.j-top-tips-close', function(){
+		$(this).parent().addClass('hidden');
+	});
 });

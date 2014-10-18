@@ -127,7 +127,6 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			});
 			$('body').on('click', function() {
 				$('.j-search-list').hide();
-				return false;
 			});
 		},
 

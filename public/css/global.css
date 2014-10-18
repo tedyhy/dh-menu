@@ -1247,7 +1247,9 @@ input, textarea {
     background-color: #EEEEEE;
 }
 .page-header {
-    height: 116px;
+    /*height: 116px;*/
+    
+    height: auto;
     background-color: #ffffff;
     border-bottom: 2px solid #FF6900;
 }
@@ -1444,23 +1446,36 @@ input, textarea {
     vertical-align: 6px;
 }
 .page-footer {
+    height: 100px;
     border-top: 3px solid #FF6900;
     background-color: #F1F1F1;
     color: #3e4545;
 }
 .footer-wrap {
-    width: 980px;
+    display: table;
     margin: 0 auto;
+    padding: 20px;
+}
+.footer-wrap div {
+    float: left;
+    margin-right: 20px;
+    background-repeat: no-repeat;
+    background-position: 0 1px;
+    padding-bottom: 4px;
+}
+#fork {
+    background: url(/static/img/fork-icon@2x.png) no-repeat 0 1px;
+    background-size: 11px 16px;
+    padding-left: 15px;
 }
 .page-footer .copyright {
-    margin-top: 20px;
     text-align: center;
     color: #8A8A8A;
 }
-.page-footer .copyright a {
-    color: #8A8A8A;
+.page-footer a {
+    color: #259dff;
 }
-.page-footer .copyright a:hover {
+.page-footer a:hover {
     text-decoration: underline;
 }
 .page-footer .column {
@@ -2436,4 +2451,7 @@ input, textarea {
     height: 13px;
     margin: 13px;
     float: right;
+}
+.fred {
+    color: red;
 }

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Thenjs = require('thenjs');
 var restaurantConn = require('../data/restaurant');
+var sign = require('../controllers/sign');
 var gtitle = 'DH FWD MENU';
 
 /* 参数过滤 */
@@ -20,23 +21,35 @@ router.param(function(name, fn) {
 });
 router.param('id', /^\d+$/);
 
-/* GET home page. */
+// all router
+router.all('*', function(req, res, next) {
+	console.log(1111);
+	next();
+})
+
+// index page
+router.get('/', function(req, res, next) {
+	res.redirect('/home/1');
+	next();
+});
+
+// home page
 router.get('/home/:id', function(req, res, next) {
 	var id = req.params.id,
 		obj = {};
 
-    if(id){
-        obj.id = id;
-        obj.callback = function(result){
+	if (id) {
+		obj.id = id;
+		obj.callback = function(result) {
 			res.render('home', {
 				title: gtitle,
 				id: id,
 				restaurants: result,
 				data: JSON.stringify(result)
 			});
-        }
-        restaurantConn.gethome(obj, res, next);        
-    } else {
+		}
+		restaurantConn.gethome(obj, res, next);
+	} else {
 		res.status(404);
 		next();
 	};
@@ -102,6 +115,12 @@ router.all('/order/preview', function(req, res, next) {
 		next();
 	};
 });
+
+// sign up, login, logout
+router.get('/login', sign.showLogin);
+router.post('/login', sign.login);
+router.get('/register', sign.showSignup);
+router.post('/register', sign.signup);
 
 // stay router
 router.get('/stay/:id', function(req, res, next) {

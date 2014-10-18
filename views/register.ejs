@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title><%=title%></title>
+	<link rel="icon" href="/static/img/favcoin.ico" size="16x16 32x32">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<link rel="stylesheet" href="/static/css/register.css">
+	<script type="text/javascript" charset="utf-8" src="/static/js/libs/seajs/sea.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/static/js/sea_config.js"></script>
+</head>
+
+<body>
+	<% include rside.ejs %>
+	<div class="wrapper">
+		<div id="top-tips" class="top-tips hidden">
+			<a class="j-top-tips-close top-tips-close" href="javascript:;"><i class="icon i-top-tips-close"></i></a>
+			<div class="j-top-tips-content top-tips-content"></div>
+		</div>
+		<% include header.ejs %>
+		<div class="page-wrap">
+			<div class="inner-wrap">
+				<div id="body-wrap">
+					<div class="page-body">
+						<h2 class="page-title">注册账号
+							<span>已有账号？<a class="cc-yellow" href="/login" id="a_login">登录</a>
+							</span>
+						</h2>
+						<form action="/register" method="post" name="register">
+							<table class="form-table">
+								<tbody>
+									<tr>
+										<td colspan="3" class="fred"><%=error%></td>
+									</tr>
+									<tr>
+										<td class="text-column">
+											<label for="username">用户名</label>
+										</td>
+										<td class="input-column">
+											<input type="text" class="input-text" name="name" id="username" autocomplete="off" placeholder="用户名" value="<%=name%>">
+										</td>
+										<td class="hint-column fred"></td>
+									</tr>
+									<tr>
+										<td class="text-column">
+											<label for="password">创建密码</label>
+										</td>
+										<td class="input-column">
+											<input type="password" class="input-text" name="pass" id="password" autocomplete="off">
+										</td>
+										<td class="hint-column fred"></td>
+									</tr>
+									<tr>
+										<td class="text-column">
+											<label for="repeat_password">确认密码</label>
+										</td>
+										<td class="input-column">
+											<input type="password" class="input-text" name="re_pass" id="repeat_password" autocomplete="off">
+										</td>
+										<td class="hint-column fred"></td>
+									</tr>
+									<tr>
+										<td class="text-column"></td>
+										<td class="input-column">
+											<input type="submit" id="btn_submit" class="btn large" value="注册">
+											<br>
+										</td>
+										<td class="hint-column fred"></td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% include footer.ejs %>
+	</div>
+
+	<script type="text/javascript">
+		seajs.use('main');
+		seajs.use('apps/login/register');
+	</script>
+</body>
+</html>

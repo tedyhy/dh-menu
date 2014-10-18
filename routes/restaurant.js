@@ -149,7 +149,7 @@ router.get('/:id', function(req, res, next) {
 	fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常
 		console.log(error);
 		res.status(404);
-		next();
+		next(error);
 	});
 
 });
