@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var Thenjs = require('thenjs');
-var restaurantConn = require('../data/restaurant');
+var restaurantConn = require('../models/restaurant');
 var sign = require('../controllers/sign');
+var auth = require('../middlewares/auth');
 var gtitle = 'DH FWD MENU';
 
 /* 参数过滤 */
@@ -29,13 +30,18 @@ router.all('*', function(req, res, next) {
 
 // index page
 router.get('/', function(req, res, next) {
+	auth.userRequired(req, res, next);
+
 	res.redirect('/home/1');
 	next();
 });
 
 // home page
 router.get('/home/:id', function(req, res, next) {
+	auth.userRequired(req, res, next);
+
 	var id = req.params.id,
+		loginname = res.locals.current_user && res.locals.current_user.name || "",
 		obj = {};
 
 	if (id) {
@@ -44,6 +50,7 @@ router.get('/home/:id', function(req, res, next) {
 			res.render('home', {
 				title: gtitle,
 				id: id,
+				loginname: loginname,
 				restaurants: result,
 				data: JSON.stringify(result)
 			});
@@ -57,8 +64,11 @@ router.get('/home/:id', function(req, res, next) {
 
 // order preview router
 router.all('/order/preview', function(req, res, next) {
+	auth.userRequired(req, res, next);
+
 	var restid = req.param('restid'),
 		uid = req.param('uid'),
+		loginname = res.locals.current_user && res.locals.current_user.name || "",
 		obj = {},
 		_cart = cache.order[111] || [],
 		_restinfo = {};
@@ -93,6 +103,7 @@ router.all('/order/preview', function(req, res, next) {
 			res.render('order/preview', {
 				title: gtitle,
 				uid: uid,
+				loginname: loginname,
 				restinfo: _restinfo,
 				data: _cart,
 				cart: JSON.stringify(_cart)
@@ -119,13 +130,15 @@ router.all('/order/preview', function(req, res, next) {
 // sign up, login, logout
 router.get('/login', sign.showLogin);
 router.post('/login', sign.login);
+router.all('/logout', sign.signout);
 router.get('/register', sign.showSignup);
 router.post('/register', sign.signup);
 
 // stay router
 router.get('/stay/:id', function(req, res, next) {
 	res.render('index', {
-		title: gtitle
+		title: gtitle,
+		loginname: res.locals.current_user.name
 	});
 });
 
@@ -133,7 +146,8 @@ router.get('/stay/:id', function(req, res, next) {
 router.get('/help/:help', function(req, res) {
 	var help = 'help/' + req.params.help;
 	res.render(help, {
-		title: gtitle
+		title: gtitle,
+		loginname: res.locals.current_user.name
 	});
 });
 

@@ -521,6 +521,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			var orderh = this.$orderlist.outerHeight(true);
 
 			this.$cartul.prepend(view.render().el);
+			this.fnShoppingCart();
 
 			if (orderh >= 400) {
 				this.$cartul.scrollTop(0);

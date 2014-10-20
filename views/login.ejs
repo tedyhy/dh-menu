@@ -27,7 +27,7 @@
 						<h2 class="page-title">登录账号</h2>
 						<div id="login-panal">
 							<div id="login-panal-left">
-								<form action="/login" method="post" id="login-form">
+								<form action="/login" method="post" id="login-form" name="login">
 									<table class="form-table">
 										<tbody>
 											<tr><td colspan="2" class="fred"><%=error%></td></tr>
@@ -45,17 +45,6 @@
 												</td>
 												<td class="input-column">
 													<input type="password" class="input-text" name="pass" id="password" autocomplete="off">
-												</td>
-											</tr>
-											<tr>
-												<td class="text-column"></td>
-												<td class="input-column" style="display:block;">
-													<label for="remember_username">
-														<input type="checkbox" name="remember_username" id="remember_username" checked="checked">记住账号
-													</label>
-													<label for="auto_login">
-														<input type="checkbox" name="auto_login" id="auto_login" checked="checked">下次自动登录
-													</label>
 												</td>
 											</tr>
 											<tr>

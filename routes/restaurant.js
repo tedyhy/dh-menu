@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Thenjs = require('thenjs');
-var restaurantConn = require('../data/restaurant');
+var restaurantConn = require('../models/restaurant');
+var auth = require('../middlewares/auth');
 var gtitle = 'DH FWD MENU';
 
 /* 参数过滤 */
@@ -22,6 +23,8 @@ router.param('id', /^\d+$/);
 
 /* GET order page. */
 router.get('/:id', function(req, res, next) {
+	auth.userRequired(req, res, next);
+
 	var _id = req.params.id,
 		_ip = req.ip,
 		_obj = {},
@@ -137,7 +140,8 @@ router.get('/:id', function(req, res, next) {
 			restinfo: _restinfo,
 			food: _data,
 			data: JSON.stringify(_data),
-			cart: JSON.stringify(_cart)
+			cart: JSON.stringify(_cart),
+			loginname: res.locals.current_user.name
 		});
 
 		cont();

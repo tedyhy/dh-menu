@@ -3,7 +3,9 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session')
 var bodyParser = require('body-parser');
+var config = require('./config.default');
 // route
 var index = require('./routes/index');
 var restaurant = require('./routes/restaurant');
@@ -20,6 +22,10 @@ app.use(favicon());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(session({secret: config.session_secret}));
+// custom middleware
+app.use(require('./controllers/sign').auth_user);
+
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {

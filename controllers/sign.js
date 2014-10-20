@@ -7,14 +7,17 @@ var sanitize = require('validator').sanitize;
 var crypto = require('crypto');
 var config = require('../config.default');
 
-var User = require('../data/user');
+var User = require('../models/user');
+
+var auth = require('../middlewares/auth');
 
 //sign up
 exports.showSignup = function(req, res, next) {
 	res.render('register', {
 		title: gtitle,
 		error: "",
-		name: ""
+		name: "",
+		loginname: ""
 	});
 };
 
@@ -30,7 +33,8 @@ exports.signup = function(req, res, next) {
 		return res.render('register', {
 			title: gtitle,
 			error: '注册信息不完整。',
-			name: name
+			name: name,
+			loginname: ""
 		});
 	}
 
@@ -38,7 +42,8 @@ exports.signup = function(req, res, next) {
 		return res.render('register', {
 			title: gtitle,
 			error: '用户名至少需要5个字符。',
-			name: name
+			name: name,
+			loginname: ""
 		});
 	}
 
@@ -48,7 +53,8 @@ exports.signup = function(req, res, next) {
 		return res.render('register', {
 			title: gtitle,
 			error: e.message,
-			name: name
+			name: name,
+			loginname: ""
 		});
 	}
 
@@ -56,7 +62,8 @@ exports.signup = function(req, res, next) {
 		return res.render('register', {
 			title: gtitle,
 			error: '两次密码输入不一致。',
-			name: name
+			name: name,
+			loginname: ""
 		});
 	}
 
@@ -73,10 +80,12 @@ exports.signup = function(req, res, next) {
 			res.render('register', {
 				title: gtitle,
 				error: '用户名已被使用。',
-				name: name
+				name: name,
+				loginname: ""
 			});
+		} else {
+			cont();
 		};
-		cont();
 	}).
 	then(function(cont) {
 		// md5 the pass
@@ -90,8 +99,9 @@ exports.signup = function(req, res, next) {
 		// new user
 		User.newAndSave(obj);
 	}).
-	then(function(cont, jump){
-		jump && res.redirect(jump);
+	then(function(cont, users) {
+		users.length && gen_session(users[0], req, res);
+		return res.redirect('/login');
 		cont();
 	}).
 	fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常
@@ -108,12 +118,15 @@ exports.signup = function(req, res, next) {
  * @param  {HttpResponse} res
  */
 exports.showLogin = function(req, res, next) {
-	console.log(req.session)
-	req.session._loginReferer = req.headers.referer;
+	if (req.session.user) {
+		return res.redirect('/home/1');
+	};
+
 	res.render('login', {
 		title: gtitle,
 		error: "",
-		name: ""
+		name: "",
+		loginname: ""
 	});
 };
 
@@ -136,15 +149,21 @@ var notJump = [
  * @param {Function} next
  */
 exports.login = function(req, res, next) {
+	if (req.session.user || res.locals.current_user) {
+		return res.redirect('/home/1');
+	};
+
 	var loginname = sanitize(req.body.name).trim();
 	var pass = sanitize(req.body.pass).trim();
 
 	if (!loginname || !pass) {
-		return res.render('login', {
+		res.render('login', {
 			title: gtitle,
 			error: '信息不完整。',
-			name: ''
+			name: loginname,
+			loginname: ""
 		});
+		return;
 	}
 
 	// 验证用户
@@ -160,9 +179,11 @@ exports.login = function(req, res, next) {
 			res.render('login', {
 				title: gtitle,
 				error: '这个用户不存在。',
-				name: loginname
+				name: loginname,
+				loginname: ""
 			});
-			cont();
+			cont('这个用户不存在。');
+			return;
 		};
 		var user = users[0];
 		pass = md5(pass);
@@ -170,21 +191,15 @@ exports.login = function(req, res, next) {
 			res.render('login', {
 				title: gtitle,
 				error: '密码错误。',
-				name: loginname
+				name: loginname,
+				loginname: ""
 			});
-			cont();
+			cont('密码错误。');
+			return;
 		}
 		// store session cookie
-		gen_session(user, res);
-		//check at some page just jump to home page
-		var refer = req.session._loginReferer || '..';
-		for (var i = 0, len = notJump.length; i !== len; ++i) {
-			if (refer.indexOf(notJump[i]) >= 0) {
-				refer = '..';
-				break;
-			}
-		}
-		res.redirect(refer);
+		gen_session(user, req, res);
+		return res.redirect('/home/1');
 		cont();
 	}).
 	fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常
@@ -200,7 +215,7 @@ exports.signout = function(req, res, next) {
 	res.clearCookie(config.auth_cookie_name, {
 		path: '/'
 	});
-	res.redirect(req.headers.referer || 'home');
+	return res.redirect('/login');
 };
 
 exports.active_account = function(req, res, next) {
@@ -361,19 +376,11 @@ exports.auth_user = function(req, res, next) {
 		if (config.admins[req.session.user.name]) {
 			req.session.user.is_admin = true;
 		}
-		Message.getMessagesCount(req.session.user._id, function(err, count) {
-			if (err) {
-				return next(err);
-			}
-			req.session.user.messages_count = count;
-			if (!req.session.user.avatar_url) {
-				req.session.user.avatar_url = getAvatarURL(req.session.user);
-			}
-			res.local('current_user', req.session.user);
-			return next();
-		});
+		res.locals.current_user = req.session.user;
+
 	} else {
 		var cookie = req.cookies[config.auth_cookie_name];
+
 		if (!cookie) {
 			return next();
 		}
@@ -381,38 +388,52 @@ exports.auth_user = function(req, res, next) {
 		var auth_token = decrypt(cookie, config.session_secret);
 		var auth = auth_token.split('\t');
 		var user_id = auth[0];
-		User.getUserById(user_id, function(err, user) {
-			if (err) {
-				return next(err);
-			}
+
+		// 验证用户
+		Thenjs(function(cont) {
+			var obj = {
+				id: user_id,
+				callback: cont
+			};
+			User.getUserById(obj);
+		}).
+		then(function(cont, users) {
+			var user = users[0];
 			if (user) {
 				if (config.admins[user.name]) {
 					user.is_admin = true;
 				}
-				Message.getMessagesCount(user._id, function(err, count) {
-					if (err) {
-						return next(err);
-					}
-					user.messages_count = count;
-					req.session.user = user;
-					req.session.user.avatar_url = user.avatar_url;
-					res.local('current_user', req.session.user);
-					return next();
-				});
-			} else {
-				return next();
+
+				req.session.user = user;
+				res.locals.current_user = req.session.user;
 			}
+
+			cont();
+		}).
+		fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常
+			console.log(error);
+			res.status(404);
+			next(error);
 		});
-	}
+	};
+
+	next();
 };
 
 // private
-function gen_session(user, res) {
+function gen_session(user, req, res) {
 	var auth_token = encrypt(user.id + '\t' + user.name + '\t' + user.pass, config.session_secret);
+	//cookie 有效期30天
 	res.cookie(config.auth_cookie_name, auth_token, {
 		path: '/',
 		maxAge: 1000 * 60 * 60 * 24 * 30
-	}); //cookie 有效期30天
+	});
+	if (config.admins[user.name]) {
+		user.is_admin = true;
+	}
+
+	req.session.user = user;
+	res.locals.current_user = req.session.user;
 }
 
 function encrypt(str, secret) {

@@ -3,10 +3,15 @@
 	<div class="top-nav">
 		<div class="topnav-wrap">
 			<div class="fr welcome">
-				<span id="dis-login" class="action"><a class="ca-lightgrey" href="/register">注册</a> ｜ <a class="ca-lightgrey" href="/login">登录</a>
+				<%if(!loginname){%>
+				<span id="dis-login" class="action">
+					<a class="ca-lightgrey" href="/register">注册</a> ｜ <a class="ca-lightgrey" href="/login">登录</a>
 				</span>
-				<!-- <a id="top-nav-send-fb" class="ca-lightgrey send-fb" href="/help/feedback">找客服</a> -->
-				<!-- <a target="_blank" href="/" class="site-name ca-lightgrey"><i class="icon i-tuan"></i><span>美团网</span></a> -->
+				<%}else{%>
+				<span id="is-login" class="name">HI,&nbsp;<%=loginname%></span>
+				<a href="/logout" class="logout ca-lightgrey" id="logout">退出</a>
+				<script type="text/javascript">var CUSER = "<%=loginname%>";</script>
+				<%}%>
 			</div>
 			<a href="/mobile/download" class="wap ca-lightgrey"><i class="icon i-phone"></i><span>手机版</span></a>
 			<span class="current-city" id="current-city">北京</span>
