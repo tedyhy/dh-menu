@@ -22,14 +22,18 @@ app.use(favicon());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(session({secret: config.session_secret}));
+app.use(session({
+	secret: config.session_secret,
+	saveUninitialized: true,
+	resave: true
+}));
 // custom middleware
 app.use(require('./controllers/sign').auth_user);
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(logger('dev'));
+	app.use(logger('dev'));
 }
 // static resource
 app.use('/static', express.static(path.join(__dirname, 'public')));
@@ -41,15 +45,15 @@ app.use('/restaurant', restaurant);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error');
+	res.status(err.status || 500);
+	res.render('error');
 });
 
 module.exports = app;

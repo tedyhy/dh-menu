@@ -27,8 +27,8 @@ io.sockets.on('connection', function(socket) {
 			fid = data.id || 0, // food id
 			merge = false;
 
-		cart.forEach(function(c, i){
-			if(!merge && c.id == fid) {
+		cart.forEach(function(c, i) {
+			if (!merge && c.id == fid) {
 				cart[i] = data;
 				merge = true;
 			}
@@ -46,12 +46,17 @@ io.sockets.on('connection', function(socket) {
 			cart = cache.order[uid] || (cache.order[uid] = []), // 用户购物车
 			fid = data.id || 0; // food id
 
-		for (var i = 0; i < cart.length; i++) {
-			if (cart[i].id == fid) {
-				cart.splice(i, 1);
-				break;
-			}
-		};
+		cart.forEach(function(c, i) {
+			if (c.id === fid) {
+				// console.log(c, i, data)
+				if (data.cart === c.cart) {
+					cart.splice(i, 1);
+				} else {
+					cart[i] = data;
+				};
+				return;
+			};
+		});
 
 		socket.broadcast.emit('client.menu.remove', fid);
 	});

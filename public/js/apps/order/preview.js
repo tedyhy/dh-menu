@@ -48,7 +48,7 @@ define('apps/order/preview', function(require, exports) {
 			})
 
 			this.$totalPrice.text(t);
-			this.$tnumber.text(t + ' 元');
+			this.$tnumber.text('合计' + t + ' 元');
 
 			this.renderPay(carts.models.length);
 		},

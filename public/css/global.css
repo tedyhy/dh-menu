@@ -1717,7 +1717,7 @@ input, textarea {
     position: fixed;
     bottom: 0;
     left: 50%;
-    margin-left: 230px;
+    margin-left: 190px;
     width: 290px;
     z-index: 100;
     font-size: 14px;
@@ -1791,7 +1791,7 @@ input, textarea {
     height: 27px;
     line-height: 27px;
     padding-left: 8px;
-    padding-right: 19px;
+    padding-right: 8px;
     font-size: 12px;
 }
 .shopping-cart .title .ti-price {

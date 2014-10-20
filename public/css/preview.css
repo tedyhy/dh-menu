@@ -1,1 +1,723 @@
-.dialog-verifymobile{color:#434343;}.dialog-verifymobile .tips{padding:20px;}.dialog-verifymobile .call-tip{padding-top:50px;padding-left:116px;}.dialog-verifymobile .tips .desc,.dialog-verifymobile .call-tip .text{margin-left:65px;font-size:16px;font-weight:bold;padding-top:4px}.dialog-verifymobile .call-tip .text{padding-top:14px;}.dialog-verifymobile .call-tip .text{padding-top:15px;}.dialog-verifymobile input{width:132px;height:27px;line-height:27px;float:left;}.dialog-verifymobile .field{margin-top:15px;padding-left:32px;}.dialog-verifymobile .verify-field{margin-top:10px;}.dialog-verifymobile .field label{float:left;font-size:14px;width:52px;padding-top:8px;}.dialog-verifymobile .field .mobile{padding-top:7px;font-size:14px;}.dialog-verifymobile .commit-order{margin-left:52px;}.dialog-verifymobile .get-verify{margin-left:15px;}.dialog-verifymobile .simple-dialog .content{padding-bottom:20px;}.dialog-verifymobile .error-tips,.dialog-verifymobile .normal-tips{margin-left:12px;padding-top:8px;}.dialog-verifymobile .normal-tips{color:#434343;}.dialog-verifymobile .verify-text{margin-top:10px;}.dialog-verifymobile .verify-text{color:#A0A0A0;}.dialog-verifymobile .verify-text span{margin-left:52px;}.dialog-verifymobile .voice-status{color:#434343;margin-left:15px;}.dialog-verifymobile .no-sms{display:inline-block;padding-top:8px;}.dialog-verifymobile .no-sms a{color:#FF6900;text-decoration:underline;}.dialog-verifymobile .calling-content{padding:10px;padding-bottom:20px;}.dialog-verifymobile .from{text-align:center;font-size:14px;margin-top:34px;}.dialog-verifymobile .from .deep{color:#FF6900;font-weight:bold;font-size:24px;padding:0 7px;}.dialog-verifymobile .word{text-align:center;font-size:14px;margin-top:7px;padding-bottom:33px;}.dialog-verifymobile .status .ct-gray{margin-top:3px;}.dialog-verifymobile .submit-field{height:47px;}.dialog-verifyvoice{color:#434343;}.dialog-verifyvoice .tips{padding:20px;}.dialog-verifyvoice .call-tip{padding-top:50px;padding-left:116px;}.dialog-verifyvoice .tips .desc,.dialog-verifyvoice .call-tip .text{margin-left:65px;font-size:16px;font-weight:bold;padding-top:4px}.dialog-verifyvoice .call-tip .text{padding-top:14px;}.dialog-verifyvoice input{width:132px;height:26px;line-height:26px;float:left;}.dialog-verifyvoice .field{margin-top:15px;padding-left:32px;}.dialog-verifyvoice .verify-field{margin-top:10px;}.dialog-verifyvoice .field label{float:left;font-size:14px;width:52px;padding-top:8px;}.dialog-verifyvoice .field .mobile{padding-top:7px;font-size:14px;}.dialog-verifyvoice .commit-order{margin-left:52px;}.dialog-verifyvoice .get-verify{margin-left:15px;}.dialog-verifyvoice .simple-dialog .content{padding-bottom:20px;}.dialog-verifyvoice .error-tips,.dialog-verifyvoice .normal-tips{margin-left:12px;padding-top:8px;}.dialog-verifyvoice .normal-tips{color:#434343;}.dialog-verifyvoice .verify-text{margin-top:10px;}.dialog-verifyvoice .verify-text{color:#A0A0A0;}.dialog-verifyvoice .verify-text span{margin-left:52px;}.dialog-verifyvoice .submit-field{height:47px;}.dialog-verifyvoice .calling-content{padding:10px;padding-bottom:20px;}.dialog-verifyvoice .from{text-align:center;font-size:14px;margin-top:34px;}.dialog-verifyvoice .from .deep{color:#FF6900;font-weight:bold;font-size:24px;padding:0 7px;}.dialog-verifyvoice .word{text-align:center;font-size:14px;margin-top:7px;padding-bottom:33px;}.dialog-verifyvoice .status .ct-gray{margin-top:3px;}.dialog-verifyvoice .submit-field{height:47px;}.dialog-confirm .actions a{font-size:14px;font-weight:bold;}.dialog-confirm .flag{margin:27px 0 0 30px;_margin-left:13px;}.dialog-confirm .info{margin-left:95px;padding:37px 0 6px 0;}.dialog-confirm .info p{color:#898989;line-height:17px;padding-top:15px;}.dialog-confirm .wait{margin-top:5px;}.dialog-confirm strong{font-size:17px;color:#434343;}.dialog-confirm .suggest{margin-top:35px;}.dialog-confirm .actions{margin-top:16px;}.dialog-confirm .success-actions{height:28px;}.dialog-confirm .no-login{margin-top:11px;padding-bottom:16px;}.dialog-confirm .no-login a{text-decoration:underline;color:#ED9400;}.dialog-confirm .nevermind{padding-bottom:24px;margin-top:11px;}.dialog-confirm .nevermind a{color:#ff6900;}.dialog-confirm .nevermind a:hover{text-decoration:underline;}.dialog-confirm .txt{margin-top:5px;}.dialog-confirm .today{margin-top:22px;}.dialog-confirm .btns{margin-top:8px;}.dialog-confirm .btns .ok-btn{float:left;}.dialog-confirm .actual-price strong{color:#ff6900;margin-left:2px;}.dialog-confirm .btns .actual-price{float:left;margin-left:10px;padding-top:4px;}.slide-down{position:absolute;border:1px solid #DCDCDC;background-color:#FFFFFF;display:none;z-index:901;box-shadow:0px 2px 5px #CCCCCC;-moz-box-shadow:0px 2px 5px #CCCCCC;-webkit-box-shadow:0px 2px 5px #CCCCCC;-ms-box-shadow:0px 2px 5px #CCCCCC;-o-box-shadow:0px 2px 5px #CCCCCC;}.slide-down li a{display:block;height:33px;padding:0 12px;line-height:33px;color:#434343;}.slide-down li.hover{background-color:#EEEEEE;}.slide-down span.del{display:none;;height:10px;width:10px;background-position:-22px -256px;margin-top:12px;margin-right:10px;cursor:pointer;}.slide-down li.hover span.del{display:block;}.inputip-abso{position:absolute;}.inputip{height:26px;line-height:26px;border:1px solid #FFC399;background-color:#FFF8ED;padding:0 12px;padding-right:0;color:#FF6900;}.order-confirm{margin-top:15px;}.error-flag,.error-tips{color:#EB6100;}.address-form .field .error-flag,.address-form .field .error-tips{float:left;margin-left:3px;padding-top:8px;}.sub-title{border-left:6px solid #FFAA1E;color:#434343;padding-left:11px;}.sub-title span{font-weight:normal;}.sub-title span a{color:#434343;font-size:14px;}.order-confirm .address{width:428px;}.dishes-table{color:#434343;border:1px solid #E5E5E5;background-color:#F7F7F7;}.dishes-table th,.dishes-table td{border:0;}.dishes-table .th-inner,.dishes-table .td-inner{height:49px;line-height:49px;padding-top:0;padding-bottom:0;font-size:14px;}.dishes-table .top-border .th-inner,.dishes-table .top-border .td-inner{border-top:1px dashed #D4D4D4;}.dishes-table .bot-border .th-inner,.dishes-table .bot-border .td-inner{border-bottom:1px dashed #D4D4D4;}.dishes-table .packing-cost .td-inner{height:auto;line-height:normal;padding-top:16px;padding-bottom:7px;}.dishes-table .delivery-cost .td-inner{height:auto;line-height:normal;padding-top:7px;padding-bottom:16px;}.dishes-table .t-total,.dishes-table .t-number{font-size:16px;font-weight:bold;margin-left:15px;}.dishes-table .coupon-use{margin-left:15px;font-size:14px;}.dishes-table .coupon-use span{margin-left:15px;}.dishes{margin-left:450px;background-color:#FFFFFF;border:1px solid #DEDEDE;color:#434343;}.dishes-rap{padding:30px;padding-right:0;}.address-box{border:1px solid #DEDEDE;background-color:#F9F9F9;margin-top:20px;padding:20px;cursor:pointer;width:426px;position:relative;}.address-box .inputip{left:0;bottom:-29px;width:453px;}.address-box p{line-height:24px;font-size:14px;}.address-box p.name{font-weight:bold;}.dishes .box-hover{background-color:#FFF6E0;border-color:#FFAA1E;}.pay-area{padding:20px 30px;padding-bottom:22px;border-top:1px dashed #E8E8E8;}.pay-area .tips{font-weight:bold;}.pay-area .price{font-size:24px;font-weight:bold;position:relative;}.pay-area .float-tip,.pay-area .nodiscount-tip{position:absolute;top:-33px;font-size:12px;background-color:#FFFFFF;color:#ff6900;white-space:nowrap;display:inline-block;padding:3px 6px;font-weight:normal;left:-1px;border:1px solid #ff6900;}.pay-area .nodiscount-tip{left:-55px;display:none;}.pay-area .float-tip .icon,.pay-area .nodiscount-tip .icon{position:absolute;bottom:-8px;left:23%;}.pay-area .nodiscount-tip .icon{left:29%;}.pay-thirdpart-pic{height:12px;vertical-align:text-top;}.pre-order{background-color:#FFF8ED;border-top:1px dashed #E8E8E8;padding:10px 30px 11px;vertical-align:middle;}.pre-order-select-time{margin-left:12px;}.pre-order-tip{margin-left:10px;}.order-tip{background-color:#FFF8ED;height:39px;line-height:39px;border-top:1px dashed #E8E8E8;padding:0 30px;color:#E28D00;}.address-form,.order-form{*zoom:1;}.address-form .field,.order-form .field{margin-top:20px;overflow:hidden;}.address-form .in-field{padding-left:106px;}.address-form .field label,.order-form .field label{width:80px;padding-top:8px;float:left;}.address-form .field input,.order-form .field input{height:28px;line-height:28px;margin:0;width:291px;float:left;border:0;background-position:-424px -63px;padding-left:6px;}.address-form .field input.disabled,.order-form .field input.disabled{background:none;border:1px solid #C6C6C6;background-color:#EBEBE4;}.pay-option{padding-top:5px;}.pay-option .option{width:75px;height:20px;background-position:-236px -4px;text-align:center;line-height:20px;color:#434343;}.pay-option .online-pay{margin-left:20px;}.pay-option .selected{background-position:-319px -4px;color:#FF6900;_background-color:transparent;}.pay-option .i-pay-tip{margin-left:6px;}.pay-option .tip{border:1px solid #898989;margin-left:5px;padding:1px 4px;}.order-form .pay-field{overflow:hidden;margin-top:17px;}.order-form .pay-field label{padding-top:7px;width:80px;}.failed-info{padding:10px;padding-top:26px;}.failed-info .faild-tips{margin-left:113px;padding-top:7px;height:65px;}.failed-info .i-cry{margin-left:35px;}div.coupon{background-color:#FFFFFF;border:1px solid #E5E5E5;border-top:0;border-bottom-style:solid;padding-top:20px;padding-right:15px;height:52px;}div.coupon .operation input{margin:0;width:131px;height:28px;border:0;line-height:28px;margin-left:10px;padding-left:6px;background-position:-283px -63px;}div.coupon .operation a{margin-left:10px;}div.coupon .error-tips{height:16px;text-align:left;margin-top:3px;padding-left:198px;padding-bottom:5px;}div.coupon .coupon-tip{line-height:33px;color:#434343;}.address-ac li a{width:220px;}.address-di li a{width:180px;}.cheque-list{width:298px;}.cheque-list li{*zoom:1;}.dialog-autologin .text{text-align:center;margin-top:12px;font-size:14px;}.dialog-autologin .content{padding:25px 10px;}.dialog-autologin .btn-group{text-align:center;margin-top:26px;padding-bottom:10px;}.dialog-autologin .s-btn{font-size:14px;}.dialog-autologin .my-account,.dialog-autologin .my-number{font-size:16px;}.order-form .leave-message{margin-top:28px;}.privilege{background-color:#FFFFFF;height:53px;padding-top:17px;border:1px solid #E5E5E5;border-top:0;}.privilege .tip{color:#434343;margin-right:10px;line-height:32px;}.threeorder-tip{border:1px solid #FFAA1E;background-color:#FFF5E4;padding:10px;margin-bottom:16px;}.threeorder-tip span{padding-top:1px;margin-left:9px;}.privilege .pri-input{width:158px;height:28px;background-position:-271px -28px;border:0;line-height:28px;padding-left:6px;padding-right:34px;color:#434343;}.privilege .si-input{margin-right:15px;position:relative;*display:inline;}.privilege .si-input .drop{display:block;position:absolute;right:0;top:0;height:34px;width:34px;}.privilege .si-input .drop .i-triangle-dn{position:absolute;top:50%;left:50%;margin-left:-5px;margin-top:-3px;}.privilege .select{position:absolute;display:none;top:34px;*top:35px;left:0;box-shadow:0px 2px 5px #CCCCCC;-moz-box-shadow:0px 2px 5px #CCCCCC;-webkit-box-shadow:0px 2px 5px #CCCCCC;-ms-box-shadow:0px 2px 5px #CCCCCC;-o-box-shadow:0px 2px 5px #CCCCCC;}.privilege .select ul{border:1px solid #DCDCDC;border-top:0;}.privilege .select a{width:190px;height:33px;display:block;background-color:#FFFFFF;color:#000000;line-height:33px;padding-left:6px;}.privilege .select a.hover{background-color:#DCDCDC;}.privilege .select a.invalidate{color:#989898;}
+.dialog-verifymobile {
+    color: #434343;
+}
+.dialog-verifymobile .tips {
+    padding: 20px;
+}
+.dialog-verifymobile .call-tip {
+    padding-top: 50px;
+    padding-left: 116px;
+}
+.dialog-verifymobile .tips .desc, .dialog-verifymobile .call-tip .text {
+    margin-left: 65px;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 4px
+}
+.dialog-verifymobile .call-tip .text {
+    padding-top: 14px;
+}
+.dialog-verifymobile .call-tip .text {
+    padding-top: 15px;
+}
+.dialog-verifymobile input {
+    width: 132px;
+    height: 27px;
+    line-height: 27px;
+    float: left;
+}
+.dialog-verifymobile .field {
+    margin-top: 15px;
+    padding-left: 32px;
+}
+.dialog-verifymobile .verify-field {
+    margin-top: 10px;
+}
+.dialog-verifymobile .field label {
+    float: left;
+    font-size: 14px;
+    width: 52px;
+    padding-top: 8px;
+}
+.dialog-verifymobile .field .mobile {
+    padding-top: 7px;
+    font-size: 14px;
+}
+.dialog-verifymobile .commit-order {
+    margin-left: 52px;
+}
+.dialog-verifymobile .get-verify {
+    margin-left: 15px;
+}
+.dialog-verifymobile .simple-dialog .content {
+    padding-bottom: 20px;
+}
+.dialog-verifymobile .error-tips, .dialog-verifymobile .normal-tips {
+    margin-left: 12px;
+    padding-top: 8px;
+}
+.dialog-verifymobile .normal-tips {
+    color: #434343;
+}
+.dialog-verifymobile .verify-text {
+    margin-top: 10px;
+}
+.dialog-verifymobile .verify-text {
+    color: #A0A0A0;
+}
+.dialog-verifymobile .verify-text span {
+    margin-left: 52px;
+}
+.dialog-verifymobile .voice-status {
+    color: #434343;
+    margin-left: 15px;
+}
+.dialog-verifymobile .no-sms {
+    display: inline-block;
+    padding-top: 8px;
+}
+.dialog-verifymobile .no-sms a {
+    color: #FF6900;
+    text-decoration: underline;
+}
+.dialog-verifymobile .calling-content {
+    padding: 10px;
+    padding-bottom: 20px;
+}
+.dialog-verifymobile .from {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 34px;
+}
+.dialog-verifymobile .from .deep {
+    color: #FF6900;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 0 7px;
+}
+.dialog-verifymobile .word {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 7px;
+    padding-bottom: 33px;
+}
+.dialog-verifymobile .status .ct-gray {
+    margin-top: 3px;
+}
+.dialog-verifymobile .submit-field {
+    height: 47px;
+}
+.dialog-verifyvoice {
+    color: #434343;
+}
+.dialog-verifyvoice .tips {
+    padding: 20px;
+}
+.dialog-verifyvoice .call-tip {
+    padding-top: 50px;
+    padding-left: 116px;
+}
+.dialog-verifyvoice .tips .desc, .dialog-verifyvoice .call-tip .text {
+    margin-left: 65px;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 4px
+}
+.dialog-verifyvoice .call-tip .text {
+    padding-top: 14px;
+}
+.dialog-verifyvoice input {
+    width: 132px;
+    height: 26px;
+    line-height: 26px;
+    float: left;
+}
+.dialog-verifyvoice .field {
+    margin-top: 15px;
+    padding-left: 32px;
+}
+.dialog-verifyvoice .verify-field {
+    margin-top: 10px;
+}
+.dialog-verifyvoice .field label {
+    float: left;
+    font-size: 14px;
+    width: 52px;
+    padding-top: 8px;
+}
+.dialog-verifyvoice .field .mobile {
+    padding-top: 7px;
+    font-size: 14px;
+}
+.dialog-verifyvoice .commit-order {
+    margin-left: 52px;
+}
+.dialog-verifyvoice .get-verify {
+    margin-left: 15px;
+}
+.dialog-verifyvoice .simple-dialog .content {
+    padding-bottom: 20px;
+}
+.dialog-verifyvoice .error-tips, .dialog-verifyvoice .normal-tips {
+    margin-left: 12px;
+    padding-top: 8px;
+}
+.dialog-verifyvoice .normal-tips {
+    color: #434343;
+}
+.dialog-verifyvoice .verify-text {
+    margin-top: 10px;
+}
+.dialog-verifyvoice .verify-text {
+    color: #A0A0A0;
+}
+.dialog-verifyvoice .verify-text span {
+    margin-left: 52px;
+}
+.dialog-verifyvoice .submit-field {
+    height: 47px;
+}
+.dialog-verifyvoice .calling-content {
+    padding: 10px;
+    padding-bottom: 20px;
+}
+.dialog-verifyvoice .from {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 34px;
+}
+.dialog-verifyvoice .from .deep {
+    color: #FF6900;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 0 7px;
+}
+.dialog-verifyvoice .word {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 7px;
+    padding-bottom: 33px;
+}
+.dialog-verifyvoice .status .ct-gray {
+    margin-top: 3px;
+}
+.dialog-verifyvoice .submit-field {
+    height: 47px;
+}
+.dialog-confirm .actions a {
+    font-size: 14px;
+    font-weight: bold;
+}
+.dialog-confirm .flag {
+    margin: 27px 0 0 30px;
+    _margin-left: 13px;
+}
+.dialog-confirm .info {
+    margin-left: 95px;
+    padding: 37px 0 6px 0;
+}
+.dialog-confirm .info p {
+    color: #898989;
+    line-height: 17px;
+    padding-top: 15px;
+}
+.dialog-confirm .wait {
+    margin-top: 5px;
+}
+.dialog-confirm strong {
+    font-size: 17px;
+    color: #434343;
+}
+.dialog-confirm .suggest {
+    margin-top: 35px;
+}
+.dialog-confirm .actions {
+    margin-top: 16px;
+}
+.dialog-confirm .success-actions {
+    height: 28px;
+}
+.dialog-confirm .no-login {
+    margin-top: 11px;
+    padding-bottom: 16px;
+}
+.dialog-confirm .no-login a {
+    text-decoration: underline;
+    color: #ED9400;
+}
+.dialog-confirm .nevermind {
+    padding-bottom: 24px;
+    margin-top: 11px;
+}
+.dialog-confirm .nevermind a {
+    color: #ff6900;
+}
+.dialog-confirm .nevermind a:hover {
+    text-decoration: underline;
+}
+.dialog-confirm .txt {
+    margin-top: 5px;
+}
+.dialog-confirm .today {
+    margin-top: 22px;
+}
+.dialog-confirm .btns {
+    margin-top: 8px;
+}
+.dialog-confirm .btns .ok-btn {
+    float: left;
+}
+.dialog-confirm .actual-price strong {
+    color: #ff6900;
+    margin-left: 2px;
+}
+.dialog-confirm .btns .actual-price {
+    float: left;
+    margin-left: 10px;
+    padding-top: 4px;
+}
+.slide-down {
+    position: absolute;
+    border: 1px solid #DCDCDC;
+    background-color: #FFFFFF;
+    display: none;
+    z-index: 901;
+    box-shadow: 0px 2px 5px #CCCCCC;
+    -moz-box-shadow: 0px 2px 5px #CCCCCC;
+    -webkit-box-shadow: 0px 2px 5px #CCCCCC;
+    -ms-box-shadow: 0px 2px 5px #CCCCCC;
+    -o-box-shadow: 0px 2px 5px #CCCCCC;
+}
+.slide-down li a {
+    display: block;
+    height: 33px;
+    padding: 0 12px;
+    line-height: 33px;
+    color: #434343;
+}
+.slide-down li.hover {
+    background-color: #EEEEEE;
+}
+.slide-down span.del {
+    display: none;
+    ;
+    height: 10px;
+    width: 10px;
+    background-position: -22px -256px;
+    margin-top: 12px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.slide-down li.hover span.del {
+    display: block;
+}
+.inputip-abso {
+    position: absolute;
+}
+.inputip {
+    height: 26px;
+    line-height: 26px;
+    border: 1px solid #FFC399;
+    background-color: #FFF8ED;
+    padding: 0 12px;
+    padding-right: 0;
+    color: #FF6900;
+}
+.order-confirm {
+    margin-top: 15px;
+}
+.error-flag, .error-tips {
+    color: #EB6100;
+}
+.address-form .field .error-flag, .address-form .field .error-tips {
+    float: left;
+    margin-left: 3px;
+    padding-top: 8px;
+}
+.sub-title {
+    border-left: 6px solid #FFAA1E;
+    color: #434343;
+    padding-left: 11px;
+}
+.sub-title span {
+    font-weight: normal;
+}
+.sub-title span a {
+    color: #434343;
+    font-size: 14px;
+}
+.order-confirm .address {
+    width: 498px;
+}
+.dishes-table {
+    color: #434343;
+    border: 1px solid #E5E5E5;
+    background-color: #F7F7F7;
+}
+.dishes-table th, .dishes-table td {
+    border: 0;
+}
+.dishes-table .th-inner, .dishes-table .td-inner {
+    height: 49px;
+    line-height: 49px;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+}
+.dishes-table .top-border .th-inner, .dishes-table .top-border .td-inner {
+    border-top: 1px dashed #D4D4D4;
+}
+.dishes-table .bot-border .th-inner, .dishes-table .bot-border .td-inner {
+    border-bottom: 1px dashed #D4D4D4;
+}
+.dishes-table .packing-cost .td-inner {
+    height: auto;
+    line-height: normal;
+    padding-top: 16px;
+    padding-bottom: 7px;
+}
+.dishes-table .delivery-cost .td-inner {
+    height: auto;
+    line-height: normal;
+    padding-top: 7px;
+    padding-bottom: 16px;
+}
+.dishes-table .t-total, .dishes-table .t-number {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+.dishes-table .coupon-use {
+    margin-left: 15px;
+    font-size: 14px;
+}
+.dishes-table .coupon-use span {
+    margin-left: 15px;
+}
+.dishes {
+    margin-left: 520px;
+    background-color: #FFFFFF;
+    border: 1px solid #DEDEDE;
+    color: #434343;
+}
+.dishes-rap {
+    padding: 30px;
+    padding-right: 0;
+}
+.address-box {
+    border: 1px solid #DEDEDE;
+    background-color: #F9F9F9;
+    margin-top: 20px;
+    padding: 20px;
+    cursor: pointer;
+    width: 426px;
+    position: relative;
+}
+.address-box .inputip {
+    left: 0;
+    bottom: -29px;
+    width: 453px;
+}
+.address-box p {
+    line-height: 24px;
+    font-size: 14px;
+}
+.address-box p.name {
+    font-weight: bold;
+}
+.dishes .box-hover {
+    background-color: #FFF6E0;
+    border-color: #FFAA1E;
+}
+.pay-area {
+    padding: 20px 30px;
+    padding-bottom: 22px;
+    border-top: 1px dashed #E8E8E8;
+}
+.pay-area .tips {
+    font-weight: bold;
+}
+.pay-area .price {
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+}
+.pay-area .float-tip, .pay-area .nodiscount-tip {
+    position: absolute;
+    top: -33px;
+    font-size: 12px;
+    background-color: #FFFFFF;
+    color: #ff6900;
+    white-space: nowrap;
+    display: inline-block;
+    padding: 3px 6px;
+    font-weight: normal;
+    left: -1px;
+    border: 1px solid #ff6900;
+}
+.pay-area .nodiscount-tip {
+    left: -55px;
+    display: none;
+}
+.pay-area .float-tip .icon, .pay-area .nodiscount-tip .icon {
+    position: absolute;
+    bottom: -8px;
+    left: 23%;
+}
+.pay-area .nodiscount-tip .icon {
+    left: 29%;
+}
+.pay-thirdpart-pic {
+    height: 12px;
+    vertical-align: text-top;
+}
+.pre-order {
+    background-color: #FFF8ED;
+    border-top: 1px dashed #E8E8E8;
+    padding: 10px 30px 11px;
+    vertical-align: middle;
+}
+.pre-order-select-time {
+    margin-left: 12px;
+}
+.pre-order-tip {
+    margin-left: 10px;
+}
+.order-tip {
+    background-color: #FFF8ED;
+    height: 39px;
+    line-height: 39px;
+    border-top: 1px dashed #E8E8E8;
+    padding: 0 30px;
+    color: #E28D00;
+}
+.address-form, .order-form {
+    *zoom: 1;
+}
+.address-form .field, .order-form .field {
+    margin-top: 20px;
+    overflow: hidden;
+}
+.address-form .in-field {
+    padding-left: 106px;
+}
+.address-form .field label, .order-form .field label {
+    width: 80px;
+    padding-top: 8px;
+    float: left;
+}
+.address-form .field input, .order-form .field input {
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+    width: 291px;
+    float: left;
+    border: 0;
+    background-position: -424px -63px;
+    padding-left: 6px;
+}
+.address-form .field input.disabled, .order-form .field input.disabled {
+    background: none;
+    border: 1px solid #C6C6C6;
+    background-color: #EBEBE4;
+}
+.pay-option {
+    padding-top: 5px;
+}
+.pay-option .option {
+    width: 75px;
+    height: 20px;
+    background-position: -236px -4px;
+    text-align: center;
+    line-height: 20px;
+    color: #434343;
+}
+.pay-option .online-pay {
+    margin-left: 20px;
+}
+.pay-option .selected {
+    background-position: -319px -4px;
+    color: #FF6900;
+    _background-color: transparent;
+}
+.pay-option .i-pay-tip {
+    margin-left: 6px;
+}
+.pay-option .tip {
+    border: 1px solid #898989;
+    margin-left: 5px;
+    padding: 1px 4px;
+}
+.order-form .pay-field {
+    overflow: hidden;
+    margin-top: 17px;
+}
+.order-form .pay-field label {
+    padding-top: 7px;
+    width: 80px;
+}
+.failed-info {
+    padding: 10px;
+    padding-top: 26px;
+}
+.failed-info .faild-tips {
+    margin-left: 113px;
+    padding-top: 7px;
+    height: 65px;
+}
+.failed-info .i-cry {
+    margin-left: 35px;
+}
+div.coupon {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-top: 0;
+    border-bottom-style: solid;
+    padding-top: 20px;
+    padding-right: 15px;
+    height: 52px;
+}
+div.coupon .operation input {
+    margin: 0;
+    width: 131px;
+    height: 28px;
+    border: 0;
+    line-height: 28px;
+    margin-left: 10px;
+    padding-left: 6px;
+    background-position: -283px -63px;
+}
+div.coupon .operation a {
+    margin-left: 10px;
+}
+div.coupon .error-tips {
+    height: 16px;
+    text-align: left;
+    margin-top: 3px;
+    padding-left: 198px;
+    padding-bottom: 5px;
+}
+div.coupon .coupon-tip {
+    line-height: 33px;
+    color: #434343;
+}
+.address-ac li a {
+    width: 220px;
+}
+.address-di li a {
+    width: 180px;
+}
+.cheque-list {
+    width: 298px;
+}
+.cheque-list li {
+    *zoom: 1;
+}
+.dialog-autologin .text {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+}
+.dialog-autologin .content {
+    padding: 25px 10px;
+}
+.dialog-autologin .btn-group {
+    text-align: center;
+    margin-top: 26px;
+    padding-bottom: 10px;
+}
+.dialog-autologin .s-btn {
+    font-size: 14px;
+}
+.dialog-autologin .my-account, .dialog-autologin .my-number {
+    font-size: 16px;
+}
+.order-form .leave-message {
+    margin-top: 28px;
+}
+.privilege {
+    background-color: #FFFFFF;
+    height: 53px;
+    padding-top: 17px;
+    border: 1px solid #E5E5E5;
+    border-top: 0;
+}
+.privilege .tip {
+    color: #434343;
+    margin-right: 10px;
+    line-height: 32px;
+}
+.threeorder-tip {
+    border: 1px solid #FFAA1E;
+    background-color: #FFF5E4;
+    padding: 10px;
+    margin-bottom: 16px;
+}
+.threeorder-tip span {
+    padding-top: 1px;
+    margin-left: 9px;
+}
+.privilege .pri-input {
+    width: 158px;
+    height: 28px;
+    background-position: -271px -28px;
+    border: 0;
+    line-height: 28px;
+    padding-left: 6px;
+    padding-right: 34px;
+    color: #434343;
+}
+.privilege .si-input {
+    margin-right: 15px;
+    position: relative;
+    *display: inline;
+}
+.privilege .si-input .drop {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 34px;
+    width: 34px;
+}
+.privilege .si-input .drop .i-triangle-dn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -5px;
+    margin-top: -3px;
+}
+.privilege .select {
+    position: absolute;
+    display: none;
+    top: 34px;
+    *top: 35px;
+    left: 0;
+    box-shadow: 0px 2px 5px #CCCCCC;
+    -moz-box-shadow: 0px 2px 5px #CCCCCC;
+    -webkit-box-shadow: 0px 2px 5px #CCCCCC;
+    -ms-box-shadow: 0px 2px 5px #CCCCCC;
+    -o-box-shadow: 0px 2px 5px #CCCCCC;
+}
+.privilege .select ul {
+    border: 1px solid #DCDCDC;
+    border-top: 0;
+}
+.privilege .select a {
+    width: 190px;
+    height: 33px;
+    display: block;
+    background-color: #FFFFFF;
+    color: #000000;
+    line-height: 33px;
+    padding-left: 6px;
+}
+.privilege .select a.hover {
+    background-color: #DCDCDC;
+}
+.privilege .select a.invalidate {
+    color: #989898;
+}
+.td-wrap {
+    line-height: 16px!important;
+}

@@ -20,6 +20,7 @@
     "socket.io": "*",
     "static-favicon": "~1.0.0",
     "thenjs": "^1.4.4",
+    "underscore": "^1.7.0",
     "validator": "0.3.7"
   }
 }

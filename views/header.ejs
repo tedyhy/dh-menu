@@ -10,7 +10,7 @@
 				<%}else{%>
 				<span id="is-login" class="name">HI,&nbsp;<%=loginname%></span>
 				<a href="/logout" class="logout ca-lightgrey" id="logout">退出</a>
-				<script type="text/javascript">var CUSER = "<%=loginname%>";</script>
+				<script type="text/javascript">window.CUSER = "<%=loginname%>";</script>
 				<%}%>
 			</div>
 			<a href="/mobile/download" class="wap ca-lightgrey"><i class="icon i-phone"></i><span>手机版</span></a>

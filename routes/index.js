@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Thenjs = require('thenjs');
+var _ = require('underscore');
 var restaurantConn = require('../models/restaurant');
 var sign = require('../controllers/sign');
 var auth = require('../middlewares/auth');
@@ -66,12 +67,32 @@ router.get('/home/:id', function(req, res, next) {
 router.all('/order/preview', function(req, res, next) {
 	auth.userRequired(req, res, next);
 
+	var _isAdmin = req.session.user.is_admin;
+	// if (!_isAdmin) {
+	// 	res.status(404);
+	// 	return next();
+	// };
+
 	var restid = req.param('restid'),
 		uid = req.param('uid'),
 		loginname = res.locals.current_user && res.locals.current_user.name || "",
 		obj = {},
-		_cart = cache.order[111] || [],
+		_cart = [],
 		_restinfo = {};
+
+	(cache.order[111] || []).forEach(function(c, i) {
+		c.orderp = _.uniq(c.orderp);
+		_cart.push(c);
+	});
+
+	// 根据不同分类显示份数
+	var _cate_cart = _.countBy(_cart, function(c, i) {
+		return c.cate_name;
+	});
+	var __cate_cart = '';
+	for (var i in _cate_cart) {
+		__cate_cart += i + '：' + _cate_cart[i] + '份，';
+	};
 
 	if (uid && restid) {
 
@@ -104,9 +125,11 @@ router.all('/order/preview', function(req, res, next) {
 				title: gtitle,
 				uid: uid,
 				loginname: loginname,
+				is_admin: _isAdmin,
 				restinfo: _restinfo,
 				data: _cart,
-				cart: JSON.stringify(_cart)
+				cart: JSON.stringify(_cart),
+				cate_cart: __cate_cart
 			});
 
 			cont();

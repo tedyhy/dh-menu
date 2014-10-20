@@ -23,17 +23,22 @@
 		<!-- page-header -->
 		<% include header.ejs %>
 		<!-- shopping-cart -->
-		<div class="shopping-cart clearfix j-shopping-cart">
+		<div class="shopping-cart clearfix j-shopping-cart" style="width: 320px;">
 			<form method="post" action="/order/preview" id="shoppingCartForm">
-				<div class="order-list j-order-list" style="top: 0;">
+				<div class="order-list j-order-list" style="top: 0;width: 320px;">
 					<div class="title">
-						<span class="fl dishes">菜品<a href="javascript:;" class="clear-cart j-clearcart">[清空]</a>
+						<span class="fl dishes" style="width:100px;">菜品
+						<%if(is_admin){%>
+						<a href="javascript:;" class="clear-cart j-clearcart">[清空]</a>
+						<%}%>
 						</span>
-						<span class="fl">份数</span>
-						<span class="fl ti-price">价格</span>
+						<span class="fl" style="margin-left: 10px;">点餐人</span>
+						<span class="fl" style="margin-left: 50px;">份数</span>
+						<span class="fr ti-price">价格</span>
 					</div>
 					<script type="text/template" id="cartfood-template">
-						<div class="fl na" title="{{name}}">{{name}}</div>
+						<div class="fl na" title="{{name}}" style="width:100px;">{{name}}</div>
+						<div class="fl na" title="{{orderp}}" style="width:90px;">{{orderp}}</div>
 						<div class="fl modify clearfix">
 							<a href="javascript:;" class="fl minus j-minus">-</a> 
 							<input type="text" class="fl txt-count j-txt-count" value="{{cart}}" readonly />
@@ -43,7 +48,7 @@
 							<span>¥{{price}}</span>
 						</div>
 					</script>
-					<ul class="j-cartul" style="height: auto; overflow: visible; max-height: 400px; overflow-y: auto;">
+					<ul class="j-cartul" style="height: auto; overflow: visible; max-height: 600px; overflow-y: auto;">
 						<!-- li from cookies -->
 					</ul>
 					<div class="total">共
@@ -59,8 +64,8 @@
 						<span class="price">¥10</span>
 					</div>
 					<div class="fr">
-						<a class="ready-pay borderradius-2 j-readypay" href="javascript:;">去下单</a>
-						<input class="go-pay borderradius-2 j-gopay" type="submit" style="display: none;" value="去下单" />
+						<a class="ready-pay borderradius-2 j-readypay" href="javascript:;">详单</a>
+						<input class="go-pay borderradius-2 j-gopay" type="submit" style="display: none;" value="详单" />
 						<input type="hidden" value="" class="j-uid-data" name="uid">
 						<input type="hidden" value="<%=restinfo.id%>" class="j-restid-data" name="restid">
 					</div>
@@ -71,7 +76,7 @@
 		<div class="page-wrap">
 			<div class="inner-wrap j-inner-wrap">
 				<div class="rest-info">
-					<div class="right-bar fr clearfix">
+					<div class="right-bar fr clearfix hidden">
 						<div class="fl search-label">搜索菜品：</div>
 						<div class="fl search-food">
 							<input type="text" placeholder="搜索菜品..." class="search-input sprite j-search-input" />
@@ -160,7 +165,7 @@
 					    <div class="title-blank ct-deepgrey j-title-blank hidden">
 					        <div class="actions clearfix fr">
 					            <a href="javascript:;" class="classic">美食分类<i class="icon i-triangle-dn"></i></a>
-								<div class="fr clearfix">
+								<div class="fr clearfix hidden">
 									<div class="fl search-label">搜索菜品：</div>
 									<div class="fl search-food">
 										<input type="text" placeholder="搜索菜品..." class="search-input sprite j-search-input" />
@@ -200,10 +205,10 @@
 					                <div class="fr sold">
 					                    <div class="zan-rank">
 					                        <i class="icon i-zan"></i>
-					                        <span class="cc-oriange">(1)</span>
+					                        <span class="cc-oriange">(<%=rr.like%>)</span>
 					                    </div>
 					                    <div class="count ct-middlegrey">
-					                        <span>月售14份</span>
+					                        <span>月售<%=rr.ordernum%>份</span>
 					                    </div>
 					                </div>
 					                <div class="fr add">
@@ -271,7 +276,6 @@
 	<script type="text/template" id="search-item-template">
 		<li class="j-search-item" data-id="{{id}}" data-name="{{name}}" data-price="{{price}}">{{name}} ￥{{price}}</li>
 	</script>
-	<!-- <ul class="search-list j-search-list" style="display: none;"></ul> -->
 
 	<script type="text/javascript">
 		seajs.use('main');

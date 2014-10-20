@@ -25,6 +25,7 @@ router.param('id', /^\d+$/);
 router.get('/:id', function(req, res, next) {
 	auth.userRequired(req, res, next);
 
+	var _isAdmin = req.session.user.is_admin;
 	var _id = req.params.id,
 		_ip = req.ip,
 		_obj = {},
@@ -108,6 +109,7 @@ router.get('/:id', function(req, res, next) {
 				cs.food = [];
 				data[c.id] = cs;
 			});
+
 			foods.forEach(function(f, i) {
 				var tmp = {},
 					cateid, num;
@@ -116,6 +118,9 @@ router.get('/:id', function(req, res, next) {
 				tmp.price = f.price;
 				tmp.like = f.like;
 				tmp.cart = 0;
+				tmp.ordernum = f.order_num;
+				tmp.cate_name = data[f.cate_id].name;
+				tmp.orderp = []; // 点了此菜品的人员
 				cateid = f.cate_id;
 				num = +data[cateid].num;
 				data[cateid].food.push(tmp);
@@ -137,6 +142,7 @@ router.get('/:id', function(req, res, next) {
 		res.render('restaurant', {
 			id: _id,
 			title: gtitle,
+			is_admin: _isAdmin,
 			restinfo: _restinfo,
 			food: _data,
 			data: JSON.stringify(_data),

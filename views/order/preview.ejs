@@ -24,7 +24,7 @@
 			<div class="inner-wrap">
 				<div class="breadcrumb">
 					<a class="ca-brown" href="/restaurant/<%=restinfo.id%>"><%=restinfo.name%></a><i>&gt;</i>
-					<span>确认订单</span>
+					<span>详单</span>
 				</div>
 				<textarea class="j-cart-data" style="display: none;"><%=cart%></textarea>
 				<div class="order-confirm clearfix j-order-confirm">
@@ -32,13 +32,16 @@
 						<table class="standard-table dishes-table">
 							<thead>
 								<tr class="bot-border">
-									<th width="240">
+									<th width="180">
 										<div class="th-inner align-left">菜品</div>
 									</th>
-									<th width="100">
+									<th width="120">
+										<div class="th-inner align-left">点餐人</div>
+									</th>
+									<th width="60">
 										<div class="th-inner">份数</div>
 									</th>
-									<th>
+									<th width="60">
 										<div class="th-inner align-right">金额</div>
 									</th>
 								</tr>
@@ -52,6 +55,9 @@
 											<div class="td-inner align-left" title="<%=r.name%>"><%=r.name%></div>
 										</td>
 										<td>
+											<div class="td-inner align-left <%=(r.orderp.length>2?'td-wrap':'')%>"><%=r.orderp.join('、')%></div>
+										</td>
+										<td>
 											<div class="td-inner align-center"><%=r.cart%></div>
 										</td>
 										<td>
@@ -60,10 +66,10 @@
 									</tr>
 								<%}%>
 								<tr class="total top-border">
-									<td colspan="3" class="clearfix">
+									<td colspan="4" class="clearfix">
 										<div class="td-inner">
-											<span class="t-number fr j-t-number">0 元</span>
-											<span class="t-total fr">合计</span>
+											<span class="fl"><%=cate_cart%></span>
+											<span class="t-number fl j-t-number">合计 0 元</span>
 										</div>
 									</td>
 								</tr>
@@ -112,9 +118,11 @@
 							</form>
 						</div>
 						<div class="pay-area">
+							<%if(is_admin){%>
 							<a class="s-btn fr" id="confirmOrder" style="display: none;">
 								<span class="s-btn">确认订单</span>
 							</a>
+							<%}%>
 							<div class="tips">您需支付&nbsp;
 								<span class="price cc-oriange">¥
 									<span id="totalPrice">0</span>

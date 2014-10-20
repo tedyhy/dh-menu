@@ -6,7 +6,8 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		// Pinyin = require('modules/pinyin/pinyin'),
 		foodData = eval("(" + $('.j-food-data').val() + ")"),
 		cartData = eval("(" + $('.j-cart-data').val() + ")"),
-		socket = io.connect();
+		socket = io.connect(),
+		CUSER = window.CUSER;
 
 	// animate
 	require("libs/tween/requestAnimationFrame");
@@ -57,12 +58,10 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			$categorys.each(function(i, cate) {
 				var t = $(cate).offset().top;
 				if (top >= t) {
-					if ($('html, body').is(':animated')) return;
-
-					var title = $(cate).find('.tag-na').text(),
-						$curcate = $foodtypenav.find('li.j-food-cate').eq(i);
-
+					var title = $(cate).find('.tag-na').text();
 					$titleblank.find('.tag-na').text(title);
+
+					if ($('html, body').is(':animated')) return;
 
 					$foodtypenav.find('li.j-food-cate').eq(i).addClass('active')
 						.siblings().removeClass('active');
@@ -122,7 +121,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 		initialize: function() {
 			$('body').on('keyup propertychange input paste filter', '.j-search-input', $.proxy(this.search, this));
-			$('body').on('click', '.j-search-item', function(){
+			$('body').on('click', '.j-search-item', function() {
 				return false;
 			});
 			$('body').on('click', function() {
@@ -301,8 +300,15 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 			// 添加购物车动画
 			self.addFoodAnim($self, price, function() {
-				var cart = +d.get('cart') + 1;
-				d.set('cart', cart);
+				var cart = +d.get('cart') + 1,
+					p = _.clone(d.get('orderp'));
+
+				p.push(CUSER);
+
+				d.set({
+					'cart': cart,
+					'orderp': p
+				});
 				carts.add(d, {
 					merge: true
 				});
@@ -390,7 +396,11 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		render: function() {
-			this.$el.html(this.template(this.model.toJSON()));
+			var p = _.clone(this.model.attributes),
+				ps = _.last(p.orderp);
+
+			p.orderp = ps;
+			this.$el.html(this.template(p));
 
 			// 总计
 			cartviews && cartviews.render();
@@ -399,18 +409,32 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		minusOne: function() {
-			var cart = +this.model.get('cart') - 1;
+			var cart = +this.model.get('cart') - 1,
+				ps = _.clone(this.model.get('orderp'));
+
+			// 处理删除菜品的人员
+			if (_.contains(ps, CUSER)) {
+				ps.splice(_.lastIndexOf(ps, CUSER), 1);
+			} else {
+				_.initial(ps);
+			};
 
 			if (cart === 0) {
-				this.clear();
+				this.clear(ps);
 				socket.emit('server.menu.remove', {
 					uid: 111,
 					data: this.model
 				});
 				return;
 			}
-			this.model.set('cart', cart);
-			allfoods.get(this.model).set('cart', cart);
+			this.model.set({
+				'cart': cart,
+				'orderp': ps
+			});
+			allfoods.get(this.model).set({
+				'cart': cart,
+				'orderp': ps
+			});
 
 			socket.emit('server.menu.remove', {
 				uid: 111,
@@ -419,10 +443,19 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		plusOne: function() {
-			var cart = +this.model.get('cart') + 1;
+			var cart = +this.model.get('cart') + 1,
+				ps = _.clone(this.model.get('orderp'));
 
-			this.model.set('cart', cart);
-			allfoods.get(this.model).set('cart', cart);
+			ps.push(CUSER);
+
+			this.model.set({
+				'cart': cart,
+				'orderp': ps
+			});
+			allfoods.get(this.model).set({
+				'cart': cart,
+				'orderp': ps
+			});
 
 			socket.emit('server.menu.add', {
 				uid: 111,
@@ -430,9 +463,12 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			});
 		},
 
-		clear: function() {
+		clear: function(ps) {
 			carts.remove(this.model);
-			allfoods.get(this.model.get('id')).set('cart', 0);
+			allfoods.get(this.model.get('id')).set({
+				'cart': 0,
+				'orderp': ps
+			});
 		}
 
 	});
@@ -490,23 +526,43 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 		ioRemoveOne: function(fid) {
 			var model = carts.get(fid),
-				cart = +model.get('cart') - 1;
+				cart = +model.get('cart') - 1,
+				ps = _.clone(model.get('orderp'));
+
+			// 处理删除菜品的人员
+			if (_.contains(ps, CUSER)) {
+				ps.splice(_.lastIndexOf(ps, CUSER), 1);
+			} else {
+				_.initial(ps);
+			};
 
 			if (cart === 0) {
 				carts.remove(model);
-				allfoods.get(fid).set('cart', cart);
+				allfoods.get(fid).set({
+					'cart': cart,
+					'orderp': ps
+				});
 				return;
 			}
 
-			model.set('cart', cart);
-			allfoods.get(fid).set('cart', cart);
+			model.set({
+				'cart': cart,
+				'orderp': ps
+			});
+			allfoods.get(fid).set({
+				'cart': cart,
+				'orderp': ps
+			});
 		},
 
 		ioClearCart: function() {
 			this.$orderlist.css('top', 0);
 
 			carts.each(function(d, i) {
-				allfoods.get(d.get('id')).set('cart', 0);
+				allfoods.get(d.get('id')).set({
+					'cart': 0,
+					'orderp': []
+				});
 			});
 
 			carts.remove(carts.models);
@@ -521,9 +577,11 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			var orderh = this.$orderlist.outerHeight(true);
 
 			this.$cartul.prepend(view.render().el);
-			this.fnShoppingCart();
+			if (carts.models.length === 1) {
+				this.fnShoppingCart();
+			};
 
-			if (orderh >= 400) {
+			if (orderh >= 600) {
 				this.$cartul.scrollTop(0);
 				return;
 			}
@@ -541,9 +599,11 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			// 调整高度
 			var orderh = this.$orderlist.outerHeight(true);
 
-			this.$orderlist.stop().animate({
-				'top': -orderh
-			});
+			if (+this.$orderlist.css('top').replace('px', '') !== 0) {
+				this.$orderlist.stop().animate({
+					'top': -orderh
+				});
+			}
 		},
 
 		render: function() {
@@ -597,7 +657,10 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.$orderlist.css('top', 0);
 
 			carts.each(function(d, i) {
-				allfoods.get(d.get('id')).set('cart', 0);
+				allfoods.get(d.get('id')).set({
+					'cart': 0,
+					'orderp': []
+				});
 			});
 
 			carts.remove(carts.models);
