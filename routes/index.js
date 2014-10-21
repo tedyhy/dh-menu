@@ -3,8 +3,11 @@ var router = express.Router();
 var Thenjs = require('thenjs');
 var _ = require('underscore');
 var restaurantConn = require('../models/restaurant');
+var User = require('../models/user');
 var sign = require('../controllers/sign');
 var auth = require('../middlewares/auth');
+var utils = require('../common/utils');
+var config = require('../config.default');
 var gtitle = 'DH FWD MENU';
 
 /* 参数过滤 */
@@ -22,6 +25,7 @@ router.param(function(name, fn) {
 	}
 });
 router.param('id', /^\d+$/);
+router.param('oid', /^[0-9a-zA-Z]+$/);
 
 // all router
 router.all('*', function(req, res, next) {
@@ -33,8 +37,7 @@ router.all('*', function(req, res, next) {
 router.get('/', function(req, res, next) {
 	auth.userRequired(req, res, next);
 
-	res.redirect('/home/1');
-	next();
+	return res.redirect('/home/1');
 });
 
 // home page
@@ -45,9 +48,25 @@ router.get('/home/:id', function(req, res, next) {
 		loginname = res.locals.current_user && res.locals.current_user.name || "",
 		obj = {};
 
-	if (id) {
-		obj.id = id;
-		obj.callback = function(result) {
+	if (id && loginname) {
+
+		Thenjs(function(cont) {
+			// 获取home所有餐馆信息
+			var obj = {
+				id: id,
+				callback: cont
+			};
+			restaurantConn.gethome(obj);
+		}).
+		then(function(cont, result) {
+			result.forEach(function(r, i){
+				r.token = utils.encrypt(r.id + '\t' + loginname, config.session_secret);
+			});
+
+			cont(null, result);
+		}).
+		then(function(cont, result) {
+			// 渲染页面
 			res.render('home', {
 				title: gtitle,
 				id: id,
@@ -55,8 +74,14 @@ router.get('/home/:id', function(req, res, next) {
 				restaurants: result,
 				data: JSON.stringify(result)
 			});
-		}
-		restaurantConn.gethome(obj, res, next);
+
+			cont();
+		}).
+		fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常
+			console.log(error);
+			res.status(404);
+			next();
+		});
 	} else {
 		res.status(404);
 		next();
@@ -64,39 +89,73 @@ router.get('/home/:id', function(req, res, next) {
 });
 
 // order preview router
-router.all('/order/preview', function(req, res, next) {
+router.all('/order/preview/:oid', function(req, res, next) {
 	auth.userRequired(req, res, next);
 
-	var _isAdmin = req.session.user.is_admin;
-	// if (!_isAdmin) {
-	// 	res.status(404);
-	// 	return next();
-	// };
+	var oid = req.params.oid,
+		loginname = res.locals.current_user && res.locals.current_user.name || "";
 
-	var restid = req.param('restid'),
-		uid = req.param('uid'),
-		loginname = res.locals.current_user && res.locals.current_user.name || "",
-		obj = {},
+	if (!oid || !loginname) {
+		res.status(404);
+		return next('无餐馆加密后的id！');
+	};
+
+	var auth_token = utils.decrypt(oid[0], config.session_secret) || '';
+
+	if (!auth_token) {
+		res.status(404);
+		return next('餐馆加密后的id错误！');
+	};
+
+	var auth_tokens = auth_token.split('\t'),
+		restid = +auth_tokens[0] || '',
+		uid = auth_tokens[1] || '';
+
+	if (!restid || !uid) {
+		res.status(404);
+		return next('餐馆加密信息错误！');
+	};
+
+	var _isAdmin = req.session.user.is_admin;
+
+	var obj = {},
 		_cart = [],
 		_restinfo = {};
 
-	(cache.order[111] || []).forEach(function(c, i) {
+	_.clone(cache.order[uid] || []).forEach(function(c, i) {
 		c.orderp = _.uniq(c.orderp);
 		_cart.push(c);
 	});
 
-	// 根据不同分类显示份数
-	var _cate_cart = _.countBy(_cart, function(c, i) {
-		return c.cate_name;
+	// 统计不同分类显示份数
+	var _cate_cart = {},
+		_cate_cart_num = 0,
+		__cate_cart = '';
+	_.clone(_cart).forEach(function(c, i) {
+		if (c.cate_name in _cate_cart) {
+			_cate_cart[c.cate_name] += c.cart;
+		} else {
+			_cate_cart[c.cate_name] = c.cart;
+		};
+		_cate_cart_num += c.cart;
 	});
-	var __cate_cart = '';
 	for (var i in _cate_cart) {
 		__cate_cart += i + '：' + _cate_cart[i] + '份，';
 	};
+	__cate_cart += '共' + _cate_cart_num + '份';
 
+
+	// 渲染页面订单详情页
 	if (uid && restid) {
 
 		Thenjs(function(cont) {
+			// 验证订餐发起人uid
+			var obj = {
+				name: uid,
+				callback: cont
+			};
+			User.getUsers(obj);
+		}).then(function(cont) {
 			// 获取餐馆详细信息
 			var obj = {
 				id: restid,
@@ -123,7 +182,7 @@ router.all('/order/preview', function(req, res, next) {
 			// 渲染页面
 			res.render('order/preview', {
 				title: gtitle,
-				uid: uid,
+				token: oid,
 				loginname: loginname,
 				is_admin: _isAdmin,
 				restinfo: _restinfo,
@@ -132,10 +191,6 @@ router.all('/order/preview', function(req, res, next) {
 				cate_cart: __cate_cart
 			});
 
-			cont();
-		}).
-		fin(function(cont, error) {
-			// console.log(error, 111)
 			cont();
 		}).
 		fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常

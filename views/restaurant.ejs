@@ -11,6 +11,7 @@
 	<script type="text/javascript" charset="utf-8" src="/static/js/libs/seajs/sea.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/static/js/sea_config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">window.FQUSER = "<%=fquser%>";</script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 		<% include header.ejs %>
 		<!-- shopping-cart -->
 		<div class="shopping-cart clearfix j-shopping-cart" style="width: 320px;">
-			<form method="post" action="/order/preview" id="shoppingCartForm">
+			<form method="post" action="/order/preview/<%=token%>" id="shoppingCartForm">
 				<div class="order-list j-order-list" style="top: 0;width: 320px;">
 					<div class="title">
 						<span class="fl dishes" style="width:100px;">菜品
@@ -66,8 +67,6 @@
 					<div class="fr">
 						<a class="ready-pay borderradius-2 j-readypay" href="javascript:;">详单</a>
 						<input class="go-pay borderradius-2 j-gopay" type="submit" style="display: none;" value="详单" />
-						<input type="hidden" value="" class="j-uid-data" name="uid">
-						<input type="hidden" value="<%=restinfo.id%>" class="j-restid-data" name="restid">
 					</div>
 				</div>
 			</form>
@@ -121,7 +120,6 @@
 				</div>
 				<div class="tab-link clearfix">
 					<a href="/restaurant/<%=id%>" class="tab-item active">菜单</a>
-					<!-- <a href="/comment/<%=id%>" class="tab-item no-border-left">评价</a> -->
 				</div>
 
 				<textarea class="j-food-data" style="display: none;"><%=data%></textarea>
@@ -171,9 +169,6 @@
 										<input type="text" placeholder="搜索菜品..." class="search-input sprite j-search-input" />
 									</div>
 								</div>
-					            <!-- <a href="javascript:;" data-href="/restaurant/<%=id%>" class="active default borderradius-2">默认排序</a>
-					            <a href="javascript:;" data-href="/restaurant/<%=id%>?sort_type=1" class=" sales borderradius-2">销量<i class="icon i-orderdown"></i></a>
-					            <a href="javascript:;" data-href="/restaurant/<%=id%>?sort_type=2" class=" price borderradius-2">价格<i class="icon i-orderup"></i></a> -->
 					        </div>
 					        <span class="tag-na"></span>
 					    </div>
@@ -184,9 +179,6 @@
 					        <h3 class="title title-0 ct-deepgrey" title="<%=r.name%>">
 					            <div class="actions clearfix fr">
 					                <a href="javascript:;" data-href="javascript:;" class="classic hidden">美食分类<i class="icon i-triangle-dn"></i></a>
-					                <!-- <a href="javascript:;" data-href="/restaurant/<%=id%>" class="active default borderradius-2">默认排序</a>
-					                <a href="javascript:;" data-href="/restaurant/<%=id%>?sort_type=1" class=" sales borderradius-2">销量<i class="icon i-orderdown"></i></a>
-					                <a href="javascript:;" data-href="/restaurant/<%=id%>?sort_type=2" class=" price borderradius-2">价格<i class="icon i-orderup"></i></a> -->
 					            </div>
 					            <span class="tag-na"><%=r.name%></span>
 					        </h3>

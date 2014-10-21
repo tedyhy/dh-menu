@@ -1,8 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var Thenjs = require('thenjs');
+var _ = require('underscore');
 var restaurantConn = require('../models/restaurant');
+var User = require('../models/user');
 var auth = require('../middlewares/auth');
+var config = require('../config.default');
+var utils = require('../common/utils');
 var gtitle = 'DH FWD MENU';
 
 /* 参数过滤 */
@@ -19,23 +23,52 @@ router.param(function(name, fn) {
 		}
 	}
 });
-router.param('id', /^\d+$/);
+router.param('id', /^[0-9a-zA-Z]+$/);
 
 /* GET order page. */
 router.get('/:id', function(req, res, next) {
 	auth.userRequired(req, res, next);
 
-	var _isAdmin = req.session.user.is_admin;
-	var _id = req.params.id,
-		_ip = req.ip,
+	var loginname = res.locals.current_user && res.locals.current_user.name || "",
+		id = req.params.id;
+
+	if (!id || !loginname) {
+		res.status(404);
+		return next('无餐馆加密后的id！');
+	};
+
+	var auth_token = utils.decrypt(id[0], config.session_secret) || '';
+
+	if (!auth_token) {
+		res.status(404);
+		return next('餐馆加密后的id错误！');
+	};
+
+	var auth_tokens = auth_token.split('\t'),
+		_id = +auth_tokens[0] || '',
+		_fqadmin = auth_tokens[1] || '';
+
+	if (!_id || !_fqadmin) {
+		res.status(404);
+		return next('餐馆加密信息错误！');
+	};
+
+	var	_isAdmin = req.session.user.is_admin,
 		_obj = {},
 		_restinfo = {},
 		_data = [],
-		_cart = cache.order[111] || [],
+		_cart = _.clone(cache.order[_fqadmin] || []),
 		_cates = [],
 		_foods = [];
 
 	Thenjs(function(cont) {
+		// 验证订餐发起人_fqadmin
+		var obj = {
+			name: _fqadmin,
+			callback: cont
+		};
+		User.getUsers(obj);
+	}).then(function(cont) {
 		// 获取餐馆详细信息
 		var obj = {
 			id: _id,
@@ -147,13 +180,11 @@ router.get('/:id', function(req, res, next) {
 			food: _data,
 			data: JSON.stringify(_data),
 			cart: JSON.stringify(_cart),
-			loginname: res.locals.current_user.name
+			loginname: loginname,
+			fquser: _fqadmin,
+			token: id
 		});
 
-		cont();
-	}).
-	fin(function(cont, error) {
-		// console.log(error, 111)
 		cont();
 	}).
 	fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常

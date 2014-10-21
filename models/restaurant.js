@@ -9,20 +9,9 @@ var restaurant = {
 		Conn.getConnection(function(err, conn) {
 
 			conn.query('SELECT * FROM home WHERE home_id = ' + obj.id, [], function(err, res) {
-
-				if (!err) {
-					res = res && res.length && res || [];
-					if (res.length) {
-						obj.callback(res);
-					} else {
-						ires.status(404);
-						next();
-					}
-				} else {
-					ires.status(404);
-					next();
-				}
+				res = res && res.length && res || [];
 				conn.release();
+				obj.callback(err, res);
 			});
 
 		});

@@ -24,7 +24,7 @@ io.sockets.on('connection', function(socket) {
 		var uid = d.uid,
 			data = d.data,
 			cart = cache.order[uid] || (cache.order[uid] = []), // 用户购物车
-			fid = data.id || 0, // food id
+			fid = data.id, // food id
 			merge = false;
 
 		cart.forEach(function(c, i) {
@@ -35,7 +35,7 @@ io.sockets.on('connection', function(socket) {
 		});
 		if (!merge) cart.push(data); // food
 
-		socket.broadcast.emit('client.menu.add', data);
+		socket.broadcast.emit('client.menu.add', {uid: uid, data: data});
 	});
 	//撤菜
 	socket.on('server.menu.remove', function(d) {
@@ -44,11 +44,10 @@ io.sockets.on('connection', function(socket) {
 		var uid = d.uid,
 			data = d.data,
 			cart = cache.order[uid] || (cache.order[uid] = []), // 用户购物车
-			fid = data.id || 0; // food id
+			fid = data.id; // food id
 
 		cart.forEach(function(c, i) {
 			if (c.id === fid) {
-				// console.log(c, i, data)
 				if (data.cart === c.cart) {
 					cart.splice(i, 1);
 				} else {
@@ -58,7 +57,7 @@ io.sockets.on('connection', function(socket) {
 			};
 		});
 
-		socket.broadcast.emit('client.menu.remove', fid);
+		socket.broadcast.emit('client.menu.remove', {fid: fid, uid: uid});
 	});
 	//重置订单
 	socket.on('server.menu.reset', function(d) {
@@ -67,6 +66,6 @@ io.sockets.on('connection', function(socket) {
 		var uid = d.uid;
 		cache.order[uid] = []; // 清空用户购物车
 
-		socket.broadcast.emit('client.menu.reset');
+		socket.broadcast.emit('client.menu.reset', {uid: uid});
 	});
 });

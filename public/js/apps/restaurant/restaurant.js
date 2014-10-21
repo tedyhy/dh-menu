@@ -7,7 +7,8 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		foodData = eval("(" + $('.j-food-data').val() + ")"),
 		cartData = eval("(" + $('.j-cart-data').val() + ")"),
 		socket = io.connect(),
-		CUSER = window.CUSER;
+		CUSER = window.CUSER,
+		fqadmin = window.FQUSER;
 
 	// animate
 	require("libs/tween/requestAnimationFrame");
@@ -225,10 +226,12 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		ioAddOne: function(f) {
-			allfoods.add(f, {
+			if (!f.uid || f.uid !== fqadmin) return;
+
+			allfoods.add(f.data, {
 				merge: true
 			});
-			carts.add(f, {
+			carts.add(f.data, {
 				merge: true
 			});
 		},
@@ -315,7 +318,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 				// 缓存到服务器
 				socket.emit('server.menu.add', {
-					uid: 111,
+					uid: fqadmin,
 					data: d
 				});
 			});
@@ -413,16 +416,17 @@ define('apps/restaurant/restaurant', function(require, exports) {
 				ps = _.clone(this.model.get('orderp'));
 
 			// 处理删除菜品的人员
-			if (_.contains(ps, CUSER)) {
-				ps.splice(_.lastIndexOf(ps, CUSER), 1);
-			} else {
-				_.initial(ps);
-			};
+			// if (_.contains(ps, CUSER)) {
+			// 	ps.splice(_.lastIndexOf(ps, CUSER), 1);
+			// } else {
+			// 	_.initial(ps);
+			// };
+			_.initial(ps);
 
 			if (cart === 0) {
 				this.clear(ps);
 				socket.emit('server.menu.remove', {
-					uid: 111,
+					uid: fqadmin,
 					data: this.model
 				});
 				return;
@@ -437,7 +441,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			});
 
 			socket.emit('server.menu.remove', {
-				uid: 111,
+				uid: fqadmin,
 				data: this.model
 			});
 		},
@@ -458,7 +462,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			});
 
 			socket.emit('server.menu.add', {
-				uid: 111,
+				uid: fqadmin,
 				data: this.model
 			});
 		},
@@ -493,9 +497,6 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			this.$gopay = this.$('.j-gopay');
 			this.$form = this.$('#shoppingCartForm');
 			this.$brieforder = this.$('.j-brief-order');
-			this.$restid = this.$('.j-restid-data');
-			this.$uid = this.$('.j-uid-data');
-			this.restid = this.$restid.val();
 
 			if (carts.models.length) {
 				this.fnShoppingCart();
@@ -519,22 +520,23 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		ioAddOne: function(f) {
-			carts.add(f, {
+			if (!f.uid || f.uid !== fqadmin) return;
+
+			carts.add(f.data, {
 				merge: true
 			});
 		},
 
-		ioRemoveOne: function(fid) {
-			var model = carts.get(fid),
+		ioRemoveOne: function(d) {
+			if (!d.fid || d.uid !== fqadmin) return;
+
+			var fid = d.fid,
+				model = carts.get(fid),
 				cart = +model.get('cart') - 1,
 				ps = _.clone(model.get('orderp'));
 
 			// 处理删除菜品的人员
-			if (_.contains(ps, CUSER)) {
-				ps.splice(_.lastIndexOf(ps, CUSER), 1);
-			} else {
-				_.initial(ps);
-			};
+			_.initial(ps);
 
 			if (cart === 0) {
 				carts.remove(model);
@@ -555,11 +557,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			});
 		},
 
-		ioClearCart: function() {
+		ioClearCart: function(d) {
+			if (!d.uid || d.uid !== fqadmin) return;
+
 			this.$orderlist.css('top', 0);
 
-			carts.each(function(d, i) {
-				allfoods.get(d.get('id')).set({
+			carts.each(function(dd, i) {
+				allfoods.get(dd.get('id')).set({
 					'cart': 0,
 					'orderp': []
 				});
@@ -666,16 +670,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 			carts.remove(carts.models);
 
 			socket.emit('server.menu.reset', {
-				uid: 111
+				uid: fqadmin
 			});
 
 			return false;
 		},
 
 		fnGoPay: function() {
-			this.$uid.val(111);
-			this.$restid.val(this.restid);
-
 			this.$form.submit();
 
 			return false;

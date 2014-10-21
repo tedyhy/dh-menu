@@ -11,6 +11,8 @@ var User = require('../models/user');
 
 var auth = require('../middlewares/auth');
 
+var utils = require('../common/utils');
+
 //sign up
 exports.showSignup = function(req, res, next) {
 	res.render('register', {
@@ -89,7 +91,7 @@ exports.signup = function(req, res, next) {
 	}).
 	then(function(cont) {
 		// md5 the pass
-		pass = md5(pass);
+		pass = utils.md5(pass);
 		// obj
 		var obj = {
 			name: name,
@@ -186,7 +188,7 @@ exports.login = function(req, res, next) {
 			return;
 		};
 		var user = users[0];
-		pass = md5(pass);
+		pass = utils.md5(pass);
 		if (pass !== user.pass) {
 			res.render('login', {
 				title: gtitle,
@@ -226,7 +228,7 @@ exports.active_account = function(req, res, next) {
 		if (err) {
 			return next(err);
 		}
-		if (!user || md5(user.email + config.session_secret) !== key) {
+		if (!user || utils.md5(user.email + config.session_secret) !== key) {
 			return res.render('notify/notify', {
 				error: '信息有误，帐号无法被激活。'
 			});
@@ -344,7 +346,7 @@ exports.update_pass = function(req, res, next) {
 				error: '错误的激活链接'
 			});
 		}
-		user.pass = md5(psw);
+		user.pass = utils.md5(psw);
 		user.retrieve_key = null;
 		user.retrieve_time = null;
 		user.active = true; // 用户激活
@@ -385,7 +387,7 @@ exports.auth_user = function(req, res, next) {
 			return next();
 		}
 
-		var auth_token = decrypt(cookie, config.session_secret);
+		var auth_token = utils.decrypt(cookie, config.session_secret);
 		var auth = auth_token.split('\t');
 		var user_id = auth[0];
 
@@ -422,7 +424,7 @@ exports.auth_user = function(req, res, next) {
 
 // private
 function gen_session(user, req, res) {
-	var auth_token = encrypt(user.id + '\t' + user.name + '\t' + user.pass, config.session_secret);
+	var auth_token = utils.encrypt(user.id + '\t' + user.name + '\t' + user.pass, config.session_secret);
 	//cookie 有效期30天
 	res.cookie(config.auth_cookie_name, auth_token, {
 		path: '/',
@@ -434,37 +436,4 @@ function gen_session(user, req, res) {
 
 	req.session.user = user;
 	res.locals.current_user = req.session.user;
-}
-
-function encrypt(str, secret) {
-	var cipher = crypto.createCipher('aes192', secret);
-	var enc = cipher.update(str, 'utf8', 'hex');
-	enc += cipher.final('hex');
-	return enc;
-}
-
-function decrypt(str, secret) {
-	var decipher = crypto.createDecipher('aes192', secret);
-	var dec = decipher.update(str, 'hex', 'utf8');
-	dec += decipher.final('utf8');
-	return dec;
-}
-
-function md5(str) {
-	var md5sum = crypto.createHash('md5');
-	md5sum.update(str);
-	str = md5sum.digest('hex');
-	return str;
-}
-
-function randomString(size) {
-	size = size || 6;
-	var code_string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	var max_num = code_string.length + 1;
-	var new_pass = '';
-	while (size > 0) {
-		new_pass += code_string.charAt(Math.floor(Math.random() * max_num));
-		size--;
-	}
-	return new_pass;
-}
+};

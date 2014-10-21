@@ -28,79 +28,7 @@
 							<a href="/home/<%=id%>" class="fl rest-tab active">餐厅</a>
 							<!--<a href="/food/topsale/wx4ex92rpq0d" class="fl hot-food">热卖美食<i class="icon i-new"></i></a>-->
 						</div>
-						<!--<div class="rest-filter clearfix">
-							<div class="rest-filter clearfix">
-								<a title="下单赠饮料" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=fulldonation">
-									<span class="sprite checkbox "></span>
-									<span class="txt">下单赠饮料
-
-									</span>
-								</a>
-								<a title="赠250ml统一饮料" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_88">
-									<span class="sprite checkbox "></span>
-									<span class="txt">赠250ml统一饮料
-
-									</span>
-								</a>
-								<a title="赠600ml百事可乐" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_101">
-									<span class="sprite checkbox "></span>
-									<span class="txt">赠600ml百事可乐
-
-									</span>
-								</a>
-								<a title="赠450ml果粒橙" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_86">
-									<span class="sprite checkbox "></span>
-									<span class="txt">赠450ml果粒橙
-
-									</span>
-								</a>
-								<a title="赠450ml果粒橙" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_25">
-									<span class="sprite checkbox "></span>
-									<span class="txt">赠450ml果粒橙
-
-									</span>
-								</a>
-								<a title="赠600ml可口可乐" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_10">
-									<span class="sprite checkbox "></span>
-									<span class="txt">赠600ml可口可乐
-
-									</span>
-								</a>
-								<a title="赠600ml雪碧" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=mealsdonation_35">
-									<span class="sprite checkbox "></span>
-									<span class="txt">赠600ml雪碧
-
-									</span>
-								</a>
-								<a title="下单立减" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=fulldiscount">
-									<span class="sprite checkbox "></span>
-									<span class="txt">下单立减
-
-									</span>
-								</a>
-								<a title="新用户优惠" href="/home/wx4ex92rpq0d?sort_type=0&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&classify_type=firstdiscount">
-									<span class="sprite checkbox "></span>
-									<span class="txt">新用户优惠
-
-									</span>
-								</a>
-
-								<a title="超时赔付" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&sort_type=0&support_online_pay=0&support_invoice=0&pay_type=1">
-									<span class="sprite checkbox "></span>
-									<span class="txt">超时赔付</span>
-								</a>
-
-								<a title="在线支付" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&sort_type=0&pay_type=0&support_invoice=0&support_online_pay=1">
-									<span class="sprite checkbox "></span>
-									<span class="txt">在线支付</span>
-								</a>
-
-								<a title="支持发票" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&sort_type=0&pay_type=0&support_online_pay=0&support_invoice=1">
-									<span class="sprite checkbox "></span>
-									<span class="txt">支持发票</span>
-								</a>
-							</div>
-						</div>
+						<!--
 						<div class="sort-filter" id="sortFilter">
 							<a class="sort default-sort active" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=0">默认排序</a>
 							<a class="sort sa-sort " href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=1">销量<i class="icon i-orderdown"></i></a>
@@ -119,7 +47,7 @@
 									var r = restaurants[i];	%>
 									<li class="fl j-restaurant" data-index="<%=i%>">
 										<div class="restaurant">
-											<a class="rest-atag" href="/restaurant/<%=r.id%>" target="_blank">
+											<a class="rest-atag" href="/restaurant/<%=r.token%>" target="_blank">
 												<div class="top-content">
 													<div class="preview fl">
 														<img class="scroll-loading" src="<%=r.img_url%>">
