@@ -124,7 +124,7 @@ exports.showLogin = function(req, res, next) {
 		return res.redirect('/home/1');
 	};
 
-	res.render('login', {
+	return res.render('login', {
 		title: gtitle,
 		error: "",
 		name: "",

@@ -37,8 +37,17 @@ router.all('*', function(req, res, next) {
 router.get('/', function(req, res, next) {
 	auth.userRequired(req, res, next);
 
-	return res.redirect('/home/1');
+	if (req.session.user) {
+		return res.redirect('/home/1');
+	}
 });
+
+// sign up, login, logout
+router.get('/login', sign.showLogin);
+router.post('/login', sign.login);
+router.all('/logout', sign.signout);
+router.get('/register', sign.showSignup);
+router.post('/register', sign.signup);
 
 // home page
 router.get('/home/:id', function(req, res, next) {
@@ -204,13 +213,6 @@ router.all('/order/preview/:oid', function(req, res, next) {
 		next();
 	};
 });
-
-// sign up, login, logout
-router.get('/login', sign.showLogin);
-router.post('/login', sign.login);
-router.all('/logout', sign.signout);
-router.get('/register', sign.showSignup);
-router.post('/register', sign.signup);
 
 // stay router
 router.get('/stay/:id', function(req, res, next) {

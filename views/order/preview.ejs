@@ -78,44 +78,10 @@
 					</div>
 					<div class="dishes">
 						<div class="dishes-rap">
-							<h3>订餐详情</h3>
-							<form id="addressForm" class="address-form">
-								<div class="field clearfix">
-									<label for="address">送餐地址：</label>
-									<input class="sprite" type="text" name="address">
-									<span class="error-flag">*</span>
-									<span class="error-tips"></span>
-								</div>
-								<div class="field clearfix mobile-field">
-									<label for="mobile">手机号：</label>
-									<input class="sprite" type="text" name="mobile" autocomplete="off" disableautocomplete="" data-pid="32991">
-									<span class="error-flag">*</span>
-									<span class="error-tips"></span>
-								</div>
-								<div class="field clearfix">
-									<label for="customer">客户姓名：</label>
-									<input class="sprite" type="text" name="customer">
-								</div>
-								<div class="field clearfix">
-									<label for="message">给餐厅留言：</label>
-									<input class="show-tags sprite" type="text" name="message">
-								</div>
-								<div class="field clearfix">
-									<label for="pay-method">付款方式：</label>
-									<div class="fl pay-option clearfix">
-										<a href="javascript:;" data-method="1" class="fl sprite option simple-pay selected">餐到付款</a>
-										<a href="javascript:;" data-method="2" class="fl sprite option online-pay">在线支付</a>
-										<i class="fl icon i-pay-tip"></i>
-										<span class="fl tip hidden">在线支付需要您登录并绑定手机号</span>
-									</div>
-								</div>
-								<div class="field hidden">
-									<input type="hidden" name="poiid" value="32991">
-									<input type="hidden" name="uuid" value="00278868E31E4D048090DA2DFC1D9FF3">
-									<input type="hidden" name="buildingid" value="">
-									<input type="hidden" name="shop_cart" value="32991:2325055,1|2325057,1|2325058,5|2325062,1|2325065,1">
-								</div>
-							</form>
+							<h3>订餐必读&amp;商家公告</h3>
+						</div>
+						<div class="content ct-deepgrey">
+							<%-restinfo.broad_content%>
 						</div>
 						<div class="pay-area">
 							<%if(is_admin){%>
@@ -126,12 +92,6 @@
 							<div class="tips">您需支付&nbsp;
 								<span class="price cc-oriange">¥
 									<span id="totalPrice">0</span>
-
-									<span style="display: none;" id="float-tip" class="float-tip borderradius-2">新用户立减¥
-										<span class="pri"></span><i class="icon i-discountip"></i>
-									</span>
-									<span id="nodiscount-tip" class="nodiscount-tip borderradius-2" style="display: none;"><i class="icon i-discountip"></i>
-									</span>
 								</span>
 								<span id="endfix">，饭到当面付款</span>
 							</div>

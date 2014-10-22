@@ -401,7 +401,7 @@
     color: #434343;
 }
 .dishes-rap {
-    padding: 30px;
+    padding: 15px;
     padding-right: 0;
 }
 .address-box {
@@ -430,7 +430,7 @@
     border-color: #FFAA1E;
 }
 .pay-area {
-    padding: 20px 30px;
+    padding: 20px 15px;
     padding-bottom: 22px;
     border-top: 1px dashed #E8E8E8;
 }
@@ -720,4 +720,12 @@ div.coupon .coupon-tip {
 }
 .td-wrap {
     line-height: 16px!important;
+}
+.dishes .content {
+    border-top: 1px dashed #d4d4d4;
+    padding: 12px;
+    line-height: 21px;
+    word-wrap: break-word;
+    font-size: 14px;
+    color: #FF6900;
 }
