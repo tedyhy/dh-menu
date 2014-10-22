@@ -88,6 +88,8 @@ router.get('/:id', function(req, res, next) {
 			_restinfo.time = r.time;
 			_restinfo.broad_content = r.broad_content;
 			_restinfo.cate = r.cate;
+			_restinfo.type = r.type;
+			_restinfo.muslim = r.muslim;
 		};
 
 		cont();

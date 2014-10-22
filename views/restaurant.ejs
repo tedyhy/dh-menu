@@ -33,13 +33,13 @@
 						<a href="javascript:;" class="clear-cart j-clearcart">[清空]</a>
 						<%}%>
 						</span>
-						<span class="fl" style="margin-left: 10px;">点餐人</span>
+						<span class="fl" style="margin-left: 0px;">点餐人</span>
 						<span class="fl" style="margin-left: 50px;">份数</span>
 						<span class="fr ti-price">价格</span>
 					</div>
 					<script type="text/template" id="cartfood-template">
 						<div class="fl na" title="{{name}}" style="width:120px;">{{name}}</div>
-						<div class="fl na" title="{{orderp}}" style="width:90px;">{{orderp}}</div>
+						<div class="fl na" title="{{orderp}}" style="width:80px;">{{orderp}}</div>
 						<div class="fl modify clearfix">
 							<a href="javascript:;" class="fl minus j-minus">-</a> 
 							<input type="text" class="fl txt-count j-txt-count" value="{{cart}}" readonly />
@@ -103,7 +103,7 @@
 										<br>
 									</div>
 									<div class="rest-info-thirdpart">
-										<span>0元起送&nbsp;免费配送&nbsp;由餐厅配送</span>
+										<span><%=restinfo.type%>&nbsp;&nbsp;<%=restinfo.muslim%></span>
 									</div>
 								</div>
 							</div>

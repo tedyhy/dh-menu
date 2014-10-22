@@ -643,13 +643,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 				h = 0 - this.$orderlist.outerHeight(true);
 
 			if (+this.$orderlist.css('top').replace('px', '') === 0) {
-				this.$orderlist.stop().animate({
+				this.$orderlist.animate({
 					'top': h + 'px'
 				}, function() {
 					self.$brieforder.hide();
 				});
 			} else {
-				this.$orderlist.stop().animate({
+				this.$orderlist.animate({
 					'top': 0
 				}, function() {
 					self.$brieforder.show();

@@ -26,14 +26,7 @@
 					<div class="rest-banner">
 						<div class="tab clearfix">
 							<a href="/home/<%=id%>" class="fl rest-tab active">餐厅</a>
-							<!--<a href="/food/topsale/wx4ex92rpq0d" class="fl hot-food">热卖美食<i class="icon i-new"></i></a>-->
 						</div>
-						<!--
-						<div class="sort-filter" id="sortFilter">
-							<a class="sort default-sort active" href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=0">默认排序</a>
-							<a class="sort sa-sort " href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=1">销量<i class="icon i-orderdown"></i></a>
-							<a class="sort ct-sort " href="/home/wx4ex92rpq0d?classify_type=&price_type=0&pay_type=0&support_online_pay=0&support_invoice=0&sort_type=2">评价<i class="icon i-orderdown"></i></a>
-						</div>-->
 					</div>
 					<div class="store-status clearfix">
 						<i class="icon i-more-poi fl"></i>
@@ -57,22 +50,12 @@
 															<span title="<%=r.name%>"><%=r.name%></span>
 														</div>
 														<div class="tags">
-															<span title="快餐小吃">快餐小吃</span>
+															<span title="<%=r.type%>"><%=r.type%></span>
 														</div>
 														<div class="price">
-															<span class="start-price">20元起送</span>
+															<span class="start-price"><%=r.muslim%></span>
 															<span class="send-price">
-																免配送费
-															</span>
-														</div>
-														<div class="rank clearfix">
-															<i class="icon i-star"></i>
-															<i class="icon i-star"></i>
-															<i class="icon i-star"></i>
-															<i class="icon i-star"></i>
-															<i class="icon i-star-empty"></i>
-															<span class="total cc-syellow fl">
-																月售43单
+																免费点餐
 															</span>
 														</div>
 													</div>
@@ -81,26 +64,11 @@
 												<div class="others">
 													<div class="discount fr">
 														<i class="icon i-free-gift fl"></i>
-														<script type="text/template" data-icon="i-free-gift">
-															下单即赠500ml冰红茶
-														</script>
-
 														<i class="icon i-first fl"></i>
-														<script type="text/template" data-icon="i-first">
-															美团外卖新用户下首单， 立减 5元
-														</script>
-
 														<i class="icon i-minus fl"></i>
-														<script type="text/template" data-icon="i-minus">
-															满15元减5元；
-														</script>
-
 														<i class="icon i-reimbursement fl"></i>
-														<script type="text/template" data-icon="i-reimbursement">
-															该餐厅支持超时赔付活动， 超40分钟8折。。 预订订单不参与超时赔付。
-														</script>
 													</div>
-													<span class="send-time ct-middlegrey">平均送餐时间：36分钟</span>
+													<span class="send-time ct-middlegrey">最佳订餐时间：用餐前30分钟</span>
 												</div>
 											</a>
 										</div>
@@ -114,45 +82,6 @@
 		</div>
 		<% include footer.ejs %>
 	</div>
-
-	<div class="dialog dialog-discount" style="display: none;">
-		<div class="tips-dialog" style="left: 439px; top: 376px;">
-			<div class="header header-rev"></div>
-			<div class="body body-rev">
-				<div class="content">
-					<div class="title">【立减5元+赠饮】香香小屋【西式营养快餐】</div>
-					<ul>
-						<li class="clearfix"><i class="fl discount-icon icon i-pay"></i>
-							<span class="discount-content">该餐厅支持在线支付</span>
-						</li>
-						<li class="clearfix"><i class="fl discount-icon icon i-cheque"></i>
-							<span class="discount-content">支持开发票，开票金额50元起。请在下单时填好发票抬头。</span>
-						</li>
-						<li class="clearfix"><i class="fl discount-icon icon i-free-gift"></i>
-							<span class="discount-content">
-								下单即赠500ML冰红茶
-							</span>
-						</li>
-						<li class="clearfix"><i class="fl discount-icon icon i-first"></i>
-							<span class="discount-content">美团外卖新用户下首单，立减 5元</span>
-						</li>
-						<li class="clearfix"><i class="fl discount-icon icon i-minus"></i>
-							<span class="discount-content">满5元减5元；</span>
-						</li>
-					</ul>
-					<div class="broadcaster">
-						<div class="sub-title">餐厅公告</div>
-						<div class="broadcontent">1、为了不耽误您的用餐时间，请提前30分钟订餐，谢谢理解
-							<br>2、该餐厅支持开发票，请在下单时填写好发票抬头
-							<br>
-							<br>~~本店优先配送美团外卖订单~~</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer footer-rev"></div>
-		</div>
-	</div>
-
 
 	<script type="text/javascript">
 		seajs.use('main');

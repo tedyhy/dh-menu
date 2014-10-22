@@ -4,6 +4,7 @@ var Thenjs = require('thenjs');
 var _ = require('underscore');
 var restaurantConn = require('../models/restaurant');
 var User = require('../models/user');
+var Order = require('../models/order');
 var sign = require('../controllers/sign');
 var auth = require('../middlewares/auth');
 var utils = require('../common/utils');
@@ -212,6 +213,37 @@ router.all('/order/preview/:oid', function(req, res, next) {
 		res.status(404);
 		next();
 	};
+});
+
+// the api of save order
+router.post('/order/preview/api/saveorder', function(req, res, next){
+
+	var loginname = res.locals.current_user && res.locals.current_user.name || "";
+	if (!req.session || !req.session.user || !loginname) {
+		res.json({code: -1, msg: "the user must be logining"});
+	};
+
+	var ordercxt = req.body.order || '';
+	if (!ordercxt) {
+		return res.json({code: -2, msg: "the order content must be"});
+	};
+	
+	Thenjs(function(cont) {
+		var obj = {
+			name: loginname,
+			order: JSON.stringify(ordercxt),
+			callback: cont
+		};
+		Order.newAndSave(obj);
+
+	}).then(function(cont) {
+		return res.json({code: 0, msg: "success"});
+	}).
+	fail(function(cont, error) {
+		console.log(error);
+		return res.json({code: -3, msg: "fail"});
+	});
+
 });
 
 // stay router

@@ -28,6 +28,7 @@ define('apps/order/preview', function(require, exports) {
 
 		initialize: function() {
 			this.$confirmOrder = this.$('#confirmOrder');
+			this.$confirmOrder2 = this.$('#confirmOrder2');
 			this.$totalPrice = this.$('#totalPrice');
 			this.$tnumber = this.$('.j-t-number');
 
@@ -62,7 +63,33 @@ define('apps/order/preview', function(require, exports) {
 		},
 
 		fnConfirmOrder: function() {
-			console.log(carts.models)
+			var self = this,
+				order = carts.toJSON();
+
+			this.showOrderBtn(false);
+
+			$.post('/order/preview/api/saveorder', {
+				order: order,
+				_t: +new Date
+			}, function(res) {
+				if (res && res.code === 0) {
+					alert('确认订单成功！');
+				} else {
+					alert('确认订单失败！');
+				};
+				
+				self.showOrderBtn(true);
+			}, 'json');
+		},
+
+		showOrderBtn: function(bool){
+			if (bool) {
+				this.$confirmOrder.show();
+				this.$confirmOrder2.hide();
+			} else {
+				this.$confirmOrder.hide();
+				this.$confirmOrder2.show();
+			};
 		}
 	});
 
