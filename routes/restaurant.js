@@ -53,7 +53,7 @@ router.get('/:id', function(req, res, next) {
 		return next('餐馆加密信息错误！');
 	};
 
-	var	_isAdmin = req.session.user.is_admin,
+	var _isAdmin = req.session.user.is_admin,
 		_obj = {},
 		_restinfo = {},
 		_data = [],

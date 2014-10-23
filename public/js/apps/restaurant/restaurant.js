@@ -343,7 +343,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 
 			d = {
 				left: btn_offset.left + m / 2 - $tip.outerWidth(!0) / 2,
-				top: btn_offset.top - f + n / 2 - $tip.outerHeight(!0) / 2
+				top: btn_offset.top - f + n / 2 - $tip.outerHeight(!0) / 2 - 30
 			};
 			e = {
 				left: cart_offset.left + $shoppingcart.width() / 2 - $tip.outerWidth(!0) / 2,

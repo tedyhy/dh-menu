@@ -1,3 +1,6 @@
+/**
+ * 订单
+ */
 var Conn = require('./conn');
 var Order = {
 	getOrders: function(obj) {

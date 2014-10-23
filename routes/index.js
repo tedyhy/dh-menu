@@ -69,7 +69,7 @@ router.get('/home/:id', function(req, res, next) {
 			restaurantConn.gethome(obj);
 		}).
 		then(function(cont, result) {
-			result.forEach(function(r, i){
+			result.forEach(function(r, i) {
 				r.token = utils.encrypt(r.id + '\t' + loginname, config.session_secret);
 			});
 
@@ -216,18 +216,24 @@ router.all('/order/preview/:oid', function(req, res, next) {
 });
 
 // the api of save order
-router.post('/order/preview/api/saveorder', function(req, res, next){
+router.post('/order/preview/api/saveorder', function(req, res, next) {
 
 	var loginname = res.locals.current_user && res.locals.current_user.name || "";
 	if (!req.session || !req.session.user || !loginname) {
-		res.json({code: -1, msg: "the user must be logining"});
+		res.json({
+			code: -1,
+			msg: "the user must be logining"
+		});
 	};
 
 	var ordercxt = req.body.order || '';
 	if (!ordercxt) {
-		return res.json({code: -2, msg: "the order content must be"});
+		return res.json({
+			code: -2,
+			msg: "the order content must be"
+		});
 	};
-	
+
 	Thenjs(function(cont) {
 		var obj = {
 			name: loginname,
@@ -237,11 +243,28 @@ router.post('/order/preview/api/saveorder', function(req, res, next){
 		Order.newAndSave(obj);
 
 	}).then(function(cont) {
-		return res.json({code: 0, msg: "success"});
+		// 清空服务器订单相关缓存
+		try {
+			if (loginname in cache.order) {
+				cache.order[loginname] = null;
+				delete cache.order[loginname];
+			};
+
+		} catch (ex) {
+			console.log(ex);
+		};
+
+		return res.json({
+			code: 0,
+			msg: "success"
+		});
 	}).
 	fail(function(cont, error) {
 		console.log(error);
-		return res.json({code: -3, msg: "fail"});
+		return res.json({
+			code: -3,
+			msg: "fail"
+		});
 	});
 
 });

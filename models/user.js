@@ -1,3 +1,6 @@
+/**
+ * 用户信息
+ */
 var Conn = require('./conn');
 var User = {
 	getUsers: function(obj) {
