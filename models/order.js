@@ -21,7 +21,7 @@ var Order = {
 	},
 	newAndSave: function(obj) {
 		Conn.getConnection(function(err, conn) {
-			conn.query('INSERT INTO `order`(`name`, `order`, `time`) VALUES(\'' + obj.name + '\', \'' + obj.order + '\', unix_timestamp())', function(err) {
+			conn.query('INSERT INTO `order`(`name`, `order`, `datetime`, `time`) VALUES(\'' + obj.name + '\', \'' + obj.order + '\', current_timestamp(), unix_timestamp())', function(err) {
 				conn.release();
 				obj.callback(err);
 			});
