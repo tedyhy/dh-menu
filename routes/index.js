@@ -244,15 +244,15 @@ router.post('/order/preview/api/saveorder', function(req, res, next) {
 
 	}).then(function(cont) {
 		// 清空服务器订单相关缓存
-		try {
-			if (loginname in cache.order) {
-				cache.order[loginname] = null;
-				delete cache.order[loginname];
-			};
+		// try {
+		// 	if (loginname in cache.order) {
+		// 		cache.order[loginname] = null;
+		// 		delete cache.order[loginname];
+		// 	};
 
-		} catch (ex) {
-			console.log(ex);
-		};
+		// } catch (ex) {
+		// 	console.log(ex);
+		// };
 
 		return res.json({
 			code: 0,

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var app = require('../app');
+var _ = require('underscore');
 
 app.set('port', process.env.PORT || 85);
 
@@ -13,7 +14,7 @@ var io = require('socket.io').listen(server);
 // 根据不同用户缓存订餐数据
 var cache = global.cache = {
 	order: {}
-}
+};
 
 // socket
 io.sockets.on('connection', function(socket) {
@@ -25,17 +26,25 @@ io.sockets.on('connection', function(socket) {
 			data = d.data,
 			cart = cache.order[uid] || (cache.order[uid] = []), // 用户购物车
 			fid = data.id, // food id
-			merge = false;
+			cc = _.findWhere(cart, {
+				id: fid
+			});
 
-		cart.forEach(function(c, i) {
-			if (!merge && c.id == fid) {
-				cart[i] = data;
-				merge = true;
-			}
+		if (cc) {
+			cart.forEach(function(c, i) {
+				if (c.id === fid) {
+					cart[i] = data;
+					return;
+				};
+			});
+		} else {
+			cart.push(data);
+		};
+
+		socket.broadcast.emit('client.menu.add', {
+			uid: uid,
+			data: data
 		});
-		if (!merge) cart.push(data); // food
-
-		socket.broadcast.emit('client.menu.add', {uid: uid, data: data});
 	});
 	//撤菜
 	socket.on('server.menu.remove', function(d) {
@@ -44,20 +53,30 @@ io.sockets.on('connection', function(socket) {
 		var uid = d.uid,
 			data = d.data,
 			cart = cache.order[uid] || (cache.order[uid] = []), // 用户购物车
-			fid = data.id; // food id
+			fid = data.id, // food id
+			cc = _.findWhere(cart, {
+				id: fid
+			});
 
-		cart.forEach(function(c, i) {
-			if (c.id === fid) {
-				if (data.cart === c.cart) {
-					cart.splice(i, 1);
-				} else {
-					cart[i] = data;
+		if (cc) {
+			cart.forEach(function(c, i) {
+				if (c.id === fid) {
+					cc.cart -= 1;
+					if (cc.cart <= 0) {
+						cart.splice(i, 1);
+					} else {
+						cart[i] = cc;
+					};
+					return;
 				};
-				return;
-			};
-		});
+			});
 
-		socket.broadcast.emit('client.menu.remove', {fid: fid, uid: uid});
+			socket.broadcast.emit('client.menu.remove', {
+				fid: fid,
+				uid: uid
+			});
+		};
+
 	});
 	//重置订单
 	socket.on('server.menu.reset', function(d) {
@@ -66,6 +85,8 @@ io.sockets.on('connection', function(socket) {
 		var uid = d.uid;
 		cache.order[uid] = []; // 清空用户购物车
 
-		socket.broadcast.emit('client.menu.reset', {uid: uid});
+		socket.broadcast.emit('client.menu.reset', {
+			uid: uid
+		});
 	});
 });

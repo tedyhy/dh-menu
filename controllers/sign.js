@@ -124,11 +124,13 @@ exports.showLogin = function(req, res, next) {
 		return res.redirect('/home/1');
 	};
 
+	var referer = req.query.url || '';
 	return res.render('login', {
 		title: gtitle,
 		error: "",
 		name: "",
-		loginname: ""
+		loginname: "",
+		referer: global.encodeURIComponent(referer)
 	});
 };
 
@@ -157,13 +159,15 @@ exports.login = function(req, res, next) {
 
 	var loginname = sanitize(req.body.name).trim();
 	var pass = sanitize(req.body.pass).trim();
+	var referer = global.decodeURIComponent(req.body.referer) || '';
 
 	if (!loginname || !pass) {
 		res.render('login', {
 			title: gtitle,
 			error: '信息不完整。',
 			name: loginname,
-			loginname: ""
+			loginname: "",
+			referer: ""
 		});
 		return;
 	}
@@ -182,7 +186,8 @@ exports.login = function(req, res, next) {
 				title: gtitle,
 				error: '这个用户不存在。',
 				name: loginname,
-				loginname: ""
+				loginname: "",
+				referer: ""
 			});
 			cont('这个用户不存在。');
 			return;
@@ -194,14 +199,16 @@ exports.login = function(req, res, next) {
 				title: gtitle,
 				error: '密码错误。',
 				name: loginname,
-				loginname: ""
+				loginname: "",
+				referer: ""
 			});
 			cont('密码错误。');
 			return;
 		}
 		// store session cookie
 		gen_session(user, req, res);
-		return res.redirect('/home/1');
+		return res.redirect(referer || '/home/1');
+
 		cont();
 	}).
 	fail(function(cont, error) { // 通常应该在链的最后放置一个 `fail` 方法收集异常
