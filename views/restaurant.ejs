@@ -75,7 +75,7 @@
 		<div class="page-wrap">
 			<div class="inner-wrap j-inner-wrap">
 				<div class="rest-info">
-					<div class="right-bar fr clearfix hidden">
+					<div class="right-bar fr clearfix">
 						<div class="fl search-label">搜索菜品：</div>
 						<div class="fl search-food">
 							<input type="text" placeholder="搜索菜品..." class="search-input sprite j-search-input" />
@@ -88,7 +88,7 @@
 							</div>
 							<div class="list">
 								<div class="na">
-									<a href="/restaurant/<%=restinfo.id%>">
+									<a href="/restaurant/<%=token%>">
 										<span><%=restinfo.name%></span><i class="icon i-triangle-dn"></i>
 									</a>
 								</div>
@@ -163,10 +163,10 @@
 					    <div class="title-blank ct-deepgrey j-title-blank hidden">
 					        <div class="actions clearfix fr">
 					            <a href="javascript:;" class="classic">美食分类<i class="icon i-triangle-dn"></i></a>
-								<div class="fr clearfix hidden">
+								<div class="fr clearfix">
 									<div class="fl search-label">搜索菜品：</div>
 									<div class="fl search-food">
-										<input type="text" placeholder="搜索菜品..." class="search-input sprite j-search-input" />
+										<input type="text" placeholder="搜索菜品..." class="search-input sprite j-search-input j-fixed" />
 									</div>
 								</div>
 					        </div>
@@ -266,7 +266,7 @@
 	</div>
 
 	<script type="text/template" id="search-item-template">
-		<li class="j-search-item" data-id="{{id}}" data-name="{{name}}" data-price="{{price}}">{{name}} ￥{{price}}</li>
+		<li class="j-search-item" data-id="{{id}}" data-name="{{name}}" data-price="{{price}}">{{name}}</li>
 	</script>
 
 	<script type="text/javascript">

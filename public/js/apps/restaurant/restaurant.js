@@ -3,7 +3,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		_ = require('underscore'),
 		Backbone = require('backbone'),
 		TWEEN = require('libs/tween/Tween'),
-		// Pinyin = require('modules/pinyin/pinyin'),
+		Search = require('modules/search/search'),
 		foodData = eval("(" + $('.j-food-data').val() + ")"),
 		cartData = eval("(" + $('.j-cart-data').val() + ")"),
 		socket = io.connect(),
@@ -40,7 +40,6 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		$titleblank = $('.j-title-blank'),
 		$foodtypenav = $('.j-foodtype-nav'),
 		$orifoodtypenav = $('.ori-foodtype-nav');
-
 	$categorys.eq(0).find('.actions a').hover(function() {
 		$(this).addClass('over');
 	}, function() {
@@ -52,6 +51,7 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		if (top < foodListOffset.top) {
 			$titleblank.addClass('hidden');
 			$foodtypenav.addClass('hidden');
+			$('.j-search-list').css('position')==='fixed' && $('.j-search-list').hide();
 
 		} else if (top >= foodListOffset.top) {
 			$titleblank.removeClass('hidden');
@@ -121,10 +121,13 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		initialize: function() {
-			$('body').on('keyup propertychange input paste filter', '.j-search-input', $.proxy(this.search, this));
-			$('body').on('click', '.j-search-item', function() {
-				return false;
+			var self = this;
+
+			new Search('.j-search-input', {
+				data: foods,
+				tpl: self.template
 			});
+
 			$('body').on('click', function() {
 				$('.j-search-list').hide();
 			});
@@ -269,9 +272,9 @@ define('apps/restaurant/restaurant', function(require, exports) {
 		},
 
 		fnShowClassic: function(e) {
-			var offset = $(e.target).offset(),
+			var offset = $('.j-title-blank').offset(),
 				top = 50,
-				left = offset.left - this.$foodtypenav.outerWidth(true) / 2 - 32;
+				left = offset.left + 32;
 
 			this.$foodtypenav.removeClass('hidden').css({
 				top: top,

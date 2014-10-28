@@ -1664,11 +1664,13 @@ input, textarea {
     font-size: 14px;
     font-weight: bold;
 }
-.breadcrumb a:hover {
-    color: #ff6900;
-}
 .breadcrumb a {
+    color: #ff6900;
     font-weight: normal;
+    text-decoration: underline;
+}
+.breadcrumb a:hover {
+    text-decoration: none;
 }
 .breadcrumb i {
     margin: 0 5px;
