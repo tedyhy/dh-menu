@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title><%=title%></title>
+	<link rel="icon" href="/static/img/favcoin.ico" size="16x16 32x32">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<link rel="stylesheet" href="/static/css/restaurant.css">
+	<link rel="stylesheet" href="/static/css/preview.css">
+	<script type="text/javascript" charset="utf-8" src="/static/js/libs/seajs/sea.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/static/js/sea_config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">window.FQUSER = "<%=fquser%>";</script>
+</head>
+
+<body>
+	<% include rside.ejs %>
+	<div class="wrapper">
+		<div id="top-tips" class="top-tips" style="display: none;">
+			<a class="j-top-tips-close top-tips-close" href="javascript:;"><i class="icon i-top-tips-close"></i></a>
+			<div class="j-top-tips-content top-tips-content" data-id=""></div>
+		</div>
+		<!-- page-header -->
+		<% include header.ejs %>
+		<!-- page-wrap -->
+		<div class="page-wrap">
+			<div class="inner-wrap j-inner-wrap">
+				<div class="rest-info">
+					<div class="details j-details">
+						<div class="up-wrap">
+							<div class="avatar fl">
+								<img src="<%=restinfo.img_url%>" width="75" height="75">
+							</div>
+							<div class="list">
+								<div class="na">
+									<a href="/restaurant/<%=token%>">
+										<span><%=restinfo.name%></span><i class="icon i-triangle-dn"></i>
+									</a>
+								</div>
+								<div class="clearfix">
+									<div class="stars clearfix">
+										<i class="icon i-star"></i>
+										<i class="icon i-star"></i>
+										<i class="icon i-star"></i>
+										<i class="icon i-star-empty"></i>
+										<i class="icon i-star-empty"></i>
+										<span class="fl mark ct-middlegrey">3.9</span>
+										<br>
+									</div>
+									<div class="rest-info-thirdpart">
+										<span><%=restinfo.type%>&nbsp;&nbsp;<%=restinfo.muslim%></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="rest-info-down-wrap">
+							<div class="location">
+								<span>餐厅地址：</span><%=restinfo.address%>
+							</div>
+							<div class="delivery-time">
+								<span>营业时间：</span><%=restinfo.time%>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-link clearfix">
+					<a href="/restaurant/<%=token%>" class="tab-item">菜单</a>
+					<a href="/bill/<%=token%>" class="tab-item active">账单</a>
+				</div>
+				<textarea class="j-bill-data" style="display: none;"><%=bill_list%></textarea>
+				<div class="order-bill">
+					<%
+					for (var i=0; i<bill_data.length; i++) {
+						var r = bill_data[i], rr = JSON.parse(r.order), price = 0;
+					%>
+						<div class="item-hd j-item-hd">
+							<div class="date"><%=r.datetime%></div>
+						</div>
+						<div class="item-bd clearfix">
+						    <div class="fl address">
+						        <table class="standard-table dishes-table">
+						            <thead>
+						                <tr class="bot-border">
+						                    <th width="180">
+						                        <div class="th-inner align-left">菜品</div>
+						                    </th>
+						                    <th width="120">
+						                        <div class="th-inner align-left">点餐人</div>
+						                    </th>
+						                    <th width="60">
+						                        <div class="th-inner">份数</div>
+						                    </th>
+						                    <th width="60">
+						                        <div class="th-inner align-right">金额</div>
+						                    </th>
+						                </tr>
+						            </thead>
+						            <tbody>
+						            	<%
+					            		for (var j in rr) {
+					            			var rrr = rr[j];
+					            			price += rrr.price*rrr.cart;
+						            	%>
+						                <tr>
+						                    <td>
+						                        <div class="td-inner align-left" title="<%=rr.name%>"><%=rrr.name%></div>
+						                    </td>
+						                    <td>
+						                        <div class="td-inner align-left text-ellipsis" title="<%=rrr.orderp.join(',')%>"><%=rrr.orderp.join(',')%></div>
+						                    </td>
+						                    <td>
+						                        <div class="td-inner align-center"><%=rrr.cart%></div>
+						                    </td>
+						                    <td>
+						                        <div class="td-inner align-right">¥<%=rrr.price%></div>
+						                    </td>
+						                </tr>
+						                <%}%>
+						                <tr class="total top-border">
+						                    <td colspan="4" class="clearfix">
+						                        <div class="td-inner">
+						                            <!-- <span class="fl">工作餐炒菜：1份，共1份</span> -->
+						                            <span class="t-number fl j-t-number">合计<%=price%> 元</span>
+						                        </div>
+						                    </td>
+						                </tr>
+						            </tbody>
+						        </table>
+						    </div>
+						    <textarea class="j-users"><%=users%></textarea>
+						    <div class="dishes">
+						        <div class="dishes-rap">
+						            <h3>已付名单</h3>
+						        </div>
+						        <div class="content ct-deepgrey">
+						        	<div class="users"><%=r.bill%></div>
+						            <div class="select_users">
+						            	<select name="" id="useroptions"></select>
+						            	<button type="button">添加</button>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+					<%}%>
+				</div>
+			</div>
+		</div>
+		<!-- page-footer -->
+		<% include footer.ejs %>
+	</div>
+
+	<script type="text/javascript">
+		seajs.use('main');
+		seajs.use('apps/bill/bill');
+	</script>
+</body>
+</html>

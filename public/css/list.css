@@ -1,0 +1,196 @@
+.orders-cont {
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+}
+
+.orders-cont .orders-toptip {
+    font-size: 14px;
+    margin-left: 135px;
+    padding: 0 24px;
+    background: #fff8ed;
+    height: 48px;
+    line-height: 48px;
+    border-bottom: solid 1px #e5e5e5;
+    border-left: solid 1px #e5e5e5;
+}
+
+.orders-toptip .lhalf {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.orders-toptip .lhalf em {
+    color: #ff6900;
+    font-style: normal;
+}
+
+.orders-toptip .rhalf {
+    display: inline-block;
+}
+
+.orders-toptip .rhalf i {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.orders-toptip .rhalf a {
+    text-decoration: underline;
+    color: #ff6900;
+}
+
+.orders-cont .orders-list {
+    background-color: #ffffff;
+    /*margin-left: 135px;*/
+    /*border-left: 1px solid #e5e5e5;*/
+    padding: 0 24px 24px;
+    overflow: hidden;
+}
+
+.dialog-remind p {
+    text-align: center;
+    line-height: 25px;
+}
+
+.dialog-remind p.number {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.dialog-remind .content {
+    padding: 24px;
+}
+
+.dialog-coupon .content {
+    padding: 20px 0;
+    padding-bottom: 30px;
+}
+
+.dialog-coupon .simple-dialog {
+    width: 462px;
+}
+
+.dialog-coupon .p1 {
+    text-align: center;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.dialog-coupon .p1 .icon {
+    display: block;
+    margin-left: 121px;
+}
+
+.dialog-coupon .p1 span {
+    font-size: 17px;
+    color: #434343;
+    font-weight: bold;
+    margin-left: 5px;
+    display: block;
+    height: 28px;
+    line-height: 30px;
+}
+
+.dialog-coupon .p2 {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.dialog-coupon .p3 {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.dialog-coupon .check-order {
+    margin-left: 143px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.dialog-coupon .check-ticket {
+    width: 98px;
+    height: 30px;
+    background-color: #FFAA1E;
+    color: #FFFFFF;
+    line-height: 30px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.lottery-tips {
+    height: 38px;
+    background-color: #FFF6E0;
+    border: 1px solid #FEDDA7;
+    color: #434343;
+    line-height: 38px;
+    margin-bottom: 10px;
+    _padding-top: 13px;
+    _height: 25px;
+}
+
+.lottery-tips .icon {
+    margin-left: 10px;
+    vertical-align: -4px;
+    _position: relative;
+    _top: -4px;
+}
+
+.lottery-tips span {
+    margin-left: 5px;
+}
+
+.lottery-tips .close {
+    margin-right: 10px;
+}
+
+.lottery-tips .close .icon {
+    vertical-align: -1px;
+}
+
+.empty-tips {
+    height: 500px;
+    text-align: center;
+    color: #434343;
+    position: relative;
+}
+
+.empty-tips .tips-inner,
+.un-empty-tips .tips-inner {
+    font-size: 14px;
+    color: #686868;
+    width: 400px;
+    height: 45px;
+    background-color: #FFFFFF;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -30px;
+    margin-left: -200px;
+    padding-top: 14px;
+}
+
+.un-empty-tips .tips-inner.short {
+    width: 173px;
+    margin-left: -86px;
+}
+
+.empty-tips .i-uncomment {
+    margin-left: 15px;
+}
+
+.empty-tips span {
+    margin-left: 10px;
+    padding-top: 7px;
+}
+
+.page-navbar {
+    padding-left: 228px;
+}
+
+.page-navbar a,
+.page-navbar span {
+    background-color: #FFFFFF;
+}
+
+.stick-qrcode .index-xiaomei .qrcode {
+    background-position: -6px -1422px;
+}

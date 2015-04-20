@@ -9,6 +9,7 @@ var config = require('./config.default');
 // route
 var index = require('./routes/index');
 var restaurant = require('./routes/restaurant');
+var bill = require('./routes/bill');
 // app
 var app = express();
 // view engine setup
@@ -40,6 +41,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 // route
 app.use('/', index);
 app.use('/restaurant', restaurant);
+app.use('/bill', bill);
 
 // app.set('env', 'production');
 
